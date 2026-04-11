@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雲想數位行銷有限公司｜網站架設、SEO、社群行銷</title>
+  <meta name="description" content="雲想數位行銷有限公司專注於網站架設、SEO 搜尋引擎優化與社群行銷，協助企業建立清楚的數位門面與長期曝光基礎。">
+  <style>
+    .yxdm-home {
+      --yxdm-color-primary: #1f4f95;
+      --yxdm-color-secondary: #f4a11a;
+      --yxdm-color-dark: #1f2430;
+      --yxdm-color-dark-2: #2f3542;
+      --yxdm-color-text: #2b2f36;
+      --yxdm-color-muted: #667085;
+      --yxdm-color-line: #d9e2ec;
+      --yxdm-color-bg: #f7f9fc;
+      --yxdm-color-white: #ffffff;
+      --yxdm-color-soft-blue: #eef4fb;
+      --yxdm-color-soft-orange: #fff5e6;
+      --yxdm-shadow-lg: 0 20px 60px rgba(19, 33, 68, 0.12);
+      --yxdm-shadow-md: 0 12px 36px rgba(19, 33, 68, 0.10);
+      --yxdm-shadow-sm: 0 8px 20px rgba(19, 33, 68, 0.06);
+      --yxdm-radius-xl: 28px;
+      --yxdm-radius-lg: 20px;
+      --yxdm-radius-md: 14px;
+      --yxdm-max: 1240px;
+      --yxdm-transition: 0.35s ease;
+      color: var(--yxdm-color-text);
+      background: var(--yxdm-color-white);
+    }
+
+    .yxdm-home *,
+    .yxdm-home *::before,
+    .yxdm-home *::after {
+      box-sizing: border-box;
+    }
+
+    .yxdm-home html,
+    .yxdm-home body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .yxdm-home a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .yxdm-home img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .yxdm-wrap {
+      width: 100%;
+      max-width: var(--yxdm-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .yxdm-section {
+      position: relative;
+      padding: 96px 0;
+      overflow: hidden;
+    }
+
+    .yxdm-section--soft {
+      background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+    }
+
+    .yxdm-section--blue {
+      background: linear-gradient(135deg, #173b73 0%, #1f4f95 55%, #2a63b6 100%);
+      color: #ffffff;
+    }
+
+    .yxdm-section--dark {
+      background: linear-gradient(135deg, #161c27 0%, #1e2634 100%);
+      color: #ffffff;
+    }
+
+    .yxdm-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--yxdm-color-primary);
+      background: rgba(31, 79, 149, 0.08);
+      text-transform: uppercase;
+    }
+
+    .yxdm-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--yxdm-color-secondary);
+      flex: 0 0 auto;
+    }
+
+    .yxdm-section--blue .yxdm-kicker,
+    .yxdm-section--dark .yxdm-kicker {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .yxdm-title {
+      margin: 18px 0 0;
+      font-size: 42px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .yxdm-desc {
+      margin: 18px 0 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-section--blue .yxdm-desc,
+    .yxdm-section--dark .yxdm-desc {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .yxdm-grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 38px;
+      align-items: center;
+    }
+
+    .yxdm-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .yxdm-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .yxdm-card {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid rgba(31, 79, 149, 0.08);
+      border-radius: var(--yxdm-radius-lg);
+      box-shadow: var(--yxdm-shadow-sm);
+      transition: transform var(--yxdm-transition), box-shadow var(--yxdm-transition), border-color var(--yxdm-transition);
+    }
+
+    .yxdm-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--yxdm-shadow-md);
+      border-color: rgba(31, 79, 149, 0.16);
+    }
+
+    .yxdm-card__inner {
+      padding: 30px;
+    }
+
+    .yxdm-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .yxdm-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      transition: transform var(--yxdm-transition), background var(--yxdm-transition), border-color var(--yxdm-transition), color var(--yxdm-transition), box-shadow var(--yxdm-transition);
+    }
+
+    .yxdm-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .yxdm-btn--primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--yxdm-color-secondary) 0%, #ffb534 100%);
+      box-shadow: 0 12px 26px rgba(244, 161, 26, 0.28);
+    }
+
+    .yxdm-btn--secondary {
+      color: #ffffff;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .yxdm-btn--ghost {
+      color: var(--yxdm-color-primary);
+      background: #ffffff;
+      border: 1px solid rgba(31, 79, 149, 0.16);
+    }
+
+    .yxdm-hero {
+      position: relative;
+      min-height: 760px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+      background: linear-gradient(135deg, #12233f 0%, #183b6d 52%, #245ca5 100%);
+    }
+
+    .yxdm-hero__media,
+    .yxdm-hero__overlay,
+    .yxdm-hero__glow {
+      position: absolute;
+      inset: 0;
+    }
+
+    .yxdm-hero__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .yxdm-hero__overlay {
+      background:
+        linear-gradient(90deg, rgba(12, 20, 34, 0.78) 0%, rgba(12, 20, 34, 0.64) 38%, rgba(12, 20, 34, 0.48) 65%, rgba(12, 20, 34, 0.62) 100%),
+        linear-gradient(180deg, rgba(12, 20, 34, 0.20) 0%, rgba(12, 20, 34, 0.55) 100%);
+      z-index: -2;
+    }
+
+    .yxdm-hero__glow {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(31, 79, 149, 0.36) 0%, rgba(31, 79, 149, 0) 35%),
+        radial-gradient(circle at 75% 25%, rgba(244, 161, 26, 0.22) 0%, rgba(244, 161, 26, 0) 30%),
+        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.08) 0%, rgba(255,255,255,0) 26%);
+      z-index: -1;
+    }
+
+    .yxdm-hero__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 92px 0 78px;
+    }
+
+    .yxdm-hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+      gap: 30px;
+      align-items: end;
+    }
+
+    .yxdm-hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .yxdm-hero__badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--yxdm-color-secondary);
+    }
+
+    .yxdm-hero__logo {
+      width: 240px;
+      max-width: 48vw;
+      margin: 0 0 26px;
+    }
+
+    .yxdm-hero__title {
+      margin: 0;
+      font-size: 58px;
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -1.4px;
+    }
+
+    .yxdm-hero__title span {
+      color: var(--yxdm-color-secondary);
+    }
+
+    .yxdm-hero__desc {
+      max-width: 760px;
+      margin: 24px 0 0;
+      font-size: 18px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .yxdm-hero__note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .yxdm-hero__chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .yxdm-hero__panel {
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+      padding: 28px;
+      justify-self: end;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .yxdm-hero__panel-title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .yxdm-hero__panel-text {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .yxdm-hero__contact {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .yxdm-hero__contact a,
+    .yxdm-hero__contact div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 15px;
+      line-height: 1.5;
+      color: #ffffff;
+    }
+
+    .yxdm-hero__contact strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .yxdm-intro__stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .yxdm-stat {
+      padding: 22px 20px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid rgba(31,79,149,0.10);
+      box-shadow: var(--yxdm-shadow-sm);
+    }
+
+    .yxdm-stat__num {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--yxdm-color-primary);
+    }
+
+    .yxdm-stat__label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-showcase {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      min-height: 540px;
+      box-shadow: var(--yxdm-shadow-lg);
+      background: linear-gradient(135deg, #163867 0%, #24589f 58%, #f4a11a 140%);
+    }
+
+    .yxdm-showcase__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+    }
+
+    .yxdm-showcase__content {
+      position: relative;
+      z-index: 2;
+      padding: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 540px;
+    }
+
+    .yxdm-showcase__badge {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      color: #ffffff;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .yxdm-showcase__title {
+      margin: 16px 0 0;
+      font-size: 34px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .yxdm-showcase__text {
+      margin: 16px 0 0;
+      max-width: 480px;
+      font-size: 16px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.86);
+    }
+
+    .yxdm-services__item {
+      height: 100%;
+    }
+
+    .yxdm-services__icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(31,79,149,0.10) 0%, rgba(244,161,26,0.14) 100%);
+      color: var(--yxdm-color-primary);
+      margin-bottom: 22px;
+    }
+
+    .yxdm-services__icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .yxdm-services__title {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-services__text {
+      margin: 14px 0 0;
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-services__list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .yxdm-services__list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--yxdm-color-text);
+    }
+
+    .yxdm-services__list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--yxdm-color-secondary);
+    }
+
+    .yxdm-value__grid {
+      margin-top: 34px;
+    }
+
+    .yxdm-value__item {
+      position: relative;
+      padding: 30px;
+      min-height: 100%;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      transition: transform var(--yxdm-transition), background var(--yxdm-transition), border-color var(--yxdm-transition);
+    }
+
+    .yxdm-value__item:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.20);
+    }
+
+    .yxdm-value__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(244,161,26,0.16);
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .yxdm-value__title {
+      margin: 22px 0 0;
+      font-size: 22px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .yxdm-value__text {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .yxdm-case-grid {
+      margin-top: 34px;
+    }
+
+    .yxdm-case {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .yxdm-case__thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #dbe6f5;
+    }
+
+    .yxdm-case__thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .yxdm-case:hover .yxdm-case__thumb {
+      transform: scale(1.06);
+    }
+
+    .yxdm-case__tag {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(22, 28, 39, 0.74);
+      color: #ffffff;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .yxdm-case__body {
+      padding: 26px;
+    }
+
+    .yxdm-case__title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-case__desc {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-case__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .yxdm-case__meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--yxdm-color-soft-blue);
+      color: var(--yxdm-color-primary);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .yxdm-process {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .yxdm-step {
+      position: relative;
+      padding: 28px 24px;
+      border-radius: 22px;
+      background: #ffffff;
+      border: 1px solid rgba(31,79,149,0.10);
+      box-shadow: var(--yxdm-shadow-sm);
+      min-height: 100%;
+    }
+
+    .yxdm-step__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--yxdm-color-primary) 0%, #336bbd 100%);
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(31,79,149,0.18);
+    }
+
+    .yxdm-step__title {
+      margin: 20px 0 0;
+      font-size: 21px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-step__text {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-blog-grid {
+      margin-top: 34px;
+    }
+
+    .yxdm-blog {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .yxdm-blog__thumb-wrap {
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #e7effa 0%, #fff4df 100%);
+      overflow: hidden;
+    }
+
+    .yxdm-blog__thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .yxdm-blog__body {
+      padding: 26px;
+    }
+
+    .yxdm-blog__cate {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--yxdm-color-soft-orange);
+      color: #b56700;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    .yxdm-blog__title {
+      margin: 16px 0 0;
+      font-size: 21px;
+      line-height: 1.45;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-blog__desc {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-blog__more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--yxdm-color-primary);
+    }
+
+    .yxdm-faq-wrap {
+      margin-top: 34px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .yxdm-faq {
+      padding: 24px 26px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid rgba(31,79,149,0.10);
+      box-shadow: var(--yxdm-shadow-sm);
+    }
+
+    .yxdm-faq__q {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-faq__a {
+      margin: 12px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-cta__box {
+      position: relative;
+      padding: 52px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #173b73 0%, #1f4f95 56%, #295ea9 100%);
+      overflow: hidden;
+      box-shadow: var(--yxdm-shadow-lg);
+    }
+
+    .yxdm-cta__grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .yxdm-cta__title {
+      margin: 0;
+      font-size: 40px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .yxdm-cta__desc {
+      margin: 18px 0 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.84);
+    }
+
+    .yxdm-cta__info {
+      display: grid;
+      gap: 14px;
+    }
+
+    .yxdm-cta__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .yxdm-cta__item strong {
+      font-weight: 800;
+    }
+
+    .yxdm-footer-note {
+      margin-top: 28px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.66);
+    }
+
+    @media (max-width: 1180px) {
+      .yxdm-hero__grid,
+      .yxdm-cta__grid,
+      .yxdm-grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .yxdm-hero__panel {
+        justify-self: start;
+        max-width: 100%;
+      }
+
+      .yxdm-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .yxdm-process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .yxdm-section {
+        padding: 74px 0;
+      }
+
+      .yxdm-title {
+        font-size: 34px;
+      }
+
+      .yxdm-hero {
+        min-height: auto;
+      }
+
+      .yxdm-hero__content {
+        padding: 80px 0 72px;
+      }
+
+      .yxdm-hero__title {
+        font-size: 42px;
+        line-height: 1.15;
+      }
+
+      .yxdm-hero__desc {
+        font-size: 16px;
+      }
+
+      .yxdm-grid-3,
+      .yxdm-grid-4,
+      .yxdm-intro__stats,
+      .yxdm-process {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .yxdm-wrap {
+        padding: 0 16px;
+      }
+
+      .yxdm-section {
+        padding: 62px 0;
+      }
+
+      .yxdm-title {
+        font-size: 29px;
+      }
+
+      .yxdm-desc {
+        font-size: 15px;
+      }
+
+      .yxdm-hero__logo {
+        width: 180px;
+        margin-bottom: 18px;
+      }
+
+      .yxdm-hero__title {
+        font-size: 34px;
+        letter-spacing: -0.8px;
+      }
+
+      .yxdm-hero__desc {
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .yxdm-hero__panel,
+      .yxdm-card__inner,
+      .yxdm-case__body,
+      .yxdm-blog__body,
+      .yxdm-step,
+      .yxdm-value__item,
+      .yxdm-faq,
+      .yxdm-cta__box {
+        padding: 22px;
+      }
+
+      .yxdm-showcase__content {
+        padding: 28px 22px;
+      }
+
+      .yxdm-showcase__title,
+      .yxdm-cta__title {
+        font-size: 28px;
+      }
+
+      .yxdm-btns {
+        gap: 10px;
+      }
+
+      .yxdm-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="yxdm-home">
+
+    <section class="yxdm-hero" id="top">
+      <div class="yxdm-hero__media">
+        <img src="yunxiang-hero.png" alt="雲想數位行銷有限公司主視覺大圖">
+      </div>
+      <div class="yxdm-hero__overlay"></div>
+      <div class="yxdm-hero__glow"></div>
+
+      <div class="yxdm-wrap yxdm-hero__content">
+        <div class="yxdm-hero__grid">
+          <div>
+            <div class="yxdm-hero__badge">B2B Digital Marketing</div>
+            <img class="yxdm-hero__logo" src="LOGO.png" alt="雲想數位行銷有限公司 LOGO">
+
+            <h1 class="yxdm-hero__title">
+              雲想數位行銷有限公司<br>
+              網站架設、<span>SEO</span>、社群行銷整合規劃
+            </h1>
+
+            <p class="yxdm-hero__desc">
+              協助企業建立清楚的數位門面，整合網站架構、搜尋曝光與品牌內容經營，讓品牌在競爭市場中更容易被看見，也更有效率地承接商務詢問。
+            </p>
+
+            <div class="yxdm-hero__note">
+              <span class="yxdm-hero__chip">企業官網建置</span>
+              <span class="yxdm-hero__chip">SEO 搜尋優化</span>
+              <span class="yxdm-hero__chip">社群內容經營</span>
+              <span class="yxdm-hero__chip">B2B 品牌規劃</span>
+            </div>
+
+            <div class="yxdm-btns">
+              <a class="yxdm-btn yxdm-btn--primary" href="#contact">立即諮詢</a>
+              <a class="yxdm-btn yxdm-btn--secondary" href="#cases">查看成功案例</a>
+              <a class="yxdm-btn yxdm-btn--secondary" href="#services">了解服務項目</a>
+            </div>
+          </div>
+
+          <div class="yxdm-hero__panel">
+            <h2 class="yxdm-hero__panel-title">讓品牌被找到，也讓內容更有商務價值</h2>
+            <p class="yxdm-hero__panel-text">
+              從官方網站、SEO 佈局到社群內容規劃，雲想數位行銷以 B2B 企業溝通邏輯出發，協助品牌建立專業形象與長期曝光基礎。
+            </p>
+
+            <div class="yxdm-hero__contact">
+              <a href="tel:0931959313"><strong>電話</strong> 0931 959 313</a>
+              <a href="mailto:ya0088@gmail.com"><strong>Email</strong> ya0088@gmail.com</a>
+              <a href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong> ya0088</a>
+              <div><strong>地址</strong> 臺中市西屯區台灣大道三段699號8樓之1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--soft">
+      <div class="yxdm-wrap yxdm-grid-2">
+        <div>
+          <span class="yxdm-kicker">About iTHINK</span>
+          <h2 class="yxdm-title">專注企業數位門面建構，打造可持續累積的行銷基礎</h2>
+          <p class="yxdm-desc">
+            雲想數位行銷有限公司成立於107年07月19日，專注提供企業網站架設、SEO 搜尋引擎優化與社群行銷服務，協助品牌從形象建立、網站內容規劃、搜尋能見度到數位溝通策略，逐步建構更完整的線上佈局。
+          </p>
+          <p class="yxdm-desc">
+            我們重視的不只是畫面呈現，而是企業在市場中如何被理解、被搜尋、被記住。透過清楚的資訊架構、正確的內容方向與一致的品牌表現，讓網站不只是展示頁，更成為承接詢問與累積信任的重要資產。
+          </p>
+
+          <div class="yxdm-intro__stats">
+            <div class="yxdm-stat">
+              <span class="yxdm-stat__num">B2B</span>
+              <span class="yxdm-stat__label">聚焦企業品牌溝通與商務型網站規劃</span>
+            </div>
+            <div class="yxdm-stat">
+              <span class="yxdm-stat__num">3大</span>
+              <span class="yxdm-stat__label">整合網站架設、SEO 與社群行銷服務</span>
+            </div>
+            <div class="yxdm-stat">
+              <span class="yxdm-stat__num">2018</span>
+              <span class="yxdm-stat__label">自107年起持續投入企業數位行銷佈局</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="yxdm-showcase">
+          <img class="yxdm-showcase__img" src="yunxiang-hero.png" alt="雲想數位行銷品牌形象圖">
+          <div class="yxdm-showcase__content">
+            <span class="yxdm-showcase__badge">Digital Strategy</span>
+            <h3 class="yxdm-showcase__title">以品牌思維規劃網站，以搜尋邏輯擴大曝光，以內容經營延續價值</h3>
+            <p class="yxdm-showcase__text">
+              不是只做一頁網站，也不是只發幾篇文章，而是為企業建立可被看見、可被理解、可被持續優化的數位基礎。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section" id="services">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Our Services</span>
+        <h2 class="yxdm-title">整合三大核心服務，讓品牌曝光與詢問來源更有方向</h2>
+        <p class="yxdm-desc">
+          從企業官方網站建置、搜尋能見度優化到社群內容經營，雲想數位行銷協助品牌建立清楚的一致性數位形象，讓每一次曝光都更接近實際商務價值。
+        </p>
+
+        <div class="yxdm-grid-3 yxdm-case-grid">
+          <article class="yxdm-card yxdm-services__item">
+            <div class="yxdm-card__inner">
+              <div class="yxdm-services__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                  <path d="M8 20h8"></path>
+                  <path d="M10 8h4"></path>
+                  <path d="M7 12h10"></path>
+                </svg>
+              </div>
+              <h3 class="yxdm-services__title">架設網站</h3>
+              <p class="yxdm-services__text">
+                依企業品牌定位、服務內容與商務溝通需求，規劃清楚、專業、利於轉換的官方網站，讓網站成為品牌對外溝通與承接詢問的重要入口。
+              </p>
+              <ul class="yxdm-services__list">
+                <li>企業形象網站規劃</li>
+                <li>網站架構與頁面內容設計</li>
+                <li>RWD 響應式版型建置</li>
+                <li>符合 SEO 思維的網站基礎</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-services__item">
+            <div class="yxdm-card__inner">
+              <div class="yxdm-services__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="11" cy="11" r="6"></circle>
+                  <path d="M20 20l-3.5-3.5"></path>
+                  <path d="M8.5 11l1.8 1.8L13.8 9.2"></path>
+                </svg>
+              </div>
+              <h3 class="yxdm-services__title">SEO 優化</h3>
+              <p class="yxdm-services__text">
+                從關鍵字規劃、頁面內容調整、網站架構整理到文章主題布局，逐步提升搜尋引擎可見度，讓潛在客戶在搜尋時更容易找到品牌。
+              </p>
+              <ul class="yxdm-services__list">
+                <li>關鍵字規劃與頁面佈局</li>
+                <li>站內內容優化建議</li>
+                <li>文章主題與專區規劃</li>
+                <li>自然搜尋曝光累積</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-services__item">
+            <div class="yxdm-card__inner">
+              <div class="yxdm-services__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M5 18h14"></path>
+                  <path d="M7 15V8"></path>
+                  <path d="M12 15V5"></path>
+                  <path d="M17 15v-4"></path>
+                  <path d="M4 6l4-2 4 2 4-2 4 2"></path>
+                </svg>
+              </div>
+              <h3 class="yxdm-services__title">社群行銷</h3>
+              <p class="yxdm-services__text">
+                依品牌定位與目標客群規劃社群內容方向，強化日常曝光、專業印象與互動節奏，讓社群成為延續品牌影響力的重要場域。
+              </p>
+              <ul class="yxdm-services__list">
+                <li>社群內容方向規劃</li>
+                <li>品牌語調與主題設定</li>
+                <li>企業形象持續曝光</li>
+                <li>官網與社群互相導流</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--blue">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Why Choose Us</span>
+        <h2 class="yxdm-title">以商務溝通邏輯出發的數位行銷規劃</h2>
+        <p class="yxdm-desc">
+          雲想數位行銷不只重視設計，更重視企業品牌在市場中如何被理解、被搜尋、被信任。從網站到內容，每個區塊都圍繞企業對外溝通與長期累積而設計。
+        </p>
+
+        <div class="yxdm-grid-4 yxdm-value__grid">
+          <article class="yxdm-value__item">
+            <div class="yxdm-value__num">01</div>
+            <h3 class="yxdm-value__title">聚焦 B2B 品牌溝通</h3>
+            <p class="yxdm-value__text">以企業客戶決策流程與商務閱讀習慣為基礎，規劃更清楚、可信且具專業感的內容結構。</p>
+          </article>
+
+          <article class="yxdm-value__item">
+            <div class="yxdm-value__num">02</div>
+            <h3 class="yxdm-value__title">網站、搜尋、內容整合</h3>
+            <p class="yxdm-value__text">讓網站架構、SEO 佈局與社群內容互相支援，避免行銷操作各自分散，提升整體一致性。</p>
+          </article>
+
+          <article class="yxdm-value__item">
+            <div class="yxdm-value__num">03</div>
+            <h3 class="yxdm-value__title">兼顧形象與轉換</h3>
+            <p class="yxdm-value__text">不只讓頁面好看，更重視訊息是否清楚、服務是否易懂、聯絡動線是否流暢，幫助詢問更有效承接。</p>
+          </article>
+
+          <article class="yxdm-value__item">
+            <div class="yxdm-value__num">04</div>
+            <h3 class="yxdm-value__title">建立長期數位資產</h3>
+            <p class="yxdm-value__text">透過網站與內容持續累積品牌可見度，讓每一次更新都能成為日後自然流量與信任感的一部分。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--soft" id="cases">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Success Cases</span>
+        <h2 class="yxdm-title">成功案例</h2>
+        <p class="yxdm-desc">
+          不同企業有不同的市場定位與溝通需求，雲想數位行銷依據產業特性、品牌方向與目標受眾，規劃合適的網站架構、內容呈現與數位行銷節奏，讓品牌價值被更清楚地傳遞。
+        </p>
+
+        <div class="yxdm-grid-3 yxdm-case-grid">
+          <article class="yxdm-card yxdm-case">
+            <div class="yxdm-case__thumb-wrap">
+              <img class="yxdm-case__thumb" src="yunxiang-hero.png" alt="企業形象網站建置案例">
+              <span class="yxdm-case__tag">Website Project</span>
+            </div>
+            <div class="yxdm-case__body">
+              <h3 class="yxdm-case__title">企業形象網站建置案例</h3>
+              <p class="yxdm-case__desc">
+                依品牌定位與服務內容重新整理網站資訊架構，強化首頁導覽、服務頁說明與聯絡轉換動線，讓企業對外溝通更完整。
+              </p>
+              <div class="yxdm-case__meta">
+                <span>品牌形象</span>
+                <span>官網規劃</span>
+                <span>RWD 架設</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-case">
+            <div class="yxdm-case__thumb-wrap">
+              <img class="yxdm-case__thumb" src="yunxiang-hero.png" alt="SEO 內容優化案例">
+              <span class="yxdm-case__tag">SEO Project</span>
+            </div>
+            <div class="yxdm-case__body">
+              <h3 class="yxdm-case__title">SEO 內容優化案例</h3>
+              <p class="yxdm-case__desc">
+                透過關鍵字規劃、頁面標題重整、內文結構優化與文章主題布局，逐步建立網站自然搜尋曝光的內容基礎。
+              </p>
+              <div class="yxdm-case__meta">
+                <span>SEO 佈局</span>
+                <span>關鍵字規劃</span>
+                <span>內容優化</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-case">
+            <div class="yxdm-case__thumb-wrap">
+              <img class="yxdm-case__thumb" src="yunxiang-hero.png" alt="社群品牌經營案例">
+              <span class="yxdm-case__tag">Social Media</span>
+            </div>
+            <div class="yxdm-case__body">
+              <h3 class="yxdm-case__title">社群品牌經營案例</h3>
+              <p class="yxdm-case__desc">
+                依品牌調性與產業需求建立社群內容方向，讓日常曝光更一致，提升品牌在目標客群中的專業印象與辨識度。
+              </p>
+              <div class="yxdm-case__meta">
+                <span>內容策略</span>
+                <span>品牌經營</span>
+                <span>社群規劃</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section" id="process">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Workflow</span>
+        <h2 class="yxdm-title">清楚的合作流程，讓每一步都更有方向</h2>
+        <p class="yxdm-desc">
+          從需求了解、策略規劃到執行上線，雲想數位行銷以條理清楚的流程推進專案，讓企業在合作過程中更容易掌握每個階段的重點。
+        </p>
+
+        <div class="yxdm-process">
+          <article class="yxdm-step">
+            <div class="yxdm-step__num">01</div>
+            <h3 class="yxdm-step__title">需求了解</h3>
+            <p class="yxdm-step__text">先了解企業現況、產業類型、服務內容、品牌方向與目標受眾，釐清網站、SEO 或社群經營的核心需求。</p>
+          </article>
+
+          <article class="yxdm-step">
+            <div class="yxdm-step__num">02</div>
+            <h3 class="yxdm-step__title">方向規劃</h3>
+            <p class="yxdm-step__text">根據品牌定位與實際需求，規劃合適的網站架構、內容方向、關鍵字佈局與整體溝通重點。</p>
+          </article>
+
+          <article class="yxdm-step">
+            <div class="yxdm-step__num">03</div>
+            <h3 class="yxdm-step__title">執行製作</h3>
+            <p class="yxdm-step__text">依服務項目進行網站建置、頁面內容整理、SEO 優化或社群主題規劃，逐步完成整體數位佈局。</p>
+          </article>
+
+          <article class="yxdm-step">
+            <div class="yxdm-step__num">04</div>
+            <h3 class="yxdm-step__title">上線優化</h3>
+            <p class="yxdm-step__text">完成上線後，持續依品牌發展與內容表現進行調整，讓網站與行銷內容更穩定地發揮價值。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--dark" id="blog">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Blog & SEO</span>
+        <h2 class="yxdm-title">數位行銷觀點與 SEO 專區</h2>
+        <p class="yxdm-desc">
+          透過網站架設、SEO、社群經營與企業數位品牌規劃等主題文章，持續累積專業內容與自然搜尋流量，讓部落格不只是文章區，更是品牌可信度與曝光度的重要基礎。
+        </p>
+
+        <div class="yxdm-grid-3 yxdm-blog-grid">
+          <article class="yxdm-card yxdm-blog">
+            <div class="yxdm-blog__thumb-wrap">
+              <img class="yxdm-blog__thumb" src="yunxiang-hero.png" alt="B2B 企業網站規劃重點">
+            </div>
+            <div class="yxdm-blog__body">
+              <span class="yxdm-blog__cate">網站架設</span>
+              <h3 class="yxdm-blog__title">B2B 企業網站規劃重點有哪些？</h3>
+              <p class="yxdm-blog__desc">從首頁架構、服務內容、品牌信任到聯絡動線，整理企業官網應具備的核心區塊與規劃邏輯。</p>
+              <a class="yxdm-blog__more" href="#blog">閱讀更多 →</a>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-blog">
+            <div class="yxdm-blog__thumb-wrap">
+              <img class="yxdm-blog__thumb" src="yunxiang-hero.png" alt="新網站如何開始做 SEO">
+            </div>
+            <div class="yxdm-blog__body">
+              <span class="yxdm-blog__cate">SEO 優化</span>
+              <h3 class="yxdm-blog__title">新網站上線後，如何開始做 SEO？</h3>
+              <p class="yxdm-blog__desc">從關鍵字規劃、頁面標題設定、內文結構到內容專區安排，掌握 SEO 起步時最重要的基礎方向。</p>
+              <a class="yxdm-blog__more" href="#blog">閱讀更多 →</a>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-blog">
+            <div class="yxdm-blog__thumb-wrap">
+              <img class="yxdm-blog__thumb" src="yunxiang-hero.png" alt="企業社群內容規劃方向">
+            </div>
+            <div class="yxdm-blog__body">
+              <span class="yxdm-blog__cate">社群行銷</span>
+              <h3 class="yxdm-blog__title">企業社群內容應該怎麼規劃？</h3>
+              <p class="yxdm-blog__desc">透過品牌定位、受眾需求與商業目標整理社群內容方向，讓社群經營更穩定、更有一致性。</p>
+              <a class="yxdm-blog__more" href="#blog">閱讀更多 →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--soft" id="faq">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">FAQ</span>
+        <h2 class="yxdm-title">常見問題</h2>
+        <p class="yxdm-desc">
+          針對網站架設、SEO 與社群行銷合作時常見的問題，先整理幾項企業客戶最常關心的重點，協助你更快了解合作方向。
+        </p>
+
+        <div class="yxdm-faq-wrap">
+          <article class="yxdm-faq">
+            <h3 class="yxdm-faq__q">Q1：沒有網站，也可以從頭開始規劃嗎？</h3>
+            <p class="yxdm-faq__a">可以。若企業目前尚未建立官網，可從網站架設開始，依品牌定位與服務內容規劃適合的頁面架構，並同步納入後續 SEO 與內容經營思維。</p>
+          </article>
+
+          <article class="yxdm-faq">
+            <h3 class="yxdm-faq__q">Q2：SEO 多久會看到效果？</h3>
+            <p class="yxdm-faq__a">SEO 屬於中長期累積，實際成效會依產業競爭度、網站基礎、頁面數量與內容規模不同而有所差異。越早建立正確架構與內容方向，越有助於後續穩定成長。</p>
+          </article>
+
+          <article class="yxdm-faq">
+            <h3 class="yxdm-faq__q">Q3：B2B 企業也需要經營社群嗎？</h3>
+            <p class="yxdm-faq__a">需要。對 B2B 品牌而言，社群不一定是大量促銷，而是持續傳遞專業印象、品牌觀點與市場存在感的重要方式，能補強官網以外的接觸場景。</p>
+          </article>
+
+          <article class="yxdm-faq">
+            <h3 class="yxdm-faq__q">Q4：網站架設是否能同時規劃 SEO？</h3>
+            <p class="yxdm-faq__a">可以，而且建議一開始就納入 SEO 思維。從頁面架構、標題層級、內文配置到文章專區規劃，若在建站初期同步安排，後續優化會更有效率。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section" id="contact">
+      <div class="yxdm-wrap">
+        <div class="yxdm-cta__box">
+          <div class="yxdm-cta__grid">
+            <div>
+              <span class="yxdm-kicker">Contact Us</span>
+              <h2 class="yxdm-cta__title">讓品牌被看見，從更清楚的數位佈局開始</h2>
+              <p class="yxdm-cta__desc">
+                從網站架設、SEO 優化到社群行銷，雲想數位行銷有限公司協助企業打造更清楚、更穩定，也更具長期價值的數位門面與內容基礎。
+              </p>
+              <div class="yxdm-btns">
+                <a class="yxdm-btn yxdm-btn--primary" href="tel:0931959313">立即來電諮詢</a>
+                <a class="yxdm-btn yxdm-btn--secondary" href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener">加入 LINE 洽詢</a>
+              </div>
+              <p class="yxdm-footer-note">雲想數位行銷有限公司｜成立日期：107年07月19日</p>
+            </div>
+
+            <div class="yxdm-cta__info">
+              <a class="yxdm-cta__item" href="tel:0931959313"><strong>電話</strong> 0931 959 313</a>
+              <a class="yxdm-cta__item" href="mailto:ya0088@gmail.com"><strong>Email</strong> ya0088@gmail.com</a>
+              <a class="yxdm-cta__item" href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong> ya0088</a>
+              <div class="yxdm-cta__item"><strong>地址</strong> 臺中市西屯區台灣大道三段699號8樓之1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+</body>
+</html>
