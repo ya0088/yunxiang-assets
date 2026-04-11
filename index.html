@@ -10,10 +10,8 @@
       --yxdm-color-primary: #1f4f95;
       --yxdm-color-secondary: #f4a11a;
       --yxdm-color-dark: #1f2430;
-      --yxdm-color-dark-2: #2f3542;
       --yxdm-color-text: #2b2f36;
       --yxdm-color-muted: #667085;
-      --yxdm-color-line: #d9e2ec;
       --yxdm-color-bg: #f7f9fc;
       --yxdm-color-white: #ffffff;
       --yxdm-color-soft-blue: #eef4fb;
@@ -56,7 +54,7 @@
       width: 100%;
       max-width: var(--yxdm-max);
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 28px;
     }
 
     .yxdm-section {
@@ -111,8 +109,8 @@
 
     .yxdm-title {
       margin: 18px 0 0;
-      font-size: 42px;
-      line-height: 1.2;
+      font-size: 40px;
+      line-height: 1.22;
       font-weight: 800;
       letter-spacing: -0.8px;
     }
@@ -132,7 +130,7 @@
     .yxdm-grid-2 {
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: 38px;
+      gap: 42px;
       align-items: center;
     }
 
@@ -201,7 +199,7 @@
     .yxdm-btn--secondary {
       color: #ffffff;
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.30);
     }
 
     .yxdm-btn--ghost {
@@ -236,16 +234,15 @@
 
     .yxdm-hero__overlay {
       background:
-        linear-gradient(90deg, rgba(12, 20, 34, 0.78) 0%, rgba(12, 20, 34, 0.64) 38%, rgba(12, 20, 34, 0.48) 65%, rgba(12, 20, 34, 0.62) 100%),
-        linear-gradient(180deg, rgba(12, 20, 34, 0.20) 0%, rgba(12, 20, 34, 0.55) 100%);
+        linear-gradient(90deg, rgba(10, 17, 31, 0.78) 0%, rgba(10, 17, 31, 0.60) 34%, rgba(10, 17, 31, 0.44) 62%, rgba(10, 17, 31, 0.58) 100%),
+        linear-gradient(180deg, rgba(12, 20, 34, 0.20) 0%, rgba(12, 20, 34, 0.52) 100%);
       z-index: -2;
     }
 
     .yxdm-hero__glow {
       background:
-        radial-gradient(circle at 15% 20%, rgba(31, 79, 149, 0.36) 0%, rgba(31, 79, 149, 0) 35%),
-        radial-gradient(circle at 75% 25%, rgba(244, 161, 26, 0.22) 0%, rgba(244, 161, 26, 0) 30%),
-        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.08) 0%, rgba(255,255,255,0) 26%);
+        radial-gradient(circle at 15% 20%, rgba(31, 79, 149, 0.32) 0%, rgba(31, 79, 149, 0) 34%),
+        radial-gradient(circle at 76% 22%, rgba(244, 161, 26, 0.18) 0%, rgba(244, 161, 26, 0) 28%);
       z-index: -1;
     }
 
@@ -253,23 +250,23 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 92px 0 78px;
+      padding: 84px 0 72px;
     }
 
     .yxdm-hero__grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
-      gap: 30px;
-      align-items: end;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.78fr);
+      gap: 40px;
+      align-items: center;
     }
 
     .yxdm-hero__badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(10px);
       font-size: 13px;
       line-height: 1.2;
@@ -287,17 +284,18 @@
     }
 
     .yxdm-hero__logo {
-      width: 240px;
-      max-width: 48vw;
-      margin: 0 0 26px;
+      width: 152px;
+      max-width: 34vw;
+      margin: 26px 0 28px;
     }
 
     .yxdm-hero__title {
       margin: 0;
-      font-size: 58px;
-      line-height: 1.08;
+      max-width: 760px;
+      font-size: 46px;
+      line-height: 1.14;
       font-weight: 800;
-      letter-spacing: -1.4px;
+      letter-spacing: -1px;
     }
 
     .yxdm-hero__title span {
@@ -306,29 +304,29 @@
 
     .yxdm-hero__desc {
       max-width: 760px;
-      margin: 24px 0 0;
-      font-size: 18px;
-      line-height: 1.9;
+      margin: 22px 0 0;
+      font-size: 17px;
+      line-height: 1.95;
       color: rgba(255, 255, 255, 0.88);
     }
 
     .yxdm-hero__note {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 10px;
+      margin-top: 26px;
     }
 
     .yxdm-hero__chip {
       display: inline-flex;
       align-items: center;
-      min-height: 38px;
-      padding: 0 16px;
+      min-height: 36px;
+      padding: 0 15px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.10);
       border: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(10px);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.95);
@@ -336,28 +334,28 @@
 
     .yxdm-hero__panel {
       background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.16);
       backdrop-filter: blur(12px);
-      padding: 28px;
-      justify-self: end;
+      padding: 26px;
       width: 100%;
       max-width: 420px;
+      margin-left: auto;
     }
 
     .yxdm-hero__panel-title {
       margin: 0;
-      font-size: 22px;
-      line-height: 1.35;
+      font-size: 19px;
+      line-height: 1.5;
       font-weight: 800;
       color: #ffffff;
     }
 
     .yxdm-hero__panel-text {
       margin: 14px 0 0;
-      font-size: 15px;
-      line-height: 1.9;
+      font-size: 14px;
+      line-height: 1.95;
       color: rgba(255, 255, 255, 0.84);
     }
 
@@ -372,18 +370,19 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      min-height: 48px;
-      padding: 0 16px;
+      min-height: 52px;
+      padding: 0 18px;
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.08);
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.5;
       color: #ffffff;
     }
 
     .yxdm-hero__contact strong {
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 800;
+      min-width: 42px;
     }
 
     .yxdm-intro__stats {
@@ -865,6 +864,7 @@
 
     .yxdm-cta__item strong {
       font-weight: 800;
+      min-width: 42px;
     }
 
     .yxdm-footer-note {
@@ -882,7 +882,7 @@
       }
 
       .yxdm-hero__panel {
-        justify-self: start;
+        margin-left: 0;
         max-width: 100%;
       }
 
@@ -909,12 +909,12 @@
       }
 
       .yxdm-hero__content {
-        padding: 80px 0 72px;
+        padding: 72px 0 64px;
       }
 
       .yxdm-hero__title {
-        font-size: 42px;
-        line-height: 1.15;
+        font-size: 38px;
+        line-height: 1.18;
       }
 
       .yxdm-hero__desc {
@@ -947,13 +947,13 @@
       }
 
       .yxdm-hero__logo {
-        width: 180px;
-        margin-bottom: 18px;
+        width: 124px;
+        margin: 20px 0 22px;
       }
 
       .yxdm-hero__title {
-        font-size: 34px;
-        letter-spacing: -0.8px;
+        font-size: 32px;
+        letter-spacing: -0.6px;
       }
 
       .yxdm-hero__desc {
@@ -987,6 +987,21 @@
 
       .yxdm-btn {
         width: 100%;
+      }
+
+      .yxdm-hero__contact a,
+      .yxdm-hero__contact div,
+      .yxdm-cta__item {
+        padding: 12px 16px;
+        min-height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .yxdm-hero__contact strong,
+      .yxdm-cta__item strong {
+        min-width: 0;
       }
     }
   </style>
@@ -1037,10 +1052,10 @@
             </p>
 
             <div class="yxdm-hero__contact">
-              <a href="tel:0931959313"><strong>電話</strong> 0931 959 313</a>
-              <a href="mailto:ya0088@gmail.com"><strong>Email</strong> ya0088@gmail.com</a>
-              <a href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong> ya0088</a>
-              <div><strong>地址</strong> 臺中市西屯區台灣大道三段699號8樓之1</div>
+              <a href="tel:0931959313"><strong>電話</strong><span>0931 959 313</span></a>
+              <a href="mailto:ya0088@gmail.com"><strong>Email</strong><span>ya0088@gmail.com</span></a>
+              <a href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong><span>ya0088</span></a>
+              <div><strong>地址</strong><span>臺中市西屯區台灣大道三段699號8樓之1</span></div>
             </div>
           </div>
         </div>
@@ -1405,10 +1420,10 @@
             </div>
 
             <div class="yxdm-cta__info">
-              <a class="yxdm-cta__item" href="tel:0931959313"><strong>電話</strong> 0931 959 313</a>
-              <a class="yxdm-cta__item" href="mailto:ya0088@gmail.com"><strong>Email</strong> ya0088@gmail.com</a>
-              <a class="yxdm-cta__item" href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong> ya0088</a>
-              <div class="yxdm-cta__item"><strong>地址</strong> 臺中市西屯區台灣大道三段699號8樓之1</div>
+              <a class="yxdm-cta__item" href="tel:0931959313"><strong>電話</strong><span>0931 959 313</span></a>
+              <a class="yxdm-cta__item" href="mailto:ya0088@gmail.com"><strong>Email</strong><span>ya0088@gmail.com</span></a>
+              <a class="yxdm-cta__item" href="https://line.me/ti/p/~ya0088" target="_blank" rel="noopener"><strong>LINE</strong><span>ya0088</span></a>
+              <div class="yxdm-cta__item"><strong>地址</strong><span>臺中市西屯區台灣大道三段699號8樓之1</span></div>
             </div>
           </div>
         </div>
