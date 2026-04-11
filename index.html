@@ -198,8 +198,9 @@
 
     .yxdm-btn--secondary {
       color: #ffffff;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.30);
+      background: rgba(10, 18, 32, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
     }
 
     .yxdm-btn--ghost {
@@ -234,8 +235,8 @@
 
     .yxdm-hero__overlay {
       background:
-        linear-gradient(90deg, rgba(10, 17, 31, 0.78) 0%, rgba(10, 17, 31, 0.60) 34%, rgba(10, 17, 31, 0.44) 62%, rgba(10, 17, 31, 0.58) 100%),
-        linear-gradient(180deg, rgba(12, 20, 34, 0.20) 0%, rgba(12, 20, 34, 0.52) 100%);
+        linear-gradient(90deg, rgba(8, 14, 26, 0.84) 0%, rgba(8, 14, 26, 0.68) 34%, rgba(8, 14, 26, 0.54) 62%, rgba(8, 14, 26, 0.66) 100%),
+        linear-gradient(180deg, rgba(10, 18, 32, 0.26) 0%, rgba(10, 18, 32, 0.58) 100%);
       z-index: -2;
     }
 
@@ -273,6 +274,8 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__badge::before {
@@ -296,6 +299,8 @@
       line-height: 1.14;
       font-weight: 800;
       letter-spacing: -1px;
+      color: #ffffff;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__title span {
@@ -307,7 +312,8 @@
       margin: 22px 0 0;
       font-size: 17px;
       line-height: 1.95;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__note {
@@ -320,24 +326,25 @@
     .yxdm-hero__chip {
       display: inline-flex;
       align-items: center;
-      min-height: 36px;
-      padding: 0 15px;
+      min-height: 38px;
+      padding: 0 16px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(14, 26, 46, 0.34);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(10px);
       font-size: 13px;
       line-height: 1;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.95);
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__panel {
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.20);
       border-radius: 26px;
       box-shadow: 0 18px 46px rgba(0, 0, 0, 0.16);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       padding: 26px;
       width: 100%;
       max-width: 420px;
@@ -350,13 +357,15 @@
       line-height: 1.5;
       font-weight: 800;
       color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
     }
 
     .yxdm-hero__panel-text {
       margin: 14px 0 0;
       font-size: 14px;
       line-height: 1.95;
-      color: rgba(255, 255, 255, 0.84);
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.14);
     }
 
     .yxdm-hero__contact {
@@ -373,7 +382,8 @@
       min-height: 52px;
       padding: 0 18px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(17, 31, 56, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       font-size: 14px;
       line-height: 1.5;
       color: #ffffff;
@@ -383,6 +393,10 @@
       color: #ffffff;
       font-weight: 800;
       min-width: 42px;
+    }
+
+    .yxdm-hero__contact span {
+      color: rgba(255, 255, 255, 0.96);
     }
 
     .yxdm-intro__stats {
