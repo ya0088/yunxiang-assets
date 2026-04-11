@@ -215,7 +215,7 @@
 
     .yxdm-hero {
       position: relative;
-      min-height: 760px;
+      min-height: 820px;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -239,15 +239,15 @@
 
     .yxdm-hero__overlay {
       background:
-        linear-gradient(90deg, rgba(8, 14, 26, 0.84) 0%, rgba(8, 14, 26, 0.68) 34%, rgba(8, 14, 26, 0.54) 62%, rgba(8, 14, 26, 0.66) 100%),
-        linear-gradient(180deg, rgba(10, 18, 32, 0.26) 0%, rgba(10, 18, 32, 0.58) 100%);
+        linear-gradient(90deg, rgba(7, 13, 24, 0.88) 0%, rgba(7, 13, 24, 0.70) 35%, rgba(7, 13, 24, 0.52) 62%, rgba(7, 13, 24, 0.66) 100%),
+        linear-gradient(180deg, rgba(9, 16, 28, 0.24) 0%, rgba(9, 16, 28, 0.58) 100%);
       z-index: -2;
     }
 
     .yxdm-hero__glow {
       background:
-        radial-gradient(circle at 15% 20%, rgba(31, 79, 149, 0.32) 0%, rgba(31, 79, 149, 0) 34%),
-        radial-gradient(circle at 76% 22%, rgba(244, 161, 26, 0.18) 0%, rgba(244, 161, 26, 0) 28%);
+        radial-gradient(circle at 14% 20%, rgba(31, 79, 149, 0.26) 0%, rgba(31, 79, 149, 0) 34%),
+        radial-gradient(circle at 74% 22%, rgba(244, 161, 26, 0.14) 0%, rgba(244, 161, 26, 0) 28%);
       z-index: -1;
     }
 
@@ -255,23 +255,28 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 84px 0 72px;
+      padding: 92px 0 84px;
     }
 
     .yxdm-hero__grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.78fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.72fr);
+      gap: 54px;
       align-items: center;
+    }
+
+    .yxdm-hero__main {
+      max-width: 760px;
     }
 
     .yxdm-hero__badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 18px;
+      padding: 11px 18px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255,255,255,0.10);
       backdrop-filter: blur(10px);
       font-size: 13px;
       line-height: 1.2;
@@ -279,7 +284,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__badge::before {
@@ -291,20 +296,21 @@
     }
 
     .yxdm-hero__logo {
-      width: 152px;
-      max-width: 34vw;
-      margin: 26px 0 28px;
+      width: 126px;
+      max-width: 28vw;
+      margin: 26px 0 26px;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.10));
     }
 
     .yxdm-hero__title {
       margin: 0;
-      max-width: 760px;
-      font-size: 46px;
-      line-height: 1.14;
+      max-width: 780px;
+      font-size: 56px;
+      line-height: 1.08;
       font-weight: 800;
-      letter-spacing: -1px;
+      letter-spacing: -1.6px;
       color: #ffffff;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.20);
     }
 
     .yxdm-hero__title span {
@@ -312,53 +318,79 @@
     }
 
     .yxdm-hero__desc {
-      max-width: 760px;
-      margin: 22px 0 0;
-      font-size: 17px;
+      max-width: 720px;
+      margin: 24px 0 0;
+      font-size: 18px;
       line-height: 1.95;
       color: rgba(255, 255, 255, 0.96);
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
     }
 
     .yxdm-hero__note {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
+      gap: 12px;
+      margin-top: 28px;
     }
 
     .yxdm-hero__chip {
       display: inline-flex;
       align-items: center;
-      min-height: 38px;
+      min-height: 40px;
       padding: 0 16px;
       border-radius: 999px;
-      background: rgba(14, 26, 46, 0.34);
+      background: rgba(12, 24, 44, 0.34);
       border: 1px solid rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(10px);
       font-size: 13px;
       line-height: 1;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.96);
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+      color: rgba(255, 255, 255, 0.97);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    .yxdm-hero .yxdm-btns {
+      margin-top: 34px;
+      gap: 14px;
+    }
+
+    .yxdm-hero .yxdm-btn {
+      min-height: 54px;
+      padding: 0 26px;
+      font-size: 15px;
+    }
+
+    .yxdm-hero .yxdm-btn--primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--yxdm-color-secondary) 0%, #ffb534 100%);
+      box-shadow: 0 14px 30px rgba(244, 161, 26, 0.28);
+    }
+
+    .yxdm-hero .yxdm-btn--secondary,
+    .yxdm-hero .yxdm-btn--secondary:link,
+    .yxdm-hero .yxdm-btn--secondary:visited {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
     }
 
     .yxdm-hero__panel {
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.14);
       border: 1px solid rgba(255, 255, 255, 0.20);
-      border-radius: 26px;
-      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.16);
-      backdrop-filter: blur(14px);
-      padding: 26px;
+      border-radius: 28px;
+      box-shadow: 0 20px 52px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+      padding: 28px;
       width: 100%;
-      max-width: 420px;
+      max-width: 430px;
       margin-left: auto;
     }
 
     .yxdm-hero__panel-title {
       margin: 0;
-      font-size: 19px;
-      line-height: 1.5;
+      font-size: 22px;
+      line-height: 1.45;
       font-weight: 800;
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
@@ -366,7 +398,7 @@
 
     .yxdm-hero__panel-text {
       margin: 14px 0 0;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.95;
       color: rgba(255, 255, 255, 0.94);
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.14);
@@ -383,10 +415,10 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      min-height: 52px;
+      min-height: 54px;
       padding: 0 18px;
-      border-radius: 14px;
-      background: rgba(17, 31, 56, 0.22);
+      border-radius: 16px;
+      background: rgba(14, 27, 49, 0.22);
       border: 1px solid rgba(255, 255, 255, 0.12);
       font-size: 14px;
       line-height: 1.5;
@@ -396,7 +428,7 @@
     .yxdm-hero__contact strong {
       color: #ffffff;
       font-weight: 800;
-      min-width: 42px;
+      min-width: 44px;
     }
 
     .yxdm-hero__contact span {
@@ -736,6 +768,9 @@
 
     .yxdm-blog-grid {
       margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
     }
 
     .yxdm-blog {
@@ -904,10 +939,8 @@
         max-width: 100%;
       }
 
-      .yxdm-grid-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
+      .yxdm-grid-4,
+      .yxdm-blog-grid,
       .yxdm-process {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -927,12 +960,12 @@
       }
 
       .yxdm-hero__content {
-        padding: 72px 0 64px;
+        padding: 72px 0 66px;
       }
 
       .yxdm-hero__title {
-        font-size: 38px;
-        line-height: 1.18;
+        font-size: 42px;
+        line-height: 1.14;
       }
 
       .yxdm-hero__desc {
@@ -942,6 +975,7 @@
       .yxdm-grid-3,
       .yxdm-grid-4,
       .yxdm-intro__stats,
+      .yxdm-blog-grid,
       .yxdm-process {
         grid-template-columns: 1fr;
       }
@@ -965,13 +999,13 @@
       }
 
       .yxdm-hero__logo {
-        width: 124px;
+        width: 112px;
         margin: 20px 0 22px;
       }
 
       .yxdm-hero__title {
-        font-size: 32px;
-        letter-spacing: -0.6px;
+        font-size: 34px;
+        letter-spacing: -0.8px;
       }
 
       .yxdm-hero__desc {
@@ -1036,7 +1070,7 @@
 
       <div class="yxdm-wrap yxdm-hero__content">
         <div class="yxdm-hero__grid">
-          <div>
+          <div class="yxdm-hero__main">
             <div class="yxdm-hero__badge">B2B Digital Marketing</div>
             <img class="yxdm-hero__logo" src="LOGO.png" alt="雲想數位行銷有限公司 LOGO">
 
@@ -1348,7 +1382,7 @@
           透過網站架設、SEO、社群經營與企業數位品牌規劃等主題文章，持續累積專業內容與自然搜尋流量，讓部落格不只是文章區，更是品牌可信度與曝光度的重要基礎。
         </p>
 
-        <div class="yxdm-grid-3 yxdm-blog-grid">
+        <div class="yxdm-blog-grid">
           <article class="yxdm-card yxdm-blog">
             <div class="yxdm-blog__thumb-wrap">
               <img class="yxdm-blog__thumb" src="yunxiang-hero.png" alt="B2B 企業網站規劃重點">
@@ -1451,8 +1485,3 @@
   </section>
 </body>
 </html>
-
-.yxdm-hero__contact span,
-.yxdm-cta__item span {
-  color: #ffffff;
-}
