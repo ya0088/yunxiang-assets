@@ -61,6 +61,7 @@
       position: relative;
       padding: 96px 0;
       overflow: hidden;
+      scroll-margin-top: 110px;
     }
 
     .yxdm-section--soft {
@@ -211,6 +212,96 @@
       color: var(--yxdm-color-primary);
       background: #ffffff;
       border: 1px solid rgba(31, 79, 149, 0.16);
+    }
+
+    .yxdm-header {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      width: 100%;
+      background: rgba(10, 17, 29, 0.72);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .yxdm-header__bar {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .yxdm-header__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      color: #ffffff;
+    }
+
+    .yxdm-header__logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      object-fit: contain;
+      background: rgba(255,255,255,0.08);
+      padding: 6px;
+      flex: 0 0 auto;
+    }
+
+    .yxdm-header__brand-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .yxdm-header__brand-text strong {
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .yxdm-header__brand-text span {
+      font-size: 12px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.72);
+      white-space: nowrap;
+    }
+
+    .yxdm-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .yxdm-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+      color: rgba(255,255,255,0.90);
+      transition: background var(--yxdm-transition), color var(--yxdm-transition), transform var(--yxdm-transition);
+    }
+
+    .yxdm-nav a:hover {
+      background: rgba(255,255,255,0.10);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .yxdm-nav a.yxdm-nav__highlight {
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(244,161,26,0.88) 0%, rgba(255,181,52,0.94) 100%);
+      box-shadow: 0 10px 24px rgba(244, 161, 26, 0.22);
     }
 
     .yxdm-hero {
@@ -719,6 +810,157 @@
       font-weight: 700;
     }
 
+    .yxdm-effects-grid {
+      margin-top: 34px;
+    }
+
+    .yxdm-effects__item {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .yxdm-effects__visual {
+      position: relative;
+      min-height: 210px;
+      background: linear-gradient(135deg, #10203a 0%, #1b4d92 55%, #ffb534 130%);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .yxdm-effects__visual::before,
+    .yxdm-effects__visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.9;
+      animation: yxdmFloatGlow 8s ease-in-out infinite;
+    }
+
+    .yxdm-effects__visual::before {
+      width: 150px;
+      height: 150px;
+      background: rgba(255,255,255,0.16);
+      top: 18px;
+      left: 24px;
+    }
+
+    .yxdm-effects__visual::after {
+      width: 110px;
+      height: 110px;
+      background: rgba(244,161,26,0.34);
+      right: 22px;
+      bottom: 18px;
+      animation-delay: -3s;
+    }
+
+    .yxdm-effects__line {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, transparent 0%, transparent 28%, rgba(255,255,255,0.14) 34%, transparent 40%, transparent 100%),
+        radial-gradient(circle at 25% 35%, rgba(255,255,255,0.18) 0%, transparent 28%),
+        radial-gradient(circle at 70% 62%, rgba(255,255,255,0.14) 0%, transparent 24%);
+      animation: yxdmShimmer 5.5s linear infinite;
+      z-index: 1;
+    }
+
+    .yxdm-effects__mock {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .yxdm-effects__mock span {
+      display: block;
+      height: 58px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+      transform: translateY(0);
+      animation: yxdmCardFloat 4.2s ease-in-out infinite;
+    }
+
+    .yxdm-effects__mock span:nth-child(2) {
+      animation-delay: -1.2s;
+    }
+
+    .yxdm-effects__mock span:nth-child(3) {
+      animation-delay: -2.4s;
+    }
+
+    .yxdm-effects__body {
+      padding: 26px;
+    }
+
+    .yxdm-effects__label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--yxdm-color-soft-orange);
+      color: #b56700;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .yxdm-effects__title {
+      margin: 16px 0 0;
+      font-size: 22px;
+      line-height: 1.45;
+      font-weight: 800;
+      color: var(--yxdm-color-dark);
+    }
+
+    .yxdm-effects__desc {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
+    .yxdm-effects__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .yxdm-effects__meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--yxdm-color-soft-blue);
+      color: var(--yxdm-color-primary);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .yxdm-effects-note {
+      margin-top: 24px;
+      padding: 22px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+      border: 1px solid rgba(31,79,149,0.10);
+      box-shadow: var(--yxdm-shadow-sm);
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--yxdm-color-muted);
+    }
+
     .yxdm-process {
       margin-top: 34px;
       display: grid;
@@ -927,6 +1169,33 @@
       color: rgba(255,255,255,0.66);
     }
 
+    @keyframes yxdmFloatGlow {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(8px, -10px, 0) scale(1.08);
+      }
+    }
+
+    @keyframes yxdmShimmer {
+      0% {
+        transform: translateX(-8%);
+      }
+      100% {
+        transform: translateX(8%);
+      }
+    }
+
+    @keyframes yxdmCardFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
     @media (max-width: 1180px) {
       .yxdm-hero__grid,
       .yxdm-cta__grid,
@@ -943,6 +1212,16 @@
       .yxdm-blog-grid,
       .yxdm-process {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .yxdm-header__bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 0;
+      }
+
+      .yxdm-nav {
+        justify-content: flex-start;
       }
     }
 
@@ -979,6 +1258,16 @@
       .yxdm-process {
         grid-template-columns: 1fr;
       }
+
+      .yxdm-nav {
+        gap: 8px;
+      }
+
+      .yxdm-nav a {
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: 13px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -988,6 +1277,7 @@
 
       .yxdm-section {
         padding: 62px 0;
+        scroll-margin-top: 140px;
       }
 
       .yxdm-title {
@@ -996,6 +1286,16 @@
 
       .yxdm-desc {
         font-size: 15px;
+      }
+
+      .yxdm-header__bar {
+        min-height: auto;
+        gap: 14px;
+      }
+
+      .yxdm-header__brand-text strong,
+      .yxdm-header__brand-text span {
+        white-space: normal;
       }
 
       .yxdm-hero__logo {
@@ -1020,7 +1320,8 @@
       .yxdm-step,
       .yxdm-value__item,
       .yxdm-faq,
-      .yxdm-cta__box {
+      .yxdm-cta__box,
+      .yxdm-effects__body {
         padding: 22px;
       }
 
@@ -1061,6 +1362,29 @@
 <body>
   <section class="yxdm-home">
 
+    <header class="yxdm-header">
+      <div class="yxdm-wrap yxdm-header__bar">
+        <a class="yxdm-header__brand" href="#top">
+          <img class="yxdm-header__logo" src="LOGO.png" alt="雲想數位行銷有限公司 LOGO">
+          <div class="yxdm-header__brand-text">
+            <strong>雲想數位行銷有限公司</strong>
+            <span>網站架設．SEO 優化．社群行銷</span>
+          </div>
+        </a>
+
+        <nav class="yxdm-nav">
+          <a href="#top">首頁</a>
+          <a href="#services">服務項目</a>
+          <a href="#cases">成功案例</a>
+          <a href="#process">合作流程</a>
+          <a href="#blog">文章專區</a>
+          <a href="#faq">常見問題</a>
+          <a class="yxdm-nav__highlight" href="#effects-share">網站特效分享</a>
+          <a href="#contact">聯絡我們</a>
+        </nav>
+      </div>
+    </header>
+
     <section class="yxdm-hero" id="top">
       <div class="yxdm-hero__media">
         <img src="yunxiang-hero.png" alt="雲想數位行銷有限公司主視覺大圖">
@@ -1093,7 +1417,7 @@
             <div class="yxdm-btns">
               <a class="yxdm-btn yxdm-btn--primary" href="#contact">立即諮詢</a>
               <a class="yxdm-btn yxdm-btn--secondary" href="#cases">查看成功案例</a>
-              <a class="yxdm-btn yxdm-btn--secondary" href="#services">了解服務項目</a>
+              <a class="yxdm-btn yxdm-btn--secondary" href="#effects-share">網站特效分享</a>
             </div>
           </div>
 
@@ -1370,6 +1694,91 @@
             <h3 class="yxdm-step__title">上線優化</h3>
             <p class="yxdm-step__text">完成上線後，持續依品牌發展與內容表現進行調整，讓網站與行銷內容更穩定地發揮價值。</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="yxdm-section yxdm-section--soft" id="effects-share">
+      <div class="yxdm-wrap">
+        <span class="yxdm-kicker">Effects Showcase</span>
+        <h2 class="yxdm-title">網站特效分享</h2>
+        <p class="yxdm-desc">
+          此區可作為網站特效案例展示專區，方便後續持續新增不同互動效果、動畫模組、視覺表現與應用說明。主選單已可直接連到本區，未來只要進入這段 HTML 內容編輯即可更新「網站特效分享」。
+        </p>
+
+        <div class="yxdm-grid-3 yxdm-effects-grid">
+          <article class="yxdm-card yxdm-effects__item">
+            <div class="yxdm-effects__visual">
+              <div class="yxdm-effects__line"></div>
+              <div class="yxdm-effects__mock">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="yxdm-effects__body">
+              <span class="yxdm-effects__label">互動效果</span>
+              <h3 class="yxdm-effects__title">滑鼠光影跟隨</h3>
+              <p class="yxdm-effects__desc">
+                可運用在首頁首屏、產品卡片、品牌展示區與 CTA 區塊，讓畫面更具科技感與即時互動感，適合強化高級感官網視覺。
+              </p>
+              <div class="yxdm-effects__meta">
+                <span>Hero Banner</span>
+                <span>品牌展示</span>
+                <span>滑鼠互動</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-effects__item">
+            <div class="yxdm-effects__visual">
+              <div class="yxdm-effects__line"></div>
+              <div class="yxdm-effects__mock">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="yxdm-effects__body">
+              <span class="yxdm-effects__label">視覺動畫</span>
+              <h3 class="yxdm-effects__title">卡片 Hover 放大</h3>
+              <p class="yxdm-effects__desc">
+                適合用於服務項目、案例總覽、產品分類與文章列表，當滑過卡片時微幅放大，可有效引導視線並提升操作回饋感。
+              </p>
+              <div class="yxdm-effects__meta">
+                <span>服務區塊</span>
+                <span>案例展示</span>
+                <span>Hover 動畫</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="yxdm-card yxdm-effects__item">
+            <div class="yxdm-effects__visual">
+              <div class="yxdm-effects__line"></div>
+              <div class="yxdm-effects__mock">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="yxdm-effects__body">
+              <span class="yxdm-effects__label">數據展示</span>
+              <h3 class="yxdm-effects__title">數字跳動動畫</h3>
+              <p class="yxdm-effects__desc">
+                常用於品牌成果、專案績效、服務數據與實績頁面，透過數字進場效果讓資訊更有節奏，也更容易形成記憶點。
+              </p>
+              <div class="yxdm-effects__meta">
+                <span>實績數據</span>
+                <span>品牌信任</span>
+                <span>進場動畫</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="yxdm-effects-note">
+          你後續若要編輯「網站特效分享」，直接修改本區塊 <strong>id="effects-share"</strong> 內的標題、說明、卡片內容、圖片、連結或新增更多卡片即可；主選單中的「網站特效分享」會自動導向這裡。
         </div>
       </div>
     </section>
