@@ -1,3061 +1,1935 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>網站特效展示中心</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>網站特效完整展示庫</title>
 <style>
-  :root{
-    --fx-bg:#0a0d14;
-    --fx-bg-2:#111827;
-    --fx-panel:rgba(255,255,255,.06);
-    --fx-panel-2:rgba(255,255,255,.08);
-    --fx-line:rgba(255,255,255,.12);
-    --fx-text:#f5f7fb;
-    --fx-muted:#9aa4b2;
-    --fx-accent:#7c5cff;
-    --fx-accent-2:#23d5ab;
-    --fx-accent-3:#6cc8ff;
-    --fx-glow:0 0 0 1px rgba(255,255,255,.08), 0 20px 60px rgba(0,0,0,.35);
-    --fx-radius:22px;
-    --fx-max:1480px;
-    --fx-sidebar:280px;
-    --fx-header:78px;
-    --fx-speed:700ms;
-    --fx-grid-gap:20px;
-    --fx-font:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-  }
-
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:var(--fx-font);
-    background:
-      radial-gradient(circle at 10% 20%, rgba(124,92,255,.16), transparent 22%),
-      radial-gradient(circle at 85% 12%, rgba(35,213,171,.10), transparent 18%),
-      radial-gradient(circle at 50% 85%, rgba(108,200,255,.10), transparent 24%),
-      linear-gradient(180deg, #070a10 0%, #0b0f17 45%, #0b111a 100%);
-    color:var(--fx-text);
-    overflow-x:hidden;
-  }
-
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  button{font:inherit}
-
-  .fx-bg-grid{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-3;
-    opacity:.18;
-    background-image:
-      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-    background-size:40px 40px;
-    mask-image:radial-gradient(circle at center, black 35%, transparent 82%);
-  }
-
-  .fx-noise{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-2;
-    opacity:.08;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.6) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 60% 40%, rgba(255,255,255,.45) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 80% 70%, rgba(255,255,255,.35) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 35% 80%, rgba(255,255,255,.4) 0 1px, transparent 1.5px);
-    background-size:120px 120px, 180px 180px, 200px 200px, 160px 160px;
-    animation:fxNoise 18s linear infinite;
-  }
-
-  @keyframes fxNoise{
-    0%{transform:translate3d(0,0,0)}
-    50%{transform:translate3d(14px,-10px,0)}
-    100%{transform:translate3d(0,0,0)}
-  }
-
-  .fx-app{
-    display:grid;
-    grid-template-columns:var(--fx-sidebar) 1fr;
-    min-height:100vh;
-  }
-
-  .fx-sidebar{
-    position:sticky;
-    top:0;
-    height:100vh;
-    padding:20px 18px 24px;
-    border-right:1px solid var(--fx-line);
-    backdrop-filter:blur(16px);
-    background:linear-gradient(180deg, rgba(10,13,20,.85), rgba(10,13,20,.65));
-    overflow:auto;
-  }
-
-  .fx-brand{
-    position:sticky;
-    top:0;
-    z-index:3;
-    padding:8px 0 18px;
-    background:linear-gradient(180deg, rgba(10,13,20,.95), rgba(10,13,20,.85) 70%, rgba(10,13,20,0));
-    backdrop-filter:blur(8px);
-  }
-
-  .fx-brand-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 14px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    font-size:13px;
-    color:#dce5f5;
-    margin-bottom:14px;
-  }
-
-  .fx-brand-dot{
-    width:10px;height:10px;border-radius:50%;
-    background:linear-gradient(135deg, var(--fx-accent), var(--fx-accent-2));
-    box-shadow:0 0 18px rgba(124,92,255,.8);
-  }
-
-  .fx-title{
-    margin:0;
-    font-size:26px;
-    line-height:1.15;
-    letter-spacing:.02em;
-  }
-
-  .fx-subtitle{
-    margin:10px 0 0;
-    color:var(--fx-muted);
-    font-size:14px;
-    line-height:1.7;
-  }
-
-  .fx-summary{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin:22px 0 24px;
-  }
-
-  .fx-summary-card{
-    padding:14px;
-    border-radius:18px;
-    border:1px solid var(--fx-line);
-    background:rgba(255,255,255,.04);
-    box-shadow:var(--fx-glow);
-  }
-
-  .fx-summary-card strong{
-    display:block;
-    font-size:22px;
-    margin-bottom:4px;
-  }
-
-  .fx-summary-card span{
-    color:var(--fx-muted);
-    font-size:12px;
-  }
-
-  .fx-menu-label{
-    font-size:12px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:#7f8a98;
-    margin:20px 0 12px;
-  }
-
-  .fx-cat-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .fx-cat-link{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    padding:13px 14px;
-    border-radius:18px;
-    border:1px solid transparent;
-    color:#d9e0ea;
-    background:rgba(255,255,255,.03);
-    transition:transform .2s ease, border-color .2s ease, background .2s ease;
-  }
-
-  .fx-cat-link:hover{
-    transform:translateX(4px);
-    border-color:rgba(255,255,255,.12);
-    background:rgba(255,255,255,.06);
-  }
-
-  .fx-cat-num{
-    flex:0 0 auto;
-    width:28px;height:28px;
-    border-radius:10px;
-    display:grid;place-items:center;
-    font-size:12px;
-    font-weight:700;
-    background:linear-gradient(135deg, rgba(124,92,255,.18), rgba(35,213,171,.15));
-    border:1px solid rgba(255,255,255,.08);
-  }
-
-  .fx-cat-text strong{
-    display:block;
-    font-size:14px;
-    margin-bottom:4px;
-  }
-
-  .fx-cat-text span{
-    display:block;
-    color:var(--fx-muted);
-    font-size:12px;
-    line-height:1.5;
-  }
-
-  .fx-main{
-    min-width:0;
-  }
-
-  .fx-topbar{
-    position:sticky;
-    top:0;
-    z-index:12;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    min-height:var(--fx-header);
-    padding:18px 26px;
-    border-bottom:1px solid var(--fx-line);
-    background:rgba(8,11,18,.66);
-    backdrop-filter:blur(16px);
-  }
-
-  .fx-topbar-left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    min-width:0;
-  }
-
-  .fx-topbar-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-  }
-
-  .fx-mini-title{
-    font-size:14px;
-    color:var(--fx-muted);
-    white-space:nowrap;
-  }
-
-  .fx-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 14px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.10);
-    background:rgba(255,255,255,.04);
-    color:#e7edf8;
-    font-size:13px;
-    transition:.25s ease;
-  }
-
-  .fx-chip:hover{
-    transform:translateY(-2px);
-    background:rgba(255,255,255,.08);
-  }
-
-  .fx-content{
-    max-width:var(--fx-max);
-    margin:0 auto;
-    padding:32px 28px 120px;
-  }
-
-  .fx-hero{
-    position:relative;
-    overflow:hidden;
-    min-height:78vh;
-    border:1px solid var(--fx-line);
-    border-radius:34px;
-    padding:64px 56px;
-    background:
-      linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
-      radial-gradient(circle at 15% 20%, rgba(124,92,255,.25), transparent 30%),
-      radial-gradient(circle at 80% 20%, rgba(108,200,255,.18), transparent 26%),
-      linear-gradient(180deg, rgba(9,13,24,.9), rgba(7,11,18,.95));
-    box-shadow:var(--fx-glow);
-    isolation:isolate;
-  }
-
-  .fx-hero::before{
-    content:"";
-    position:absolute;
-    inset:-10%;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(255,255,255,.12), transparent 18%),
-      radial-gradient(circle at 70% 26%, rgba(35,213,171,.18), transparent 16%),
-      radial-gradient(circle at 50% 78%, rgba(124,92,255,.20), transparent 24%);
-    filter:blur(24px);
-    animation:fxGlowFloat 12s ease-in-out infinite;
-    z-index:-2;
-  }
-
-  .fx-hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 36%, transparent 52%),
-      linear-gradient(180deg, rgba(255,255,255,.02), transparent 28%);
-    mix-blend-mode:screen;
-    opacity:.75;
-    animation:fxScan 7s linear infinite;
-    z-index:-1;
-  }
-
-  @keyframes fxGlowFloat{
-    0%,100%{transform:translate3d(0,0,0) scale(1)}
-    50%{transform:translate3d(2%, -2%, 0) scale(1.06)}
-  }
-
-  @keyframes fxScan{
-    0%{transform:translateX(-42%)}
-    100%{transform:translateX(50%)}
-  }
-
-  .fx-hero-grid{
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:34px;
-    align-items:end;
-  }
-
-  .fx-kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 14px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.05);
-    color:#dfe7f3;
-    font-size:13px;
-    margin-bottom:22px;
-  }
-
-  .fx-kicker i{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--fx-accent-2);
-    box-shadow:0 0 18px rgba(35,213,171,.9);
-    display:block;
-  }
-
-  .fx-hero h1{
-    margin:0;
-    font-size:clamp(34px, 5vw, 74px);
-    line-height:1.04;
-    letter-spacing:.01em;
-    max-width:10.5em;
-  }
-
-  .fx-hero h1 .typing{
-    display:inline-block;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:2px solid rgba(255,255,255,.7);
-    width:0;
-    animation:fxTyping 4s steps(12,end) forwards, fxCursor 1s step-end infinite;
-  }
-
-  .fx-hero h1 .gradient{
-    background:linear-gradient(135deg, #fff 0%, #bfb4ff 38%, #9ae9d1 80%, #fff 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-
-  @keyframes fxTyping{to{width:12ch}}
-  @keyframes fxCursor{50%{border-color:transparent}}
-
-  .fx-hero p{
-    max-width:760px;
-    margin:22px 0 0;
-    font-size:17px;
-    line-height:1.9;
-    color:#d4dcec;
-  }
-
-  .fx-hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    margin-top:28px;
-  }
-
-  .fx-btn{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    min-height:52px;
-    padding:0 20px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    overflow:hidden;
-    cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-  }
-
-  .fx-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 30px rgba(0,0,0,.25);
-    background:rgba(255,255,255,.11);
-  }
-
-  .fx-btn-primary{
-    background:linear-gradient(135deg, rgba(124,92,255,.95), rgba(35,213,171,.88));
-    border-color:transparent;
-    color:#081018;
-    font-weight:700;
-  }
-
-  .fx-btn-primary::after{
-    content:"";
-    position:absolute;
-    inset:-40%;
-    background:radial-gradient(circle, rgba(255,255,255,.55), transparent 36%);
-    transform:translate(var(--mx,-200px), var(--my,-200px));
-    transition:transform .08s linear;
-    opacity:.9;
-    pointer-events:none;
-  }
-
-  .fx-hero-visual{
-    position:relative;
-    min-height:420px;
-    display:grid;
-    align-items:center;
-  }
-
-  .fx-orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(2px);
-    opacity:.9;
-    animation:fxOrbFloat 10s ease-in-out infinite;
-  }
-
-  .fx-orb.orb-1{
-    width:220px;height:220px;
-    background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.75), rgba(124,92,255,.75), rgba(124,92,255,0));
-    top:12%;
-    right:12%;
-  }
-
-  .fx-orb.orb-2{
-    width:160px;height:160px;
-    background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.7), rgba(35,213,171,.75), rgba(35,213,171,0));
-    bottom:8%;
-    left:12%;
-    animation-delay:-4s;
-  }
-
-  .fx-orb.orb-3{
-    width:120px;height:120px;
-    background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.7), rgba(108,200,255,.75), rgba(108,200,255,0));
-    top:54%;
-    right:34%;
-    animation-delay:-7s;
-  }
-
-  @keyframes fxOrbFloat{
-    0%,100%{transform:translate3d(0,0,0) scale(1)}
-    50%{transform:translate3d(0,-18px,0) scale(1.08)}
-  }
-
-  .fx-visual-panel{
-    position:relative;
-    margin-left:auto;
-    width:min(500px, 100%);
-    min-height:360px;
-    border-radius:28px;
-    border:1px solid rgba(255,255,255,.12);
-    background:
-      linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
-      linear-gradient(180deg, rgba(8,12,20,.92), rgba(10,14,22,.92));
-    box-shadow:0 24px 80px rgba(0,0,0,.35);
-    overflow:hidden;
-    transform-style:preserve-3d;
-    transform:perspective(1200px) rotateY(-8deg) rotateX(5deg);
-  }
-
-  .fx-visual-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:16px 18px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-
-  .fx-dots{display:flex;gap:8px}
-  .fx-dots span{
-    width:10px;height:10px;border-radius:50%;
-    background:rgba(255,255,255,.16);
-  }
-
-  .fx-visual-body{
-    position:relative;
-    padding:22px;
-    display:grid;
-    gap:16px;
-  }
-
-  .fx-stack{
-    display:grid;
-    gap:14px;
-  }
-
-  .fx-stack-card{
-    position:relative;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.05);
-    min-height:84px;
-    overflow:hidden;
-    box-shadow:0 16px 32px rgba(0,0,0,.18);
-    animation:fxStack 8s ease-in-out infinite;
-  }
-
-  .fx-stack-card:nth-child(2){transform:translateX(20px); animation-delay:-2s}
-  .fx-stack-card:nth-child(3){transform:translateX(40px); animation-delay:-4s}
-
-  @keyframes fxStack{
-    0%,100%{transform:translateY(0) scale(1)}
-    50%{transform:translateY(-8px) scale(1.015)}
-  }
-
-  .fx-stack-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(90deg, rgba(255,255,255,.12), transparent 25%),
-      linear-gradient(180deg, rgba(124,92,255,.2), transparent 50%);
-  }
-
-  .fx-stack-card::after{
-    content:"";
-    position:absolute;
-    width:120px;height:120px;border-radius:50%;
-    right:-20px;top:-30px;
-    background:radial-gradient(circle, rgba(35,213,171,.45), rgba(35,213,171,0));
-    filter:blur(8px);
-  }
-
-  .fx-scroll-hint{
-    position:absolute;
-    left:56px;
-    bottom:26px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    color:#cdd7e7;
-    font-size:13px;
-  }
-
-  .fx-scroll-pill{
-    width:34px;height:56px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.18);
-    position:relative;
-  }
-
-  .fx-scroll-pill::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:12px;
-    width:6px;height:10px;
-    margin-left:-3px;
-    border-radius:999px;
-    background:#fff;
-    animation:fxScrollDot 1.6s ease-in-out infinite;
-  }
-
-  @keyframes fxScrollDot{
-    0%{opacity:0; transform:translateY(0)}
-    30%{opacity:1}
-    100%{opacity:0; transform:translateY(18px)}
-  }
-
-  .fx-intro{
-    margin:34px 0 10px;
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:18px;
-  }
-
-  .fx-intro-card{
-    padding:22px;
-    border-radius:24px;
-    border:1px solid var(--fx-line);
-    background:rgba(255,255,255,.045);
-    box-shadow:var(--fx-glow);
-  }
-
-  .fx-intro-card strong{
-    display:block;
-    margin-bottom:10px;
-    font-size:15px;
-  }
-
-  .fx-intro-card p{
-    margin:0;
-    color:var(--fx-muted);
-    line-height:1.8;
-    font-size:14px;
-  }
-
-  .fx-section{
-    position:relative;
-    margin-top:48px;
-    padding:30px;
-    border-radius:32px;
-    border:1px solid var(--fx-line);
-    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-    box-shadow:var(--fx-glow);
-    overflow:hidden;
-  }
-
-  .fx-section::before{
-    content:"";
-    position:absolute;
-    inset:auto -10% 70% -10%;
-    height:160px;
-    background:radial-gradient(circle at center, rgba(124,92,255,.16), transparent 55%);
-    pointer-events:none;
-  }
-
-  .fx-section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:18px;
-    margin-bottom:24px;
-  }
-
-  .fx-section-head h2{
-    margin:0;
-    font-size:clamp(24px, 3vw, 38px);
-    line-height:1.15;
-  }
-
-  .fx-section-head p{
-    margin:10px 0 0;
-    max-width:760px;
-    color:var(--fx-muted);
-    line-height:1.9;
-    font-size:15px;
-  }
-
-  .fx-section-meta{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .fx-badge{
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    color:#dce6f4;
-    font-size:12px;
-  }
-
-  .fx-cards{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:var(--fx-grid-gap);
-  }
-
-  .fx-card{
-    position:relative;
-    min-width:0;
-    border-radius:26px;
-    border:1px solid rgba(255,255,255,.10);
-    overflow:hidden;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
-      linear-gradient(180deg, rgba(8,12,20,.72), rgba(8,12,20,.82));
-    box-shadow:0 22px 56px rgba(0,0,0,.22);
-    transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-  }
-
-  .fx-card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(255,255,255,.18);
-    box-shadow:0 28px 70px rgba(0,0,0,.28);
-  }
-
-  .fx-demo{
-    position:relative;
-    min-height:220px;
-    padding:22px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    overflow:hidden;
-    isolation:isolate;
-  }
-
-  .fx-body{
-    padding:20px 20px 22px;
-  }
-
-  .fx-body h3{
-    margin:0 0 8px;
-    font-size:21px;
-    line-height:1.25;
-  }
-
-  .fx-body p{
-    margin:0;
-    color:var(--fx-muted);
-    line-height:1.8;
-    font-size:14px;
-  }
-
-  .fx-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:14px;
-  }
-
-  .fx-tags span{
-    font-size:12px;
-    color:#dbe4f2;
-    padding:8px 10px;
-    border-radius:999px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-  }
-
-  .fx-option-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-  }
-
-  .fx-option{
-    padding:10px 12px;
-    border-radius:14px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    color:#dbe4f2;
-    font-size:13px;
-    line-height:1.45;
-  }
-
-  .fx-list-card{
-    grid-column:1/-1;
-  }
-
-  .fx-list-card .fx-demo{
-    min-height:120px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    flex-wrap:wrap;
-    background:
-      linear-gradient(135deg, rgba(124,92,255,.14), rgba(35,213,171,.08)),
-      linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  }
-
-  .fx-marquee{
-    display:flex;
-    gap:16px;
-    white-space:nowrap;
-    min-width:max-content;
-    animation:fxMarquee 24s linear infinite;
-    font-size:18px;
-    color:#dce4f5;
-  }
-
-  .fx-marquee span{
-    padding:10px 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.10);
-  }
-
-  @keyframes fxMarquee{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
-  }
-
-  .fx-wave,
-  .fx-particles,
-  .fx-radar,
-  .fx-gridflow,
-  .fx-blob-bg,
-  .fx-aurora,
-  .fx-light-refraction{
-    position:absolute;
-    inset:0;
-  }
-
-  .fx-wave svg, .fx-gridflow svg, .fx-radar svg, .fx-light-refraction svg{
-    position:absolute; inset:0; width:100%; height:100%;
-  }
-
-  .fx-demo-title{
-    position:relative;
-    z-index:2;
-    max-width:380px;
-  }
-
-  .fx-demo-title strong{
-    display:block;
-    font-size:26px;
-    line-height:1.15;
-    margin-bottom:10px;
-  }
-
-  .fx-demo-title span{
-    display:block;
-    color:#cfdaeb;
-    font-size:14px;
-    line-height:1.75;
-  }
-
-  .fx-split{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    height:100%;
-    position:absolute;
-    inset:0;
-  }
-
-  .fx-split-left,
-  .fx-split-right{
-    position:relative;
-    overflow:hidden;
-  }
-
-  .fx-split-left{
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,.12), transparent 22%),
-      linear-gradient(135deg, rgba(124,92,255,.32), rgba(8,11,18,.4));
-  }
-
-  .fx-split-right{
-    background:
-      radial-gradient(circle at 70% 35%, rgba(255,255,255,.1), transparent 18%),
-      linear-gradient(135deg, rgba(35,213,171,.22), rgba(8,11,18,.4));
-  }
-
-  .fx-split-left::after,
-  .fx-split-right::after{
-    content:"";
-    position:absolute;
-    inset:-10%;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,.08), transparent);
-    animation:fxShine 5s linear infinite;
-  }
-
-  @keyframes fxShine{
-    from{transform:translateX(-60%)}
-    to{transform:translateX(70%)}
-  }
-
-  .fx-kb{
-    position:absolute; inset:0;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.38)),
-      radial-gradient(circle at 20% 30%, rgba(124,92,255,.32), transparent 28%),
-      radial-gradient(circle at 75% 30%, rgba(35,213,171,.26), transparent 24%),
-      linear-gradient(120deg, #151c2d, #090d14 55%, #141b28);
-    animation:fxKenBurns 12s ease-in-out infinite alternate;
-    transform-origin:center;
-  }
-
-  @keyframes fxKenBurns{
-    from{transform:scale(1) translate3d(0,0,0)}
-    to{transform:scale(1.12) translate3d(-2%, -1%, 0)}
-  }
-
-  .fx-light-pillars{
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(90deg, transparent 0, rgba(255,255,255,.04) 12%, transparent 24%),
-      linear-gradient(90deg, transparent 30%, rgba(108,200,255,.12) 38%, transparent 48%),
-      linear-gradient(90deg, transparent 56%, rgba(124,92,255,.12) 66%, transparent 74%),
-      linear-gradient(90deg, transparent 78%, rgba(35,213,171,.10) 86%, transparent 94%);
-    filter:blur(10px);
-    animation:fxLightRun 8s linear infinite;
-  }
-
-  @keyframes fxLightRun{
-    from{transform:translateX(-10%)}
-    to{transform:translateX(10%)}
-  }
-
-  .fx-particles canvas,
-  .fx-wave-canvas,
-  .fx-mini-particles,
-  .fx-fluid-canvas,
-  .fx-waveform canvas,
-  .fx-button-ripple canvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    display:block;
-  }
-
-  .fx-title-lines{
-    position:relative;
-    z-index:2;
-  }
-
-  .fx-gradient-text{
-    font-size:48px;
-    line-height:1;
-    font-weight:800;
-    margin:0 0 12px;
-    background:linear-gradient(135deg, #fff 0%, #cabfff 35%, #92f0dd 72%, #fff 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-
-  .fx-outline-text{
-    font-size:52px;
-    line-height:1;
-    font-weight:800;
-    color:transparent;
-    -webkit-text-stroke:1px rgba(255,255,255,.55);
-    margin:0;
-  }
-
-  .fx-typing-line{
-    font-size:28px;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:2px solid rgba(255,255,255,.7);
-    width:0;
-    animation:fxTyping 4s steps(12,end) forwards, fxCursor 1s step-end infinite;
-    margin-bottom:12px;
-  }
-
-  .fx-highlight-words{
-    font-size:18px;
-    color:#dbe4f2;
-    line-height:1.8;
-  }
-
-  .fx-highlight-words strong{
-    display:inline-block;
-    min-width:4em;
-    color:#fff;
-    background:linear-gradient(90deg, rgba(124,92,255,.28), rgba(35,213,171,.28));
-    padding:2px 10px;
-    border-radius:999px;
-    animation:fxWordSwap 6s ease-in-out infinite;
-  }
-
-  @keyframes fxWordSwap{
-    0%,100%{transform:translateY(0); filter:brightness(1)}
-    25%{transform:translateY(-3px); filter:brightness(1.15)}
-    50%{transform:translateY(0)}
-    75%{transform:translateY(3px)}
-  }
-
-  .fx-readline{
-    position:relative;
-    padding:18px 0 0;
-    color:#d4ddec;
-    line-height:1.95;
-    font-size:14px;
-  }
-
-  .fx-readline::before{
-    content:"";
-    position:absolute;
-    left:0; right:0; top:0;
-    height:3px; border-radius:999px;
-    background:linear-gradient(90deg, rgba(124,92,255,.9), rgba(35,213,171,.9));
-    animation:fxReadLine 3.5s linear infinite;
-  }
-
-  @keyframes fxReadLine{
-    from{transform:translateX(-70%)}
-    to{transform:translateX(70%)}
-  }
-
-  .fx-reveal-row{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-  }
-
-  .fx-mini-block{
-    min-height:90px;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.04);
-    opacity:0;
-    transform:translateY(16px);
-    animation:fxReveal .8s ease forwards;
-  }
-
-  .fx-mini-block:nth-child(2){animation-delay:.15s}
-  .fx-mini-block:nth-child(3){animation-delay:.3s}
-
-  @keyframes fxReveal{
-    to{opacity:1; transform:translateY(0)}
-  }
-
-  .fx-mask-reveal{
-    position:relative;
-    min-height:160px;
-    border-radius:22px;
-    overflow:hidden;
-    background:
-      linear-gradient(135deg, rgba(124,92,255,.26), rgba(35,213,171,.16)),
-      linear-gradient(180deg, #111827, #0b1220);
-  }
-
-  .fx-mask-reveal::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(90deg, #0b1220 0 45%, transparent 45% 55%, #0b1220 55% 100%);
-    animation:fxMaskOpen 4.6s ease-in-out infinite;
-  }
-
-  @keyframes fxMaskOpen{
-    0%,100%{clip-path:inset(0 0 0 0)}
-    50%{clip-path:inset(0 48% 0 48%)}
-  }
-
-  .fx-card-stack{
-    position:relative;
-    height:180px;
-  }
-
-  .fx-card-stack > span{
-    position:absolute;
-    inset:auto auto 0 0;
-    width:72%;
-    height:130px;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.06);
-    box-shadow:0 18px 40px rgba(0,0,0,.25);
-    animation:fxCardsLift 7s ease-in-out infinite;
-  }
-
-  .fx-card-stack > span:nth-child(1){left:2%; bottom:8px}
-  .fx-card-stack > span:nth-child(2){left:14%; bottom:24px; animation-delay:-1.2s}
-  .fx-card-stack > span:nth-child(3){left:26%; bottom:40px; animation-delay:-2.4s}
-  .fx-card-stack > span:nth-child(4){left:38%; bottom:56px; animation-delay:-3.6s}
-
-  @keyframes fxCardsLift{
-    0%,100%{transform:translateY(0) rotate(0deg)}
-    50%{transform:translateY(-8px) rotate(-1.2deg)}
-  }
-
-  .fx-tilt-card{
-    position:relative;
-    width:min(340px,100%);
-    min-height:180px;
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.12);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
-      linear-gradient(180deg, rgba(14,19,30,.96), rgba(10,14,22,.92));
-    box-shadow:0 24px 60px rgba(0,0,0,.25);
-    transform-style:preserve-3d;
-    transform:perspective(1200px) rotateX(8deg) rotateY(-10deg);
-    overflow:hidden;
-  }
-
-  .fx-tilt-card::before{
-    content:"";
-    position:absolute;
-    inset:-20%;
-    background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.18), transparent 24%);
-    animation:fxCardGlow 6s ease-in-out infinite;
-  }
-
-  @keyframes fxCardGlow{
-    0%,100%{transform:translate3d(0,0,0)}
-    50%{transform:translate3d(12%, 4%, 0)}
-  }
-
-  .fx-tilt-card .beam{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg, transparent 18%, rgba(255,255,255,.14) 36%, transparent 54%);
-    animation:fxShine 4.5s linear infinite;
-  }
-
-  .fx-tilt-card .line{
-    position:absolute;
-    inset:18px;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.15);
-    box-shadow:0 0 28px rgba(108,200,255,.12), inset 0 0 28px rgba(124,92,255,.08);
-  }
-
-  .fx-nav-preview{
-    display:grid;
-    grid-template-columns:160px 1fr;
-    gap:16px;
-    align-items:stretch;
-  }
-
-  .fx-nav-list{
-    display:grid;
-    gap:10px;
-  }
-
-  .fx-nav-item{
-    padding:12px 14px;
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.04);
-    transition:.25s ease;
-  }
-
-  .fx-nav-item:hover, .fx-nav-item.active{
-    transform:translateX(4px);
-    background:rgba(255,255,255,.09);
-  }
-
-  .fx-nav-preview-pane{
-    position:relative;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:
-      radial-gradient(circle at 22% 30%, rgba(124,92,255,.24), transparent 20%),
-      radial-gradient(circle at 72% 24%, rgba(35,213,171,.18), transparent 18%),
-      linear-gradient(180deg, #121a2b, #0c121e);
-    overflow:hidden;
-  }
-
-  .fx-nav-preview-pane::after{
-    content:"Hover 預覽";
-    position:absolute;
-    right:18px; bottom:16px;
-    color:rgba(255,255,255,.82);
-    font-weight:700;
-    letter-spacing:.08em;
-  }
-
-  .fx-accordion-demo details{
-    border-radius:16px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    overflow:hidden;
-  }
-
-  .fx-accordion-demo details + details{margin-top:10px}
-  .fx-accordion-demo summary{
-    list-style:none;
-    cursor:pointer;
-    padding:16px 18px;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .fx-accordion-demo summary::-webkit-details-marker{display:none}
-  .fx-accordion-demo .fx-panel-body{
-    padding:0 18px 18px;
-    color:var(--fx-muted);
-    line-height:1.8;
-    font-size:14px;
-  }
-
-  .fx-tabs{
-    display:grid;
-    gap:14px;
-  }
-
-  .fx-tab-head{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .fx-tab-btn{
-    padding:11px 14px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    color:#e6edf8;
-    cursor:pointer;
-  }
-
-  .fx-tab-btn.active{
-    background:linear-gradient(135deg, rgba(124,92,255,.85), rgba(35,213,171,.7));
-    color:#081018;
-    border-color:transparent;
-    font-weight:700;
-  }
-
-  .fx-tab-pane{
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.04);
-    padding:18px;
-    color:#d9e3f1;
-    line-height:1.85;
-  }
-
-  .fx-carousel{
-    position:relative;
-    height:180px;
-    overflow:hidden;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-  }
-
-  .fx-carousel-track{
-    display:flex;
-    width:300%;
-    height:100%;
-    animation:fxCarousel 12s ease-in-out infinite;
-  }
-
-  .fx-carousel-slide{
-    flex:0 0 33.333%;
-    height:100%;
-    background-size:cover;
-    background-position:center;
-  }
-
-  .fx-carousel-slide:nth-child(1){
-    background:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 16%),
-      linear-gradient(135deg, rgba(124,92,255,.42), rgba(10,14,22,.9));
-  }
-  .fx-carousel-slide:nth-child(2){
-    background:
-      radial-gradient(circle at 75% 20%, rgba(255,255,255,.10), transparent 14%),
-      linear-gradient(135deg, rgba(35,213,171,.36), rgba(10,14,22,.9));
-  }
-  .fx-carousel-slide:nth-child(3){
-    background:
-      radial-gradient(circle at 60% 78%, rgba(255,255,255,.12), transparent 14%),
-      linear-gradient(135deg, rgba(108,200,255,.32), rgba(10,14,22,.9));
-  }
-
-  @keyframes fxCarousel{
-    0%,28%{transform:translateX(0)}
-    34%,61%{transform:translateX(-33.333%)}
-    67%,94%{transform:translateX(-66.666%)}
-    100%{transform:translateX(0)}
-  }
-
-  .fx-hotspot-wrap{
-    position:relative;
-    min-height:200px;
-    border-radius:22px;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(124,92,255,.24), transparent 22%),
-      radial-gradient(circle at 78% 36%, rgba(35,213,171,.16), transparent 20%),
-      linear-gradient(180deg, #121b2d, #0b1220);
-  }
-
-  .fx-hotspot{
-    position:absolute;
-    width:20px;height:20px;
-    border-radius:50%;
-    border:2px solid #fff;
-    background:rgba(255,255,255,.16);
-    box-shadow:0 0 0 0 rgba(255,255,255,.4);
-    animation:fxPulse 2s infinite;
-  }
-  .fx-hotspot::after{
-    content:attr(data-label);
-    position:absolute;
-    top:26px; left:50%;
-    transform:translateX(-50%);
-    white-space:nowrap;
-    padding:8px 10px;
-    border-radius:999px;
-    background:rgba(8,11,18,.86);
-    border:1px solid rgba(255,255,255,.1);
-    font-size:12px;
-  }
-
-  @keyframes fxPulse{
-    0%{box-shadow:0 0 0 0 rgba(255,255,255,.35)}
-    70%{box-shadow:0 0 0 14px rgba(255,255,255,0)}
-    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
-  }
-
-  .fx-before-after{
-    position:relative;
-    min-height:200px;
-    border-radius:22px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.08);
-  }
-
-  .fx-before-after .before,
-  .fx-before-after .after{
-    position:absolute;
-    inset:0;
-  }
-
-  .fx-before-after .before{
-    background:
-      linear-gradient(135deg, rgba(124,92,255,.40), rgba(10,14,22,.85));
-  }
-
-  .fx-before-after .after{
-    width:50%;
-    background:
-      linear-gradient(135deg, rgba(35,213,171,.36), rgba(10,14,22,.85));
-    border-right:2px solid rgba(255,255,255,.6);
-    animation:fxBeforeAfter 5s ease-in-out infinite;
-  }
-
-  @keyframes fxBeforeAfter{
-    0%,100%{width:24%}
-    50%{width:78%}
-  }
-
-  .fx-masonry{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-  }
-
-  .fx-masonry span{
-    display:block;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.05);
-    min-height:70px;
-    animation:fxFloatBox 6s ease-in-out infinite;
-  }
-
-  .fx-masonry span:nth-child(1){min-height:82px}
-  .fx-masonry span:nth-child(2){min-height:120px}
-  .fx-masonry span:nth-child(3){min-height:92px}
-  .fx-masonry span:nth-child(4){min-height:134px}
-  .fx-masonry span:nth-child(5){min-height:92px}
-  .fx-masonry span:nth-child(6){min-height:120px}
-  .fx-masonry span:nth-child(odd){animation-delay:-1.5s}
-
-  @keyframes fxFloatBox{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-6px)}
-  }
-
-  .fx-timeline{
-    position:relative;
-    padding-left:28px;
-  }
-
-  .fx-timeline::before{
-    content:"";
-    position:absolute;
-    top:0; bottom:0; left:10px;
-    width:2px;
-    background:linear-gradient(180deg, rgba(124,92,255,.9), rgba(35,213,171,.8));
-  }
-
-  .fx-time-item{
-    position:relative;
-    padding:0 0 18px 20px;
-  }
-
-  .fx-time-item::before{
-    content:"";
-    position:absolute;
-    left:-25px; top:8px;
-    width:14px;height:14px;border-radius:50%;
-    background:#fff;
-    box-shadow:0 0 0 6px rgba(124,92,255,.25);
-  }
-
-  .fx-time-item strong{display:block;margin-bottom:6px}
-  .fx-time-item span{display:block;color:var(--fx-muted);font-size:14px;line-height:1.75}
-
-  .fx-step-story{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-  }
-
-  .fx-step{
-    padding:18px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.045);
-    position:relative;
-    overflow:hidden;
-  }
-
-  .fx-step::before{
-    content:"";
-    position:absolute;
-    left:0; top:0; bottom:0;
-    width:4px;
-    background:linear-gradient(180deg, var(--fx-accent), var(--fx-accent-2));
-  }
-
-  .fx-step em{
-    display:inline-flex;
-    width:34px;height:34px;border-radius:12px;
-    align-items:center;justify-content:center;
-    font-style:normal;font-weight:700;
-    margin-bottom:10px;
-    background:rgba(255,255,255,.08);
-  }
-
-  .fx-data-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-  }
-
-  .fx-metric{
-    padding:18px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.05);
-  }
-
-  .fx-num{
-    font-size:36px;
-    font-weight:800;
-    line-height:1;
-    margin-bottom:8px;
-  }
-
-  .fx-progress{
-    position:relative;
-    height:10px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-    overflow:hidden;
-    margin:14px 0 8px;
-  }
-
-  .fx-progress::after{
-    content:"";
-    position:absolute;
-    inset:0 auto 0 0;
-    width:68%;
-    background:linear-gradient(90deg, rgba(124,92,255,.95), rgba(35,213,171,.9));
-    border-radius:999px;
-    animation:fxProgress 4s ease-in-out infinite;
-  }
-
-  @keyframes fxProgress{
-    0%,100%{width:26%}
-    50%{width:82%}
-  }
-
-  .fx-chart{
-    position:relative;
-    min-height:180px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.04);
-    overflow:hidden;
-  }
-
-  .fx-chart svg{
-    width:100%;height:100%;
-    position:absolute; inset:0;
-  }
-
-  .fx-radar-chart polygon{
-    fill:rgba(124,92,255,.22);
-    stroke:rgba(255,255,255,.7);
-    stroke-width:1.4;
-    animation:fxRadar 5s ease-in-out infinite;
-    transform-origin:center;
-  }
-
-  @keyframes fxRadar{
-    0%,100%{transform:scale(.86)}
-    50%{transform:scale(1.03)}
-  }
-
-  .fx-waveform{
-    position:relative;
-    min-height:180px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    overflow:hidden;
-    background:rgba(255,255,255,.04);
-  }
-
-  .fx-micro-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-  }
-
-  .fx-btn-lab{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-  }
-
-  .fx-magnetic,
-  .fx-ripple,
-  .fx-glow-outline,
-  .fx-cursor-demo{
-    position:relative;
-    min-height:140px;
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.04);
-    display:grid;
-    place-items:center;
-    overflow:hidden;
-  }
-
-  .fx-magnetic .mag-btn,
-  .fx-ripple .rip-btn{
-    position:relative;
-    min-width:160px;
-    min-height:52px;
-    border-radius:999px;
-    display:grid;
-    place-items:center;
-    color:#fff;
-    border:1px solid rgba(255,255,255,.14);
-    background:rgba(255,255,255,.08);
-    transition:transform .16s ease;
-    z-index:2;
-  }
-
-  .fx-ripple .rip-btn::after{
-    content:"";
-    position:absolute;
-    inset:auto;
-    width:10px;height:10px;border-radius:50%;
-    background:rgba(255,255,255,.55);
-    transform:scale(0);
-    animation:fxRipple 2s ease-out infinite;
-  }
-
-  @keyframes fxRipple{
-    0%{transform:scale(0); opacity:.7}
-    100%{transform:scale(16); opacity:0}
-  }
-
-  .fx-glow-outline .tiltbox{
-    width:72%;
-    height:88px;
-    border-radius:18px;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 0 34px rgba(124,92,255,.18), inset 0 0 32px rgba(35,213,171,.08);
-    position:relative;
-  }
-
-  .fx-glow-outline .tiltbox::before{
-    content:"";
-    position:absolute;
-    inset:-1px;
-    border-radius:18px;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,.4), transparent);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    padding:1px;
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-    animation:fxShine 4s linear infinite;
-  }
-
-  .fx-cursor-demo::before{
-    content:"";
-    position:absolute;
-    width:180px;height:180px;border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,.18), transparent 62%);
-    left:var(--cx,50%);
-    top:var(--cy,50%);
-    transform:translate(-50%,-50%);
-    pointer-events:none;
-  }
-
-  .fx-neumorphism{
-    position:relative;
-    min-height:200px;
-    display:grid;
-    place-items:center;
-    border-radius:28px;
-    background:#d8deea;
-    box-shadow:inset 1px 1px 0 rgba(255,255,255,.4), inset -1px -1px 0 rgba(0,0,0,.04);
-  }
-
-  .fx-neo-card{
-    width:min(320px, 92%);
-    min-height:120px;
-    border-radius:24px;
-    background:#dfe6f1;
-    box-shadow:18px 18px 36px rgba(163,177,198,.55), -18px -18px 36px rgba(255,255,255,.92);
-  }
-
-  .fx-glow-ui{
-    position:relative;
-    min-height:200px;
-    border-radius:28px;
-    background:#090e19;
-    overflow:hidden;
-  }
-
-  .fx-glow-ui::before{
-    content:"";
-    position:absolute;
-    inset:-20%;
-    background:
-      radial-gradient(circle at 30% 40%, rgba(124,92,255,.36), transparent 24%),
-      radial-gradient(circle at 68% 54%, rgba(35,213,171,.30), transparent 20%),
-      radial-gradient(circle at 54% 28%, rgba(108,200,255,.18), transparent 14%);
-    filter:blur(14px);
-    animation:fxGlowFloat 9s ease-in-out infinite;
-  }
-
-  .fx-glow-ui .panel{
-    position:absolute;
-    inset:24px;
-    border-radius:24px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(96,170,255,.28);
-    box-shadow:0 0 40px rgba(88,124,255,.18), inset 0 0 40px rgba(66,165,245,.06);
-  }
-
-  .fx-blades{
-    position:relative;
-    min-height:220px;
-    display:grid;
-    place-items:center;
-  }
-
-  .fx-blades .hub{
-    width:26px;height:26px;border-radius:50%;
-    background:#fff;
-    z-index:2;
-  }
-
-  .fx-blades .blade{
-    position:absolute;
-    width:12px;height:100px;
-    border-radius:999px;
-    background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(124,92,255,.36));
-    transform-origin:50% calc(100% - 12px);
-    animation:fxSpin 4s linear infinite;
-  }
-
-  .fx-blades .blade:nth-child(2){transform:rotate(0deg) translateY(-44px)}
-  .fx-blades .blade:nth-child(3){transform:rotate(120deg) translateY(-44px)}
-  .fx-blades .blade:nth-child(4){transform:rotate(240deg) translateY(-44px)}
-
-  @keyframes fxSpin{
-    from{rotate:0deg}
-    to{rotate:360deg}
-  }
-
-  .fx-footer{
-    margin-top:60px;
-    padding:28px 10px 10px;
-    text-align:center;
-    color:var(--fx-muted);
-    font-size:13px;
-    line-height:1.8;
-  }
-
-  .fx-canvas-host{
-    position:absolute;
-    inset:0;
-    opacity:.9;
-  }
-
-  .fx-section-anchor{
-    position:absolute;
-    top:calc(-1 * var(--fx-header) - 16px);
-  }
-
-  .fx-mobile-toggle{
-    display:none;
-  }
-
-  @media (max-width: 1200px){
-    .fx-hero-grid,
-    .fx-intro,
-    .fx-cards,
-    .fx-data-grid,
-    .fx-step-story,
-    .fx-btn-lab,
-    .fx-micro-grid{grid-template-columns:1fr}
-    .fx-hero{padding:48px 28px 84px}
-    .fx-scroll-hint{left:28px}
-  }
-
-  @media (max-width: 980px){
-    .fx-app{grid-template-columns:1fr}
-    .fx-sidebar{
-      position:fixed;
-      left:0; top:0; bottom:0;
-      width:min(88vw, 360px);
-      z-index:40;
-      transform:translateX(-102%);
-      transition:transform .3s ease;
-      box-shadow:30px 0 80px rgba(0,0,0,.45);
-    }
-    .fx-sidebar.show{transform:translateX(0)}
-    .fx-mobile-toggle{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:46px;height:46px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      font-size:20px;
-      cursor:pointer;
-    }
-    .fx-topbar{padding:16px 18px}
-    .fx-content{padding:24px 16px 100px}
-    .fx-section{padding:22px}
-    .fx-hero{border-radius:28px}
-  }
-
-  @media (max-width: 680px){
-    .fx-hero h1{font-size:34px}
-    .fx-section-head{display:block}
-    .fx-summary{grid-template-columns:1fr 1fr}
-    .fx-demo{min-height:190px}
-    .fx-nav-preview{grid-template-columns:1fr}
-    .fx-masonry{grid-template-columns:repeat(2,1fr)}
-    .fx-reveal-row{grid-template-columns:1fr}
-    .fx-card-stack > span{width:86%}
-  }
+:root{
+  --bg:#090d14;--bg2:#0f1522;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);
+  --text:#f5f7fb;--muted:#9ea8b7;--a:#7c5cff;--b:#2de2b6;--c:#6bc9ff;--radius:24px;
+  --shadow:0 20px 60px rgba(0,0,0,.35);--max:1600px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--text);background:
+radial-gradient(circle at 10% 10%,rgba(124,92,255,.12),transparent 18%),
+radial-gradient(circle at 90% 12%,rgba(45,226,182,.10),transparent 16%),
+linear-gradient(180deg,#080b12,#0b1220 45%,#0c1320 100%);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.bg-grid{position:fixed;inset:0;z-index:-2;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:38px 38px;mask-image:radial-gradient(circle at center,black 35%,transparent 80%)}
+.shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:22px;border-right:1px solid var(--line);background:rgba(8,11,18,.76);backdrop-filter:blur(14px);overflow:auto}
+.brand{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.badge{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.04);font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 18px rgba(124,92,255,.8)}
+.brand h1{font-size:30px;line-height:1.1;margin:16px 0 10px}
+.brand p{margin:0;color:var(--muted);line-height:1.8;font-size:14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.stats div{padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.04)}
+.stats strong{display:block;font-size:22px}
+.stats span{font-size:12px;color:var(--muted)}
+.nav{display:grid;gap:10px}
+.nav a{padding:12px 14px;border-radius:16px;border:1px solid transparent;background:rgba(255,255,255,.03);font-size:14px;line-height:1.5}
+.nav a:hover{border-color:var(--line);transform:translateX(4px);background:rgba(255,255,255,.06)}
+.main{min-width:0}
+.top{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line);background:rgba(8,11,18,.72);backdrop-filter:blur(14px)}
+.top .chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:13px}
+.content{max-width:var(--max);margin:0 auto;padding:30px 24px 100px}
+.hero{position:relative;overflow:hidden;padding:56px;border:1px solid var(--line);border-radius:34px;background:
+linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),
+radial-gradient(circle at 20% 20%,rgba(124,92,255,.22),transparent 26%),
+radial-gradient(circle at 80% 18%,rgba(45,226,182,.18),transparent 20%),
+linear-gradient(180deg,#0f1726,#0b1220);box-shadow:var(--shadow)}
+.hero h2{font-size:clamp(34px,5vw,72px);line-height:1.04;margin:0 0 18px}
+.hero p{max-width:900px;color:#dbe3f1;line-height:1.9;font-size:17px}
+.hero .count{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.hero .count div{padding:16px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.hero .count strong{display:block;font-size:28px}
+.hero .count span{font-size:12px;color:var(--muted)}
+.section{margin-top:42px;padding:26px;border-radius:30px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));box-shadow:var(--shadow)}
+.eyebrow{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:12px;color:#d9e3f2}
+.section h2{margin:14px 0 8px;font-size:34px;line-height:1.15}
+.section p{margin:0;color:var(--muted);line-height:1.8}
+.grid{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{border-radius:24px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.04);box-shadow:0 18px 46px rgba(0,0,0,.26);min-width:0}
+.demo{position:relative;min-height:220px;overflow:hidden;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#111827,#0b1220)}
+.demo-inner{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;font-weight:800;line-height:1.25;font-size:18px;text-shadow:0 4px 20px rgba(0,0,0,.45)}
+.label{position:absolute;top:14px;right:14px;z-index:2;padding:8px 10px;border-radius:999px;background:rgba(8,11,18,.72);border:1px solid rgba(255,255,255,.12);font-size:12px;letter-spacing:.08em}
+.meta{padding:16px 18px 18px}
+.meta h3{margin:0 0 8px;font-size:19px;line-height:1.3}
+.meta p{margin:0;font-size:14px;line-height:1.8;color:var(--muted)}
+.demo::before,.demo::after{content:"";position:absolute}
+/* generic building blocks */
+.parallax::before{inset:-12%;background:
+radial-gradient(circle at 28% 30%,rgba(255,255,255,.12),transparent 16%),
+linear-gradient(135deg,rgba(124,92,255,.42),rgba(10,14,22,.92));animation:float 7s ease-in-out infinite alternate}
+.parallax::after{inset:24px;border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02));transform:translateY(-8px);box-shadow:0 18px 36px rgba(0,0,0,.25)}
+.kenburns::before{inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 18%),linear-gradient(135deg,rgba(124,92,255,.38),rgba(8,11,18,.9));animation:ken 8s ease-in-out infinite alternate}
+.aurora::before{inset:-10%;background:radial-gradient(circle at 20% 30%,rgba(124,92,255,.55),transparent 22%),radial-gradient(circle at 70% 38%,rgba(45,226,182,.42),transparent 18%),radial-gradient(circle at 50% 78%,rgba(107,201,255,.28),transparent 18%);filter:blur(18px);animation:float 9s ease-in-out infinite}
+.video::before{inset:0;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 30%),linear-gradient(120deg,rgba(45,226,182,.16),rgba(124,92,255,.22),transparent 60%),linear-gradient(180deg,#0f1726,#0b1220)}
+.video::after{inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.06) 0 2px,transparent 2px 6px);mix-blend-mode:screen;opacity:.18}
+.typing::before{left:18px;right:18px;top:70px;height:44px;border-right:2px solid rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;content:"逐字浮現中";font-size:34px;font-weight:900;width:0;animation:type 3.5s steps(6,end) infinite alternate}
+.split{display:grid;grid-template-columns:1fr 1fr}
+.split::before{left:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(8,11,18,.8))}
+.split::after{right:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,rgba(45,226,182,.36),rgba(8,11,18,.8))}
+.stack::before{left:28px;right:80px;bottom:36px;height:110px;border-radius:20px;background:rgba(255,255,255,.08);box-shadow:26px -18px 0 rgba(255,255,255,.06),52px -36px 0 rgba(255,255,255,.04);animation:float 6s ease-in-out infinite}
+.scrollhint::before{left:50%;top:40px;width:34px;height:58px;margin-left:-17px;border-radius:999px;border:1px solid rgba(255,255,255,.24)}
+.scrollhint::after{left:50%;top:54px;width:6px;height:10px;margin-left:-3px;border-radius:999px;background:#fff;animation:scrollDot 1.6s ease-in-out infinite}
+.slices::before{inset:18px;background:linear-gradient(90deg,rgba(124,92,255,.55) 0 20%,rgba(255,255,255,.08) 20% 40%,rgba(45,226,182,.55) 40% 60%,rgba(255,255,255,.08) 60% 80%,rgba(107,201,255,.5) 80%);clip-path:polygon(0 0,100% 0,80% 100%,0 100%);animation:slideX 5s ease-in-out infinite}
+.scan::before{inset:0;background:linear-gradient(120deg,transparent 0 35%,rgba(255,255,255,.15) 50%,transparent 65%);animation:scan 4s linear infinite}
+.scene::before{inset:0;background:linear-gradient(135deg,rgba(124,92,255,.34),transparent 40%),linear-gradient(315deg,rgba(45,226,182,.34),transparent 40%),linear-gradient(180deg,#0f1726,#0b1220)}
+.scene::after{inset:0;background:linear-gradient(180deg,transparent 0 48%,rgba(255,255,255,.08) 48% 52%,transparent 52%);animation:slideY 4s ease-in-out infinite}
+.whitespace::before{inset:18px;border:1px solid rgba(255,255,255,.1);border-radius:18px}
+.whitespace::after{left:26px;right:26px;top:46px;bottom:46px;background:linear-gradient(180deg,transparent 0 10%,rgba(255,255,255,.06) 10% 14%,transparent 14% 50%,rgba(255,255,255,.06) 50% 54%,transparent 54%)}
+.depth::before{inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.10),transparent 12%),radial-gradient(circle at 50% 50%,rgba(124,92,255,.22),transparent 28%),radial-gradient(circle at 50% 50%,rgba(45,226,182,.18),transparent 44%)} 
+.depth::after{inset:18px;border-radius:20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 18px 36px rgba(0,0,0,.28);transform:perspective(900px) rotateX(12deg)}
+.wave::before{inset:auto -10% 10px -10%;height:120px;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.12),transparent 40%),linear-gradient(180deg,rgba(124,92,255,.46),rgba(45,226,182,.36));clip-path:path('M0,64 C120,20 220,110 340,70 C430,40 520,18 700,70 L700,140 L0,140 Z');animation:drift 8s ease-in-out infinite}
+.curve::before{inset:0;background:
+radial-gradient(circle at 20% 20%,rgba(124,92,255,.18),transparent 18%),
+radial-gradient(circle at 80% 20%,rgba(45,226,182,.15),transparent 16%) }
+.curve::after{left:-10%;right:-10%;top:34%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);box-shadow:0 -26px 0 rgba(255,255,255,.3),0 26px 0 rgba(255,255,255,.2);transform:rotate(-8deg);animation:drift 6s ease-in-out infinite}
+.particles::before,.stars::before{inset:0;background:
+radial-gradient(circle at 10% 20%,rgba(255,255,255,.9) 0 1px,transparent 2px),
+radial-gradient(circle at 25% 60%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+radial-gradient(circle at 50% 50%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+radial-gradient(circle at 76% 22%,rgba(255,255,255,.9) 0 1px,transparent 2px),
+radial-gradient(circle at 82% 72%,rgba(255,255,255,.7) 0 1px,transparent 2px),
+radial-gradient(circle at 56% 18%,rgba(255,255,255,.7) 0 1px,transparent 2px);
+background-size:100% 100%;animation:twinkle 4s linear infinite}
+.particles::after{inset:0;background:radial-gradient(circle at 40% 50%,rgba(124,92,255,.28),transparent 20%),radial-gradient(circle at 60% 40%,rgba(45,226,182,.22),transparent 18%)}
+.gridflow::before{inset:0;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:26px 26px;transform:perspective(900px) rotateX(70deg) scale(1.2);transform-origin:center bottom;animation:slideY 6s linear infinite}
+.fluid::before{inset:-10%;background:conic-gradient(from 90deg at 50% 50%,rgba(124,92,255,.55),rgba(45,226,182,.42),rgba(107,201,255,.38),rgba(124,92,255,.55));filter:blur(18px);animation:spin 10s linear infinite}
+.radar::before{left:50%;top:50%;width:220px;height:220px;margin:-110px;border-radius:50%;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 38px rgba(255,255,255,.05),0 0 0 76px rgba(255,255,255,.03)}
+.radar::after{left:50%;top:50%;width:120px;height:2px;background:linear-gradient(90deg,rgba(45,226,182,.0),rgba(45,226,182,.95));transform-origin:left center;animation:spin 3s linear infinite}
+.path::before{left:14px;right:14px;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.5),rgba(255,255,255,.08))}
+.path::after{top:calc(50% - 6px);left:20px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 18px rgba(255,255,255,.8);animation:pathMove 4s linear infinite}
+.blurblob::before{inset:0;background:radial-gradient(circle at 25% 35%,rgba(124,92,255,.55),transparent 20%),radial-gradient(circle at 68% 55%,rgba(45,226,182,.42),transparent 22%),radial-gradient(circle at 48% 72%,rgba(107,201,255,.36),transparent 18%);filter:blur(18px);animation:float 8s ease-in-out infinite}
+.blobnav::before{left:50%;top:50%;width:180px;height:120px;margin:-60px -90px;background:linear-gradient(135deg,rgba(124,92,255,.65),rgba(45,226,182,.48));border-radius:58% 42% 50% 50% / 48% 62% 38% 52%;animation:morph 7s ease-in-out infinite}
+.webgl::before{inset:0;background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.08),transparent 16%),linear-gradient(180deg,#151d2d,#0b1220)}
+.webgl::after{left:50%;top:50%;width:140px;height:140px;margin:-70px;transform:rotate(45deg);border:1px solid rgba(255,255,255,.25);box-shadow:0 0 0 26px rgba(255,255,255,.06);animation:spin 9s linear infinite}
+.refraction::before{inset:-10%;background:linear-gradient(120deg,rgba(255,255,255,.05) 0 20%,rgba(255,255,255,.16) 34%,rgba(124,92,255,.14) 42%,rgba(45,226,182,.16) 50%,transparent 66%);filter:blur(6px);animation:scan 4s linear infinite}
+.gradienttext .demo-inner{font-size:40px;background:linear-gradient(135deg,#fff,#c7bcff,#9df0de);-webkit-background-clip:text;background-clip:text;color:transparent;bottom:70px}
+.outlined .demo-inner{font-size:42px;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.7);bottom:70px}
+.highlight .demo-inner{bottom:70px;font-size:28px}
+.highlight::before{left:16px;right:16px;bottom:66px;height:38px;border-radius:999px;background:linear-gradient(90deg,rgba(124,92,255,.45),rgba(45,226,182,.35));animation:slideX 4s ease-in-out infinite}
+.marquee::before{left:0;right:0;top:70px;height:42px;content:"MARQUEE   MARQUEE   MARQUEE   MARQUEE   ";white-space:nowrap;font-size:36px;font-weight:900;animation:marq 10s linear infinite}
+.splittext::before{left:18px;right:18px;top:56px;content:"字 體 拆 開";font-size:40px;letter-spacing:.26em;animation:splitin 3s ease-in-out infinite alternate}
+.readline::before{left:18px;right:18px;top:128px;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--a),var(--b));animation:slideX 3s ease-in-out infinite}
+.shine .demo-inner{font-size:32px;bottom:74px}
+.shine::before{inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);animation:scan 3.5s linear infinite}
+.liquidtext .demo-inner{font-size:34px;filter:blur(.2px);animation:squish 3.5s ease-in-out infinite}
+.odometer::before{left:24px;top:42px;content:"128\A256\A512";white-space:pre;font-size:38px;font-weight:800;line-height:1.05;animation:odometer 3.5s steps(3,end) infinite}
+.wordswap::before{left:18px;top:76px;content:"快速";font-size:36px;font-weight:900;animation:swapWord 6s steps(1,end) infinite}
+.underline::after{left:18px;bottom:64px;height:3px;background:linear-gradient(90deg,var(--a),var(--b));width:0;animation:grow 3.5s ease-in-out infinite}
+.glyph::before{left:18px;top:72px;content:"A";font-size:58px;font-weight:900;animation:glyph 4s ease-in-out infinite}
+.spatialtext::before{left:60px;top:40px;content:"TYPE";font-size:38px;font-weight:900;letter-spacing:.18em;transform:perspective(800px) rotateY(44deg);text-shadow:36px 0 0 rgba(255,255,255,.14),72px 0 0 rgba(255,255,255,.08)}
+.fade::before{inset:36px;border-radius:18px;background:rgba(255,255,255,.12);animation:fade 2.8s ease-in-out infinite}
+.upreveal::before{left:26px;right:26px;bottom:28px;height:130px;border-radius:18px;background:rgba(255,255,255,.10);animation:upreveal 2.6s ease-in-out infinite}
+.slidein::before{left:-40%;top:46px;width:70%;height:120px;border-radius:20px;background:rgba(124,92,255,.45);animation:slidein 4s ease-in-out infinite}
+.stagger::before{left:24px;bottom:28px;width:54px;height:120px;border-radius:16px;background:rgba(255,255,255,.1);box-shadow:78px -16px 0 rgba(255,255,255,.12),156px -32px 0 rgba(255,255,255,.14);animation:stagger 4s ease-in-out infinite}
+.mask::before{inset:18px;border-radius:20px;background:linear-gradient(135deg,rgba(124,92,255,.46),rgba(45,226,182,.36));clip-path:inset(0 100% 0 0);animation:maskopen 4s ease-in-out infinite}
+.hoverzoomcard::before{inset:34px;border-radius:20px;background:rgba(255,255,255,.1);animation:hoverzoom 3.5s ease-in-out infinite}
+.hoverimage::before{inset:18px;border-radius:20px;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.08),transparent 16%),linear-gradient(135deg,rgba(124,92,255,.42),rgba(45,226,182,.28));animation:hoverzoom 3.5s ease-in-out infinite reverse}
+.blurclear::before{inset:18px;border-radius:20px;background:linear-gradient(135deg,rgba(124,92,255,.42),rgba(45,226,182,.28));filter:blur(14px);animation:blurclear 4s ease-in-out infinite}
+.zoomfocus::before{inset:22px;border-radius:20px;background:radial-gradient(circle at center,rgba(255,255,255,.18),transparent 30%),linear-gradient(135deg,rgba(124,92,255,.46),rgba(45,226,182,.28));animation:zoomfocus 4s ease-in-out infinite}
+.floatcard::before{inset:38px;border-radius:20px;background:rgba(255,255,255,.10);animation:float 4.6s ease-in-out infinite}
+.flipcard::before{left:50%;top:50%;width:130px;height:160px;margin:-80px -65px;border-radius:18px;background:rgba(255,255,255,.1);transform-style:preserve-3d;animation:flip 5s ease-in-out infinite}
+.expandwide::before{left:50%;top:50%;width:110px;height:110px;margin:-55px;border-radius:20px;background:rgba(255,255,255,.12);animation:expandwide 4s ease-in-out infinite}
+.mosaic::before{inset:18px;background:linear-gradient(90deg,rgba(255,255,255,.08) 0 33%,transparent 33% 34%,rgba(255,255,255,.08) 34% 66%,transparent 66% 67%,rgba(255,255,255,.08) 67% 100%),linear-gradient(180deg,rgba(255,255,255,.08) 0 50%,transparent 50% 51%,rgba(255,255,255,.08) 51% 100%);animation:drift 4s ease-in-out infinite}
+.tiltcard::before{left:50%;top:50%;width:180px;height:120px;margin:-60px -90px;border-radius:20px;background:rgba(255,255,255,.08);transform:perspective(900px) rotateX(18deg) rotateY(-20deg)}
+.glowborder::before{inset:18px;border-radius:22px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 24px rgba(124,92,255,.36),0 0 48px rgba(45,226,182,.16)}
+.glowborder::after{inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);animation:scan 3.6s linear infinite}
+.dragcards::before{left:24px;right:24px;bottom:32px;height:120px;border-radius:18px;background:rgba(255,255,255,.08);box-shadow:20px -12px 0 rgba(255,255,255,.06),40px -24px 0 rgba(255,255,255,.04)}
+.dragcards::after{left:70px;bottom:70px;width:48px;height:48px;border-radius:50%;background:rgba(45,226,182,.8);animation:pathMove 5s ease-in-out infinite}
+.heightgrow::before{left:24px;right:24px;bottom:28px;height:60px;border-radius:20px;background:rgba(255,255,255,.1);animation:heightgrow 4s ease-in-out infinite}
+.bookshelf::before{left:0;right:0;bottom:30px;height:6px;background:rgba(255,255,255,.16)}
+.bookshelf::after{left:40px;bottom:36px;width:46px;height:120px;border-radius:12px;background:rgba(124,92,255,.48);box-shadow:60px -8px 0 rgba(255,255,255,.14),120px -16px 0 rgba(45,226,182,.38),180px -4px 0 rgba(255,255,255,.14);animation:drift 4s ease-in-out infinite}
+.mediaoverlay::before{inset:18px;border-radius:20px;background:linear-gradient(180deg,rgba(124,92,255,.42),rgba(45,226,182,.26))}
+.mediaoverlay::after{left:18px;right:18px;bottom:18px;height:72px;border-radius:18px;background:linear-gradient(180deg,transparent,rgba(8,11,18,.72))}
+.stickybar::before{left:14px;right:14px;top:18px;height:44px;border-radius:999px;background:rgba(255,255,255,.1);animation:stickyMorph 4s ease-in-out infinite}
+.scrollspy::before{left:18px;top:18px;bottom:18px;width:110px;border-right:1px solid rgba(255,255,255,.1)}
+.scrollspy::after{left:26px;top:44px;width:84px;height:20px;border-radius:999px;background:linear-gradient(90deg,var(--a),var(--b));box-shadow:0 42px 0 rgba(255,255,255,.08),0 84px 0 rgba(255,255,255,.08);animation:slideY 4s ease-in-out infinite}
+.dotnav::before{right:22px;top:34px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 28px 0 rgba(255,255,255,.45),0 56px 0 rgba(255,255,255,.45),0 84px 0 rgba(255,255,255,.45)}
+.dotnav::after{right:17px;top:28px;width:20px;height:20px;border-radius:50%;border:1px solid rgba(255,255,255,.3);animation:slideY 4s ease-in-out infinite}
+.megamenu::before{left:18px;right:18px;top:26px;height:42px;border-radius:999px;background:rgba(255,255,255,.1)}
+.megamenu::after{left:18px;right:18px;top:78px;height:108px;border-radius:20px;background:rgba(255,255,255,.08);transform:scaleY(0);transform-origin:top;animation:dropdown 4s ease-in-out infinite}
+.topprogress::before{right:22px;bottom:22px;width:66px;height:66px;border-radius:50%;border:6px solid rgba(255,255,255,.1);border-top-color:rgba(45,226,182,.9);animation:spin 2.8s linear infinite}
+.cursorui::before{left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:#fff;box-shadow:0 0 0 12px rgba(255,255,255,.12)}
+.hoverpreview::before{left:20px;top:20px;bottom:20px;width:110px;border-radius:18px;background:rgba(255,255,255,.06)}
+.hoverpreview::after{left:148px;top:20px;right:20px;bottom:20px;border-radius:18px;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(45,226,182,.24));animation:hoverzoom 4s ease-in-out infinite}
+.radialmenu::before{left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:#fff;box-shadow:90px 0 0 rgba(255,255,255,.1),-90px 0 0 rgba(255,255,255,.1),0 90px 0 rgba(255,255,255,.1),0 -90px 0 rgba(255,255,255,.1);animation:spin 7s linear infinite}
+.windownav::before{left:18px;right:18px;top:18px;bottom:18px;border-radius:22px;border:1px solid rgba(255,255,255,.1)}
+.windownav::after{left:28px;right:28px;top:34px;height:24px;background:linear-gradient(90deg,var(--a),var(--b));border-radius:999px;animation:slideY 4s ease-in-out infinite}
+.accordion::before{left:18px;right:18px;top:34px;height:40px;border-radius:14px;background:rgba(255,255,255,.1);box-shadow:0 52px 0 rgba(255,255,255,.08),0 104px 0 rgba(255,255,255,.06)}
+.accordion::after{left:18px;right:18px;top:84px;height:48px;border-radius:14px;background:rgba(124,92,255,.28);animation:dropdown 4s ease-in-out infinite}
+.tabs::before{left:18px;top:18px;width:76px;height:34px;border-radius:999px;background:linear-gradient(90deg,var(--a),var(--b));box-shadow:88px 0 0 rgba(255,255,255,.08),176px 0 0 rgba(255,255,255,.08)}
+.tabs::after{left:18px;right:18px;bottom:18px;top:70px;border-radius:18px;background:rgba(255,255,255,.08)}
+.mediaswitch::before{left:18px;top:18px;width:42%;bottom:18px;border-radius:18px;background:linear-gradient(135deg,rgba(124,92,255,.46),rgba(45,226,182,.28))}
+.mediaswitch::after{right:18px;top:18px;width:34%;bottom:18px;border-radius:18px;background:rgba(255,255,255,.08);animation:slideX 4s ease-in-out infinite}
+.drawer::before{left:18px;top:18px;bottom:18px;width:56px;border-radius:18px;background:rgba(255,255,255,.08)}
+.drawer::after{left:18px;top:18px;bottom:18px;width:58%;border-radius:18px;background:rgba(124,92,255,.34);transform:translateX(-100%);animation:drawer 4s ease-in-out infinite}
+.puzzle::before{inset:18px;background:linear-gradient(90deg,rgba(255,255,255,.08) 0 33%,transparent 33% 34%,rgba(255,255,255,.08) 34% 66%,transparent 66% 67%,rgba(255,255,255,.08) 67%),linear-gradient(180deg,rgba(255,255,255,.08) 0 50%,transparent 50% 51%,rgba(255,255,255,.08) 51%);animation:splitin 4s ease-in-out infinite}
+.slicecarousel::before{inset:18px;background:linear-gradient(90deg,rgba(124,92,255,.46) 0 25%,rgba(255,255,255,.05) 25% 50%,rgba(45,226,182,.32) 50% 75%,rgba(107,201,255,.32) 75%);animation:slideX 6s ease-in-out infinite}
+.thumbwall::before{left:18px;right:18px;top:18px;bottom:18px;background:linear-gradient(90deg,rgba(255,255,255,.08) 0 32%,transparent 32% 34%,rgba(255,255,255,.08) 34% 66%,transparent 66% 68%,rgba(255,255,255,.08) 68%),linear-gradient(180deg,rgba(255,255,255,.08) 0 50%,transparent 50% 52%,rgba(255,255,255,.08) 52%)}
+.carousel::before{left:18px;top:24px;bottom:24px;width:70%;border-radius:20px;background:linear-gradient(135deg,rgba(124,92,255,.46),rgba(45,226,182,.28));animation:carousel 6s ease-in-out infinite}
+.hotspot::before{inset:18px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.34),rgba(45,226,182,.18))}
+.hotspot::after{left:64%;top:44%;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.38);animation:pulse 2s infinite}
+.beforeafter::before{inset:18px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.42),rgba(8,11,18,.82))}
+.beforeafter::after{left:18px;top:18px;bottom:18px;width:50%;border-right:2px solid rgba(255,255,255,.7);border-radius:22px 0 0 22px;background:linear-gradient(135deg,rgba(45,226,182,.36),rgba(8,11,18,.82));animation:beforeafter 4.5s ease-in-out infinite}
+.lightbox::before{inset:22px;border-radius:20px;background:rgba(255,255,255,.1)}
+.lightbox::after{left:50%;top:50%;width:80px;height:80px;margin:-40px;border-radius:50%;border:2px solid rgba(255,255,255,.75);box-shadow:0 0 0 26px rgba(255,255,255,.08)}
+.panorama::before{left:-30%;right:-30%;top:18px;bottom:18px;border-radius:22px;background:linear-gradient(90deg,rgba(124,92,255,.34),rgba(45,226,182,.22),rgba(107,201,255,.28));animation:slideX 6s ease-in-out infinite}
+.framedraw::before{inset:18px;border-radius:20px;border:2px solid rgba(255,255,255,.75);clip-path:inset(0 100% 100% 0);animation:drawframe 4s linear infinite}
+.layerparallax::before{left:20px;right:20px;bottom:20px;height:50px;border-radius:18px;background:rgba(255,255,255,.08);box-shadow:0 -40px 0 rgba(124,92,255,.22),0 -82px 0 rgba(45,226,182,.18)}
+.videoframe::before{inset:18px;border-radius:20px;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(45,226,182,.24));box-shadow:inset 0 0 0 4px rgba(255,255,255,.18)}
+.geomask::before{inset:18px;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(45,226,182,.24));clip-path:polygon(50% 0,100% 24%,82% 100%,18% 100%,0 24%)}
+.skewmask::before{inset:18px;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(45,226,182,.24));transform:skewX(-16deg)}
+.arcmask::before{inset:18px;background:linear-gradient(135deg,rgba(124,92,255,.44),rgba(45,226,182,.24));clip-path:ellipse(50% 44% at 50% 50%)}
+.modelrotate::before{left:50%;top:50%;width:120px;height:120px;margin:-60px;transform:rotate(45deg);background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.2);animation:spin 8s linear infinite}
+.timeline::before{left:56px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,var(--a),var(--b))}
+.timeline::after{left:49px;top:38px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 50px 0 rgba(255,255,255,.8),0 100px 0 rgba(255,255,255,.8)}
+.flowline::before{left:18px;right:18px;top:50%;height:2px;background:linear-gradient(90deg,transparent,var(--b),transparent)}
+.flowline::after{left:18px;top:calc(50% - 6px);width:12px;height:12px;border-radius:50%;background:#fff;animation:pathMove 4s linear infinite}
+.pinnedstory::before{left:18px;top:18px;bottom:18px;width:38%;border-radius:18px;background:rgba(255,255,255,.08)}
+.pinnedstory::after{right:18px;top:18px;bottom:18px;width:36%;border-radius:18px;background:rgba(124,92,255,.34)}
+.stepstory::before{left:18px;right:18px;top:26px;height:50px;border-radius:16px;background:rgba(255,255,255,.08);box-shadow:0 60px 0 rgba(124,92,255,.22),0 120px 0 rgba(45,226,182,.18)}
+.horizontalstory::before{left:18px;top:32px;bottom:32px;width:90px;border-radius:18px;background:rgba(255,255,255,.08);box-shadow:120px 0 0 rgba(124,92,255,.22),240px 0 0 rgba(45,226,182,.18);animation:slideX 6s ease-in-out infinite}
+.pageflip::before{left:50%;top:50%;width:130px;height:160px;margin:-80px -65px;background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.06));transform-origin:left center;animation:pageflip 4s ease-in-out infinite}
+.scrollsnap::before{left:18px;right:18px;top:18px;bottom:18px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.08) 0 33%,transparent 33% 34%,rgba(255,255,255,.08) 34% 67%,transparent 67% 68%,rgba(255,255,255,.08) 68%)}
+.countup::before{left:18px;top:62px;content:"24\A48\A72";white-space:pre;font-size:42px;font-weight:900;line-height:1.02;animation:odometer 3s steps(3,end) infinite}
+.progressbar::before{left:18px;right:18px;bottom:48px;height:12px;border-radius:999px;background:rgba(255,255,255,.08)}
+.progressbar::after{left:18px;bottom:48px;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--a),var(--b));width:0;animation:grow 3.6s ease-in-out infinite}
+.dashboard::before{left:18px;right:18px;top:18px;bottom:18px;background:linear-gradient(90deg,rgba(255,255,255,.08) 0 50%,transparent 50% 51%,rgba(255,255,255,.08) 51%),linear-gradient(180deg,rgba(255,255,255,.08) 0 50%,transparent 50% 51%,rgba(255,255,255,.08) 51%)}
+.linedraw::before{left:18px;right:18px;top:50%;height:80px;border-left:0;border-bottom:0;border:2px solid transparent;border-image:linear-gradient(90deg,var(--a),var(--b)) 1;clip-path:polygon(0 100%,18% 70%,36% 78%,54% 40%,72% 54%,100% 8%,100% 100%,0 100%)}
+.bargrow::before{left:24px;right:24px;bottom:30px;height:140px;background:linear-gradient(90deg,rgba(124,92,255,.55) 0 20%,transparent 20% 28%,rgba(45,226,182,.46) 28% 48%,transparent 48% 56%,rgba(107,201,255,.5) 56% 76%,transparent 76% 84%,rgba(255,255,255,.26) 84%);clip-path:polygon(0 100%,0 44%,20% 44%,20% 100%,28% 100%,28% 28%,48% 28%,48% 100%,56% 100%,56% 14%,76% 14%,76% 100%,84% 100%,84% 60%,100% 60%,100% 100%)}
+.radarchart::before{left:50%;top:50%;width:160px;height:160px;margin:-80px;border-radius:50%;border:1px solid rgba(255,255,255,.18);box-shadow:0 0 0 28px rgba(255,255,255,.06),0 0 0 56px rgba(255,255,255,.04)}
+.radarchart::after{left:50%;top:50%;width:140px;height:140px;margin:-70px;background:rgba(124,92,255,.26);clip-path:polygon(50% 0,84% 28%,74% 76%,28% 92%,8% 42%);animation:pulseScale 3.5s ease-in-out infinite}
+.donut::before{left:50%;top:50%;width:120px;height:120px;margin:-60px;border-radius:50%;border:14px solid rgba(255,255,255,.1);border-top-color:var(--a);border-right-color:var(--b);animation:spin 4s linear infinite}
+.pulsepoints::before{left:34px;top:76px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:80px -28px 0 #fff,170px 18px 0 #fff,250px -42px 0 #fff}
+.pulsepoints::after{left:28px;top:70px;width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.5);box-shadow:80px -28px 0 0 rgba(255,255,255,0),170px 18px 0 0 rgba(255,255,255,0),250px -42px 0 0 rgba(255,255,255,0);animation:pulseRing 2s ease-out infinite}
+.dataswitch::before{left:18px;top:18px;right:18px;height:44px;border-radius:16px;background:rgba(255,255,255,.08)}
+.dataswitch::after{left:18px;top:76px;right:18px;bottom:18px;border-radius:20px;background:linear-gradient(135deg,rgba(124,92,255,.34),rgba(45,226,182,.18));animation:fade 3.5s ease-in-out infinite}
+.maphotspots::before{inset:18px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.28),rgba(45,226,182,.14))}
+.maphotspots::after{left:30%;top:30%;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:90px 24px 0 #fff,160px -10px 0 #fff,220px 50px 0 #fff}
+.mappath::before{inset:18px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(45,226,182,.12))}
+.mappath::after{left:40px;top:130px;width:260px;height:80px;border:2px dashed rgba(255,255,255,.55);border-color:rgba(255,255,255,.55) transparent transparent transparent;border-radius:80% 80% 0 0;transform:rotate(-10deg)}
+.waveform::before{left:18px;right:18px;top:50%;height:2px;background:rgba(255,255,255,.14)}
+.waveform::after{left:18px;right:18px;top:70px;height:80px;background:linear-gradient(90deg,transparent 0 2%,rgba(124,92,255,.72) 2% 4%,transparent 4% 8%,rgba(45,226,182,.8) 8% 10%,transparent 10% 14%,rgba(107,201,255,.78) 14% 16%,transparent 16% 22%,rgba(255,255,255,.8) 22% 24%,transparent 24% 30%,rgba(124,92,255,.72) 30% 32%,transparent 32% 40%,rgba(45,226,182,.8) 40% 42%,transparent 42% 50%,rgba(107,201,255,.78) 50% 52%,transparent 52% 60%,rgba(255,255,255,.8) 60% 62%,transparent 62% 70%,rgba(124,92,255,.72) 70% 72%,transparent 72% 80%,rgba(45,226,182,.8) 80% 82%,transparent 82%);clip-path:polygon(0 50%,2% 50%,2% 30%,4% 70%,4% 50%,8% 50%,8% 18%,10% 82%,10% 50%,14% 50%,14% 40%,16% 60%,16% 50%,22% 50%,22% 10%,24% 90%,24% 50%,30% 50%,30% 28%,32% 72%,32% 50%,40% 50%,40% 12%,42% 88%,42% 50%,50% 50%,50% 26%,52% 74%,52% 50%,60% 50%,60% 20%,62% 80%,62% 50%,70% 50%,70% 38%,72% 62%,72% 50%,80% 50%,80% 24%,82% 76%,82% 50%,100% 50%,100% 50%)}
+.mouselight::before{left:var(--mx,50%);top:var(--my,50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.24),transparent 68%);transform:translate(-50%,-50%)}
+.magnetic::before{left:50%;top:50%;width:160px;height:54px;margin:-27px -80px;border-radius:999px;background:rgba(255,255,255,.1);animation:magnet 3s ease-in-out infinite}
+.ripple::before{left:50%;top:50%;width:24px;height:24px;margin:-12px;border-radius:50%;background:rgba(255,255,255,.3);animation:ripple 2.2s ease-out infinite}
+.springdrag::before{left:34px;top:94px;width:60px;height:60px;border-radius:16px;background:rgba(124,92,255,.52);animation:spring 3s cubic-bezier(.22,1.28,.36,1) infinite}
+.speedmorph::before{left:40px;top:84px;width:100px;height:54px;border-radius:999px;background:rgba(45,226,182,.65);animation:speed 2.6s linear infinite}
+.microstate::before{left:50%;top:50%;width:96px;height:96px;margin:-48px;border-radius:24px;background:rgba(255,255,255,.1);animation:micro 3.2s ease-in-out infinite}
+.lottie::before{left:50%;top:50%;width:120px;height:120px;margin:-60px;border-radius:24px;background:linear-gradient(135deg,rgba(124,92,255,.46),rgba(45,226,182,.28));animation:spin 8s linear infinite}
+.physics::before{left:36px;top:46px;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:70px 0 0 rgba(124,92,255,.8),140px 0 0 rgba(45,226,182,.8);animation:physics 3s ease-in-out infinite}
+.aireactive::before{inset:-10%;background:conic-gradient(from 0deg,rgba(124,92,255,.46),rgba(45,226,182,.34),rgba(107,201,255,.34),rgba(124,92,255,.46));filter:blur(16px);animation:spin 7s linear infinite}
+.spacescene::before{left:50%;top:50%;width:180px;height:180px;margin:-90px;border-radius:28px;background:rgba(255,255,255,.08);transform:perspective(900px) rotateX(60deg) rotateZ(45deg)}
+.sensory::before{left:50%;top:50%;width:110px;height:110px;margin:-55px;border-radius:50%;border:2px solid rgba(255,255,255,.35);box-shadow:0 0 0 18px rgba(255,255,255,.10),0 0 0 36px rgba(255,255,255,.06);animation:pulseScale 2.6s ease-in-out infinite}
+.environment::before{left:24px;top:24px;content:"08:45";font-size:44px;font-weight:900}
+.environment::after{right:22px;top:28px;width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff 0 18%,#ffd55f 18% 100%);box-shadow:-12px 70px 0 0 rgba(255,255,255,.16)}
+.materialsim::before{left:26px;right:26px;top:36px;bottom:36px;border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.06));box-shadow:inset -12px -12px 24px rgba(0,0,0,.18),inset 10px 10px 20px rgba(255,255,255,.06)}
+.cloth::before{left:26px;right:26px;top:38px;bottom:38px;border-radius:20px;background:linear-gradient(180deg,rgba(124,92,255,.48),rgba(45,226,182,.24));clip-path:polygon(0 0,100% 0,96% 100%,4% 100%);animation:cloth 4s ease-in-out infinite}
+.ink::before{left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:rgba(124,92,255,.8);box-shadow:0 0 0 0 rgba(124,92,255,.18);animation:ink 3.6s ease-out infinite}
+.camera::before{left:26px;right:26px;top:26px;bottom:26px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.36),rgba(45,226,182,.22));animation:camera 5s ease-in-out infinite}
+.tilewall::before{inset:18px;background:linear-gradient(90deg,rgba(255,255,255,.08) 0 25%,transparent 25% 26%,rgba(255,255,255,.08) 26% 50%,transparent 50% 51%,rgba(255,255,255,.08) 51% 75%,transparent 75% 76%,rgba(255,255,255,.08) 76%),linear-gradient(180deg,rgba(255,255,255,.08) 0 33%,transparent 33% 34%,rgba(255,255,255,.08) 34% 66%,transparent 66% 67%,rgba(255,255,255,.08) 67%)}
+.tilewall::after{inset:18px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(45,226,182,.1));animation:drift 4s ease-in-out infinite}
+.realism::before{left:26px;right:26px;top:26px;bottom:26px;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.08));box-shadow:inset 0 1px 1px rgba(255,255,255,.18),0 24px 40px rgba(0,0,0,.26)}
+.neumorphism{background:#dbe1eb}
+.neumorphism::before{left:50%;top:50%;width:220px;height:120px;margin:-60px -110px;border-radius:26px;background:#dfe6f0;box-shadow:18px 18px 36px rgba(163,177,198,.55),-18px -18px 36px rgba(255,255,255,.92)}
+.neumorphism .demo-inner{color:#44536b;text-shadow:none}
+.glowui::before{inset:-12%;background:radial-gradient(circle at 30% 40%,rgba(124,92,255,.42),transparent 20%),radial-gradient(circle at 72% 46%,rgba(45,226,182,.34),transparent 18%);filter:blur(16px)}
+.glowui::after{inset:18px;border-radius:24px;border:1px solid rgba(107,201,255,.36);box-shadow:0 0 36px rgba(124,92,255,.22),inset 0 0 30px rgba(45,226,182,.08)}
+.fan::before{left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:#fff}
+.fan::after{left:50%;top:50%;width:10px;height:88px;margin:-88px -5px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(124,92,255,.36));box-shadow:0 0 0 0 #000;transform-origin:50% calc(100% - 8px);animation:spin 1.8s linear infinite;box-shadow:70px 120px 0 -2px rgba(255,255,255,.9),-70px 120px 0 -2px rgba(255,255,255,.9)}
+.generic::before{inset:18px;border-radius:22px;background:linear-gradient(135deg,rgba(124,92,255,.34),rgba(45,226,182,.22))}
+/* keyframes */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes ken{from{transform:scale(1)}to{transform:scale(1.12) translate(-2%,-1%)}}
+@keyframes type{from{width:0}to{width:7em}}
+@keyframes scrollDot{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(18px)}}
+@keyframes slideX{0%,100%{transform:translateX(-6%)}50%{transform:translateX(6%)}}
+@keyframes slideY{0%,100%{transform:translateY(-8px)}50%{transform:translateY(8px)}}
+@keyframes scan{from{transform:translateX(-45%)}to{transform:translateX(45%)}}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+@keyframes twinkle{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pathMove{0%{transform:translateX(0)}100%{transform:translateX(290px)}}
+@keyframes morph{0%,100%{border-radius:58% 42% 50% 50% / 48% 62% 38% 52%}50%{border-radius:42% 58% 38% 62% / 56% 40% 60% 44%}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-40%)}}
+@keyframes splitin{0%,100%{letter-spacing:.26em;opacity:.7}50%{letter-spacing:.05em;opacity:1}}
+@keyframes squish{0%,100%{transform:scaleX(1)}50%{transform:scaleX(1.12) scaleY(.92)}}
+@keyframes odometer{0%{transform:translateY(0)}100%{transform:translateY(-96px)}}
+@keyframes swapWord{0%{content:"快速"}33%{content:"精準"}66%{content:"流暢"}100%{content:"快速"}}
+@keyframes grow{0%,100%{width:0}50%{width:calc(100% - 36px)}}
+@keyframes glyph{0%{content:"A"}25%{content:"R"}50%{content:"8"}75%{content:"Ω"}100%{content:"A"}}
+@keyframes fade{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes upreveal{0%{transform:translateY(40px);opacity:0}50%{transform:translateY(0);opacity:1}100%{transform:translateY(-8px);opacity:.85}}
+@keyframes slidein{0%{transform:translateX(-70%)}50%{transform:translateX(40%)}100%{transform:translateX(120%)}}
+@keyframes stagger{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes maskopen{0%,100%{clip-path:inset(0 100% 0 0)}50%{clip-path:inset(0 0 0 0)}}
+@keyframes hoverzoom{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes blurclear{0%,100%{filter:blur(14px)}50%{filter:blur(0)}}
+@keyframes zoomfocus{0%,100%{transform:scale(.92)}50%{transform:scale(1.08)}}
+@keyframes flip{0%,100%{transform:translateZ(0) rotateY(0deg)}50%{transform:translateZ(0) rotateY(180deg)}}
+@keyframes expandwide{0%,100%{width:110px;height:110px;margin:-55px}50%{width:calc(100% - 36px);height:150px;left:18px;top:35px;margin:0}}
+@keyframes heightgrow{0%,100%{height:60px}50%{height:146px}}
+@keyframes stickyMorph{0%,100%{border-radius:999px}50%{border-radius:16px}}
+@keyframes dropdown{0%,100%{transform:scaleY(0);opacity:0}50%{transform:scaleY(1);opacity:1}}
+@keyframes drawer{0%,100%{transform:translateX(-100%)}50%{transform:translateX(0)}}
+@keyframes carousel{0%,100%{transform:translateX(0)}50%{transform:translateX(35%)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.4)}70%{box-shadow:0 0 0 18px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+@keyframes beforeafter{0%,100%{width:26%}50%{width:78%}}
+@keyframes drawframe{0%{clip-path:inset(0 100% 100% 0)}25%{clip-path:inset(0 0 100% 0)}50%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(100% 0 0 0)}}
+@keyframes pageflip{0%,100%{transform:perspective(900px) rotateY(0deg)}50%{transform:perspective(900px) rotateY(-160deg)}}
+@keyframes pulseScale{0%,100%{transform:scale(.88)}50%{transform:scale(1.04)}}
+@keyframes pulseRing{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.7);opacity:0}}
+@keyframes magnet{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 14px),calc(-50% - 10px))}}
+@keyframes ripple{0%{transform:translate(-50%,-50%) scale(0);opacity:.8}100%{transform:translate(-50%,-50%) scale(10);opacity:0}}
+@keyframes spring{0%,100%{transform:translateX(0)}40%{transform:translateX(180px)}60%{transform:translateX(150px)}80%{transform:translateX(170px)}}
+@keyframes speed{0%{transform:translateX(0) skewX(0)}50%{transform:translateX(180px) skewX(-18deg)}100%{transform:translateX(0) skewX(0)}}
+@keyframes micro{0%,100%{border-radius:24px;background:rgba(255,255,255,.1)}50%{border-radius:999px;background:rgba(45,226,182,.18)}}
+@keyframes physics{0%,100%{transform:translateY(0)}50%{transform:translateY(90px)}}
+@keyframes cloth{0%,100%{transform:skewX(0deg)}50%{transform:skewX(6deg)}}
+@keyframes ink{0%{box-shadow:0 0 0 0 rgba(124,92,255,.18)}100%{box-shadow:0 0 0 120px rgba(124,92,255,0)}}
+@keyframes camera{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(-8px,4px) scale(1.04)}50%{transform:translate(8px,-6px) scale(1.08)}75%{transform:translate(-4px,8px) scale(1.03)}}
+footer{margin-top:60px;text-align:center;color:var(--muted);font-size:13px;line-height:1.8}
+@media (max-width:1200px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero .count{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto}.grid{grid-template-columns:1fr}.hero{padding:30px}}
 </style>
 </head>
 <body>
-<div class="fx-bg-grid"></div>
-<div class="fx-noise"></div>
-
-<div class="fx-app">
-  <aside class="fx-sidebar" id="fxSidebar">
-    <div class="fx-brand">
-      <div class="fx-brand-badge"><span class="fx-brand-dot"></span> 網站特效展示中心</div>
-      <h1 class="fx-title">網站特效分類與範例</h1>
-      <p class="fx-subtitle">依照你提供的表格，將特效按分類整理成可直接瀏覽的完整展示頁。左側為分類導覽，右側為每一類的可視化範例與完整特效選項。</p>
-      <div class="fx-summary">
-        <div class="fx-summary-card"><strong>12</strong><span>特效大類</span></div>
-        <div class="fx-summary-card"><strong>100+</strong><span>特效名稱整理</span></div>
+<div class="bg-grid"></div>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <div class="badge"><span class="dot"></span> 網站特效完整展示庫</div>
+      <h1>每一個特效都看得到</h1>
+      <p>這份版本不是分類摘要，而是依照你表格中的特效名稱，將每一個特效做成獨立可視化卡片。可直接預覽、可直接貼上使用、可再自行拆分到官網各區塊。</p>
+      <div class="stats">
+        <div><strong>12</strong><span>大類</span></div>
+        <div><strong>146</strong><span>特效卡片</span></div>
       </div>
     </div>
-
-    <div class="fx-menu-label">分類導覽</div>
-    <nav class="fx-cat-list" id="fxNavList"></nav>
+    <nav class="nav">
+      <a href="#sec-1">01. 首屏 / 品牌形象動效</a><a href="#sec-2">02. 背景氛圍類特效</a><a href="#sec-3">03. 文字與標題動畫</a><a href="#sec-4">04. 區塊進場 / 滾動出現動畫</a><a href="#sec-5">05. 卡片 / 內容模組互動</a><a href="#sec-6">06. 導覽 / 選單 / 頁面定位互動</a><a href="#sec-7">07. 內容切換 / 資訊切換元件</a><a href="#sec-8">08. 圖片 / 媒體展示特效</a><a href="#sec-9">09. 流程 / 故事 / 頁面節奏設計</a><a href="#sec-10">10. 數據視覺化 / 儀表板動畫</a><a href="#sec-11">11. 按鈕 / 滑鼠 / 微互動</a><a href="#sec-12">12. 高階實驗型 / 沉浸式特效</a>
+    </nav>
   </aside>
-
-  <main class="fx-main">
-    <div class="fx-topbar">
-      <div class="fx-topbar-left">
-        <button class="fx-mobile-toggle" id="fxMobileToggle">☰</button>
-        <div>
-          <div class="fx-mini-title">完整單頁展示版</div>
-          <strong>可作為「網站特效」選單頁面基礎版本</strong>
-        </div>
-      </div>
-      <div class="fx-topbar-right">
-        <a class="fx-chip" href="#hero">回到首頁</a>
-        <a class="fx-chip" href="#section-1">首屏動效</a>
-        <a class="fx-chip" href="#section-6">導覽互動</a>
-        <a class="fx-chip" href="#section-12">高階沉浸式</a>
+  <main class="main">
+    <div class="top">
+      <div><strong>完整單頁 HTML</strong><div style="color:var(--muted);font-size:13px;margin-top:4px">所有特效皆獨立展示</div></div>
+      <div class="chips">
+        <a class="chip" href="#sec-1">首屏</a>
+        <a class="chip" href="#sec-6">導覽</a>
+        <a class="chip" href="#sec-10">數據</a>
+        <a class="chip" href="#sec-12">高階</a>
       </div>
     </div>
-
-    <div class="fx-content">
-      <section class="fx-hero" id="hero">
-        <div class="fx-hero-grid">
-          <div>
-            <div class="fx-kicker"><i></i> 可視化分類展示 / 單頁整合版 / 可延伸為官網特效專區</div>
-            <h1>
-              把網站特效
-              <span class="gradient">一個一個放進選項內</span><br>
-              <span class="typing">看得見、選得到</span>
-            </h1>
-            <p>這份 HTML 已依照你表格中的分類方式整理，包含首屏、背景、文字、進場、卡片、導覽、切換元件、媒體展示、流程敘事、數據儀表板、微互動，以及高階沉浸式效果。每一類都附上可直接瀏覽的示意範例，並在下方列出對應特效名稱，方便你後續逐一擴充成獨立頁或獨立區塊。</p>
-            <div class="fx-hero-actions">
-              <a class="fx-btn fx-btn-primary" href="#section-1" id="fxHeroBtn">開始瀏覽範例</a>
-              <a class="fx-btn" href="#section-12">查看高階特效</a>
-            </div>
-          </div>
-
-          <div class="fx-hero-visual">
-            <div class="fx-orb orb-1"></div>
-            <div class="fx-orb orb-2"></div>
-            <div class="fx-orb orb-3"></div>
-
-            <div class="fx-visual-panel">
-              <div class="fx-visual-head">
-                <div class="fx-dots"><span></span><span></span><span></span></div>
-                <div class="fx-mini-title">首屏分割 / 堆疊 / 光束掃描</div>
-              </div>
-              <div class="fx-visual-body">
-                <div class="fx-stack">
-                  <div class="fx-stack-card"></div>
-                  <div class="fx-stack-card"></div>
-                  <div class="fx-stack-card"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="fx-scroll-hint">
-          <div class="fx-scroll-pill"></div>
-          <div>往下瀏覽各類型網站特效範例</div>
+    <div class="content">
+      <section class="hero">
+        <h2>依照你的表格，<br>把每一個特效都真的做出來。</h2>
+        <p>本頁採單一完整 HTML，所有展示都內建在同一份檔案內，不依賴外部框架。每張卡片都是一個獨立特效示範，方便你後續直接複製某一張卡片的結構到官網，或繼續拆分成單獨頁面。</p>
+        <div class="count">
+          <div><strong>146</strong><span>獨立展示卡片</span></div>
+          <div><strong>12</strong><span>特效分類</span></div>
+          <div><strong>HTML</strong><span>單檔可貼上</span></div>
+          <div><strong>CSS</strong><span>內嵌完成</span></div>
         </div>
       </section>
-
-      <section class="fx-intro">
-        <div class="fx-intro-card">
-          <strong>適合用法</strong>
-          <p>可直接作為官網中的「網站特效」專區，也可以拆成多個子頁面，讓每個特效獨立展示、獨立說明、獨立套用。</p>
+      
+    <section class="section" id="sec-1">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 01 類</span>
+          <h2>首屏 / 品牌形象動效</h2>
+          <p>本區共 15 個特效，皆以獨立卡片方式實際呈現。</p>
         </div>
-        <div class="fx-intro-card">
-          <strong>目前結構</strong>
-          <p>本版面已把分類、示意區塊、特效名稱清單、內頁跳轉錨點都整合好，後續可再加上每個特效的獨立 HTML 範例頁連結。</p>
-        </div>
-        <div class="fx-intro-card">
-          <strong>延伸方式</strong>
-          <p>你可將每張卡片連到獨立內頁，也可把卡片下方的特效清單改成按鈕式選單，點擊後切換不同示範畫面。</p>
-        </div>
-      </section>
-
-      <div id="fxSections"></div>
-
-      <div class="fx-footer">
-        本頁為單檔完整 HTML 展示版，已將你表格中的特效分類與特效名稱整合為可直接瀏覽的網站頁面結構。<br>
-        後續若要，我可以再把每一個特效各自拆成獨立 HTML 範例頁版本。
       </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo parallax" data-demo="parallax">
+            <div class="label">001</div>
+            <div class="demo-inner">視差滾動 Parallax</div>
+          </div>
+          <div class="meta">
+            <h3>視差滾動 Parallax</h3>
+            <p>視差滾動 Parallax 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo kenburns" data-demo="kenburns">
+            <div class="label">002</div>
+            <div class="demo-inner">Ken Burns 緩慢縮放</div>
+          </div>
+          <div class="meta">
+            <h3>Ken Burns 緩慢縮放</h3>
+            <p>Ken Burns 緩慢縮放 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo aurora" data-demo="aurora">
+            <div class="label">003</div>
+            <div class="demo-inner">漸層光暈漂浮</div>
+          </div>
+          <div class="meta">
+            <h3>漸層光暈漂浮</h3>
+            <p>漸層光暈漂浮 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo video" data-demo="video">
+            <div class="label">004</div>
+            <div class="demo-inner">影片背景</div>
+          </div>
+          <div class="meta">
+            <h3>影片背景</h3>
+            <p>影片背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo typing" data-demo="typing">
+            <div class="label">005</div>
+            <div class="demo-inner">首屏文字逐字浮現</div>
+          </div>
+          <div class="meta">
+            <h3>首屏文字逐字浮現</h3>
+            <p>首屏文字逐字浮現 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo split" data-demo="split">
+            <div class="label">006</div>
+            <div class="demo-inner">Split Hero 分割首屏</div>
+          </div>
+          <div class="meta">
+            <h3>Split Hero 分割首屏</h3>
+            <p>Split Hero 分割首屏 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo stack" data-demo="stack">
+            <div class="label">007</div>
+            <div class="demo-inner">首屏卡片堆疊展開</div>
+          </div>
+          <div class="meta">
+            <h3>首屏卡片堆疊展開</h3>
+            <p>首屏卡片堆疊展開 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scrollhint" data-demo="scrollhint">
+            <div class="label">008</div>
+            <div class="demo-inner">首屏滾動提示動畫</div>
+          </div>
+          <div class="meta">
+            <h3>首屏滾動提示動畫</h3>
+            <p>首屏滾動提示動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo slices" data-demo="slices">
+            <div class="label">009</div>
+            <div class="demo-inner">首屏內容切片進場</div>
+          </div>
+          <div class="meta">
+            <h3>首屏內容切片進場</h3>
+            <p>首屏內容切片進場 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scan" data-demo="scan">
+            <div class="label">010</div>
+            <div class="demo-inner">首屏背景光束掃描</div>
+          </div>
+          <div class="meta">
+            <h3>首屏背景光束掃描</h3>
+            <p>首屏背景光束掃描 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scene" data-demo="scene">
+            <div class="label">011</div>
+            <div class="demo-inner">品牌宣言切場動畫</div>
+          </div>
+          <div class="meta">
+            <h3>品牌宣言切場動畫</h3>
+            <p>品牌宣言切場動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo whitespace" data-demo="whitespace">
+            <div class="label">012</div>
+            <div class="demo-inner">精品式留白滾動</div>
+          </div>
+          <div class="meta">
+            <h3>精品式留白滾動</h3>
+            <p>精品式留白滾動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo depth" data-demo="depth">
+            <div class="label">013</div>
+            <div class="demo-inner">多層景深分層</div>
+          </div>
+          <div class="meta">
+            <h3>多層景深分層</h3>
+            <p>多層景深分層 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo parallax" data-demo="parallax">
+            <div class="label">014</div>
+            <div class="demo-inner">滾動視差雲深</div>
+          </div>
+          <div class="meta">
+            <h3>滾動視差雲深</h3>
+            <p>滾動視差雲深 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo parallax" data-demo="parallax">
+            <div class="label">015</div>
+            <div class="demo-inner">視差視覺深度</div>
+          </div>
+          <div class="meta">
+            <h3>視差視覺深度</h3>
+            <p>視差視覺深度 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-2">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 02 類</span>
+          <h2>背景氛圍類特效</h2>
+          <p>本區共 14 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo wave" data-demo="wave">
+            <div class="label">016</div>
+            <div class="demo-inner">波浪背景動態</div>
+          </div>
+          <div class="meta">
+            <h3>波浪背景動態</h3>
+            <p>波浪背景動態 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo curve" data-demo="curve">
+            <div class="label">017</div>
+            <div class="demo-inner">曲線背景動態</div>
+          </div>
+          <div class="meta">
+            <h3>曲線背景動態</h3>
+            <p>曲線背景動態 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo particles" data-demo="particles">
+            <div class="label">018</div>
+            <div class="demo-inner">粒子背景</div>
+          </div>
+          <div class="meta">
+            <h3>粒子背景</h3>
+            <p>粒子背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo gridflow" data-demo="gridflow">
+            <div class="label">019</div>
+            <div class="demo-inner">網格背景流動</div>
+          </div>
+          <div class="meta">
+            <h3>網格背景流動</h3>
+            <p>網格背景流動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo stars" data-demo="stars">
+            <div class="label">020</div>
+            <div class="demo-inner">星空／噪點背景</div>
+          </div>
+          <div class="meta">
+            <h3>星空／噪點背景</h3>
+            <p>星空／噪點背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo fluid" data-demo="fluid">
+            <div class="label">021</div>
+            <div class="demo-inner">漸層流體背景</div>
+          </div>
+          <div class="meta">
+            <h3>漸層流體背景</h3>
+            <p>漸層流體背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo aurora" data-demo="aurora">
+            <div class="label">022</div>
+            <div class="demo-inner">極光背景</div>
+          </div>
+          <div class="meta">
+            <h3>極光背景</h3>
+            <p>極光背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo radar" data-demo="radar">
+            <div class="label">023</div>
+            <div class="demo-inner">雷達掃描背景</div>
+          </div>
+          <div class="meta">
+            <h3>雷達掃描背景</h3>
+            <p>雷達掃描背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo path" data-demo="path">
+            <div class="label">024</div>
+            <div class="demo-inner">細線路徑流動</div>
+          </div>
+          <div class="meta">
+            <h3>細線路徑流動</h3>
+            <p>細線路徑流動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo blurblob" data-demo="blurblob">
+            <div class="label">025</div>
+            <div class="demo-inner">模糊光斑飄移</div>
+          </div>
+          <div class="meta">
+            <h3>模糊光斑飄移</h3>
+            <p>模糊光斑飄移 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo blobnav" data-demo="blobnav">
+            <div class="label">026</div>
+            <div class="demo-inner">液態 blob 導覽</div>
+          </div>
+          <div class="meta">
+            <h3>液態 blob 導覽</h3>
+            <p>液態 blob 導覽 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo particles" data-demo="particles">
+            <div class="label">027</div>
+            <div class="demo-inner">Canvas 粒子互動</div>
+          </div>
+          <div class="meta">
+            <h3>Canvas 粒子互動</h3>
+            <p>Canvas 粒子互動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo webgl" data-demo="webgl">
+            <div class="label">028</div>
+            <div class="demo-inner">WebGL 3D 背景</div>
+          </div>
+          <div class="meta">
+            <h3>WebGL 3D 背景</h3>
+            <p>WebGL 3D 背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo refraction" data-demo="refraction">
+            <div class="label">029</div>
+            <div class="demo-inner">光線折射效果</div>
+          </div>
+          <div class="meta">
+            <h3>光線折射效果</h3>
+            <p>光線折射效果 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-3">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 03 類</span>
+          <h2>文字與標題動畫</h2>
+          <p>本區共 14 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo gradienttext" data-demo="gradienttext">
+            <div class="label">030</div>
+            <div class="demo-inner">漸層字</div>
+          </div>
+          <div class="meta">
+            <h3>漸層字</h3>
+            <p>漸層字 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo outlined" data-demo="outlined">
+            <div class="label">031</div>
+            <div class="demo-inner">描邊字</div>
+          </div>
+          <div class="meta">
+            <h3>描邊字</h3>
+            <p>描邊字 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo typing" data-demo="typing">
+            <div class="label">032</div>
+            <div class="demo-inner">逐字打字機</div>
+          </div>
+          <div class="meta">
+            <h3>逐字打字機</h3>
+            <p>逐字打字機 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo highlight" data-demo="highlight">
+            <div class="label">033</div>
+            <div class="demo-inner">關鍵字高亮切換</div>
+          </div>
+          <div class="meta">
+            <h3>關鍵字高亮切換</h3>
+            <p>關鍵字高亮切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo marquee" data-demo="marquee">
+            <div class="label">034</div>
+            <div class="demo-inner">跑馬文字帶</div>
+          </div>
+          <div class="meta">
+            <h3>跑馬文字帶</h3>
+            <p>跑馬文字帶 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo splittext" data-demo="splittext">
+            <div class="label">035</div>
+            <div class="demo-inner">文字拆字進場</div>
+          </div>
+          <div class="meta">
+            <h3>文字拆字進場</h3>
+            <p>文字拆字進場 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo highlight" data-demo="highlight">
+            <div class="label">036</div>
+            <div class="demo-inner">段落高亮閱讀線</div>
+          </div>
+          <div class="meta">
+            <h3>段落高亮閱讀線</h3>
+            <p>段落高亮閱讀線 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo shine" data-demo="shine">
+            <div class="label">037</div>
+            <div class="demo-inner">文字掃光效果</div>
+          </div>
+          <div class="meta">
+            <h3>文字掃光效果</h3>
+            <p>文字掃光效果 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo liquidtext" data-demo="liquidtext">
+            <div class="label">038</div>
+            <div class="demo-inner">文字液態變形</div>
+          </div>
+          <div class="meta">
+            <h3>文字液態變形</h3>
+            <p>文字液態變形 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo odometer" data-demo="odometer">
+            <div class="label">039</div>
+            <div class="demo-inner">數字滾輪切換</div>
+          </div>
+          <div class="meta">
+            <h3>數字滾輪切換</h3>
+            <p>數字滾輪切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo wordswap" data-demo="wordswap">
+            <div class="label">040</div>
+            <div class="demo-inner">關鍵字輪播替換</div>
+          </div>
+          <div class="meta">
+            <h3>關鍵字輪播替換</h3>
+            <p>關鍵字輪播替換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo underline" data-demo="underline">
+            <div class="label">041</div>
+            <div class="demo-inner">標題底線生長動畫</div>
+          </div>
+          <div class="meta">
+            <h3>標題底線生長動畫</h3>
+            <p>標題底線生長動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo glyph" data-demo="glyph">
+            <div class="label">042</div>
+            <div class="demo-inner">字符形態變換</div>
+          </div>
+          <div class="meta">
+            <h3>字符形態變換</h3>
+            <p>字符形態變換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo spatialtext" data-demo="spatialtext">
+            <div class="label">043</div>
+            <div class="demo-inner">空間型排版文字作為動態物件</div>
+          </div>
+          <div class="meta">
+            <h3>空間型排版文字作為動態物件</h3>
+            <p>空間型排版文字作為動態物件 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-4">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 04 類</span>
+          <h2>區塊進場 / 滾動出現動畫</h2>
+          <p>本區共 10 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo fade" data-demo="fade">
+            <div class="label">044</div>
+            <div class="demo-inner">Fade in 淡入</div>
+          </div>
+          <div class="meta">
+            <h3>Fade in 淡入</h3>
+            <p>Fade in 淡入 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo upreveal" data-demo="upreveal">
+            <div class="label">045</div>
+            <div class="demo-inner">Up reveal 向上浮現</div>
+          </div>
+          <div class="meta">
+            <h3>Up reveal 向上浮現</h3>
+            <p>Up reveal 向上浮現 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo slidein" data-demo="slidein">
+            <div class="label">046</div>
+            <div class="demo-inner">左右滑入</div>
+          </div>
+          <div class="meta">
+            <h3>左右滑入</h3>
+            <p>左右滑入 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo stagger" data-demo="stagger">
+            <div class="label">047</div>
+            <div class="demo-inner">Stagger 交錯進場</div>
+          </div>
+          <div class="meta">
+            <h3>Stagger 交錯進場</h3>
+            <p>Stagger 交錯進場 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo mask" data-demo="mask">
+            <div class="label">048</div>
+            <div class="demo-inner">Mask reveal 遮罩展開</div>
+          </div>
+          <div class="meta">
+            <h3>Mask reveal 遮罩展開</h3>
+            <p>Mask reveal 遮罩展開 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo generic" data-demo="generic">
+            <div class="label">049</div>
+            <div class="demo-inner">Hover 放大卡片</div>
+          </div>
+          <div class="meta">
+            <h3>Hover 放大卡片</h3>
+            <p>Hover 放大卡片 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo generic" data-demo="generic">
+            <div class="label">050</div>
+            <div class="demo-inner">Hover 圖片微縮放</div>
+          </div>
+          <div class="meta">
+            <h3>Hover 圖片微縮放</h3>
+            <p>Hover 圖片微縮放 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo blurclear" data-demo="blurclear">
+            <div class="label">051</div>
+            <div class="demo-inner">圖片局部模糊轉清晰</div>
+          </div>
+          <div class="meta">
+            <h3>圖片局部模糊轉清晰</h3>
+            <p>圖片局部模糊轉清晰 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo zoomfocus" data-demo="zoomfocus">
+            <div class="label">052</div>
+            <div class="demo-inner">滾動縮放聚焦</div>
+          </div>
+          <div class="meta">
+            <h3>滾動縮放聚焦</h3>
+            <p>滾動縮放聚焦 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scene" data-demo="scene">
+            <div class="label">053</div>
+            <div class="demo-inner">章節切場轉場</div>
+          </div>
+          <div class="meta">
+            <h3>章節切場轉場</h3>
+            <p>章節切場轉場 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-5">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 05 類</span>
+          <h2>卡片 / 內容模組互動</h2>
+          <p>本區共 11 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo floatcard" data-demo="floatcard">
+            <div class="label">054</div>
+            <div class="demo-inner">卡片浮動</div>
+          </div>
+          <div class="meta">
+            <h3>卡片浮動</h3>
+            <p>卡片浮動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo flipcard" data-demo="flipcard">
+            <div class="label">055</div>
+            <div class="demo-inner">卡片翻面</div>
+          </div>
+          <div class="meta">
+            <h3>卡片翻面</h3>
+            <p>卡片翻面 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo stack" data-demo="stack">
+            <div class="label">056</div>
+            <div class="demo-inner">卡片堆疊 Stack Cards</div>
+          </div>
+          <div class="meta">
+            <h3>卡片堆疊 Stack Cards</h3>
+            <p>卡片堆疊 Stack Cards 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo expandwide" data-demo="expandwide">
+            <div class="label">057</div>
+            <div class="demo-inner">卡片展開成全寬內容</div>
+          </div>
+          <div class="meta">
+            <h3>卡片展開成全寬內容</h3>
+            <p>卡片展開成全寬內容 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo mosaic" data-demo="mosaic">
+            <div class="label">058</div>
+            <div class="demo-inner">卡片磁貼拼接動畫</div>
+          </div>
+          <div class="meta">
+            <h3>卡片磁貼拼接動畫</h3>
+            <p>卡片磁貼拼接動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo tiltcard" data-demo="tiltcard">
+            <div class="label">059</div>
+            <div class="demo-inner">卡片 3D 傾斜</div>
+          </div>
+          <div class="meta">
+            <h3>卡片 3D 傾斜</h3>
+            <p>卡片 3D 傾斜 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo glowborder" data-demo="glowborder">
+            <div class="label">060</div>
+            <div class="demo-inner">卡片邊框發光追蹤</div>
+          </div>
+          <div class="meta">
+            <h3>卡片邊框發光追蹤</h3>
+            <p>卡片邊框發光追蹤 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo dragcards" data-demo="dragcards">
+            <div class="label">061</div>
+            <div class="demo-inner">卡片拖曳排序</div>
+          </div>
+          <div class="meta">
+            <h3>卡片拖曳排序</h3>
+            <p>卡片拖曳排序 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo heightgrow" data-demo="heightgrow">
+            <div class="label">062</div>
+            <div class="demo-inner">卡片 hover 展開高度</div>
+          </div>
+          <div class="meta">
+            <h3>卡片 hover 展開高度</h3>
+            <p>卡片 hover 展開高度 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo parallax" data-demo="parallax">
+            <div class="label">063</div>
+            <div class="demo-inner">視差卡片書架</div>
+          </div>
+          <div class="meta">
+            <h3>視差卡片書架</h3>
+            <p>視差卡片書架 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo mediaoverlay" data-demo="mediaoverlay">
+            <div class="label">064</div>
+            <div class="demo-inner">媒體懸浮浮層資訊</div>
+          </div>
+          <div class="meta">
+            <h3>媒體懸浮浮層資訊</h3>
+            <p>媒體懸浮浮層資訊 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-6">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 06 類</span>
+          <h2>導覽 / 選單 / 頁面定位互動</h2>
+          <p>本區共 10 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo stickybar" data-demo="stickybar">
+            <div class="label">065</div>
+            <div class="demo-inner">吸頂導航變形</div>
+          </div>
+          <div class="meta">
+            <h3>吸頂導航變形</h3>
+            <p>吸頂導航變形 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo highlight" data-demo="highlight">
+            <div class="label">066</div>
+            <div class="demo-inner">滑動目錄高亮跟隨</div>
+          </div>
+          <div class="meta">
+            <h3>滑動目錄高亮跟隨</h3>
+            <p>滑動目錄高亮跟隨 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo dotnav" data-demo="dotnav">
+            <div class="label">067</div>
+            <div class="demo-inner">全頁錨點導覽圓點</div>
+          </div>
+          <div class="meta">
+            <h3>全頁錨點導覽圓點</h3>
+            <p>全頁錨點導覽圓點 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo megamenu" data-demo="megamenu">
+            <div class="label">068</div>
+            <div class="demo-inner">Mega Menu 動態展開</div>
+          </div>
+          <div class="meta">
+            <h3>Mega Menu 動態展開</h3>
+            <p>Mega Menu 動態展開 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo topprogress" data-demo="topprogress">
+            <div class="label">069</div>
+            <div class="demo-inner">滑動返回頂部進度鈕</div>
+          </div>
+          <div class="meta">
+            <h3>滑動返回頂部進度鈕</h3>
+            <p>滑動返回頂部進度鈕 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo cursorui" data-demo="cursorui">
+            <div class="label">070</div>
+            <div class="demo-inner">游標自訂 Cursor UI</div>
+          </div>
+          <div class="meta">
+            <h3>游標自訂 Cursor UI</h3>
+            <p>游標自訂 Cursor UI 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo hoverpreview" data-demo="hoverpreview">
+            <div class="label">071</div>
+            <div class="demo-inner">區塊 hover 導覽預覽</div>
+          </div>
+          <div class="meta">
+            <h3>區塊 hover 導覽預覽</h3>
+            <p>區塊 hover 導覽預覽 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo radialmenu" data-demo="radialmenu">
+            <div class="label">072</div>
+            <div class="demo-inner">放射狀選單</div>
+          </div>
+          <div class="meta">
+            <h3>放射狀選單</h3>
+            <p>放射狀選單 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo blobnav" data-demo="blobnav">
+            <div class="label">073</div>
+            <div class="demo-inner">液態 blob 導覽</div>
+          </div>
+          <div class="meta">
+            <h3>液態 blob 導覽</h3>
+            <p>液態 blob 導覽 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo windownav" data-demo="windownav">
+            <div class="label">074</div>
+            <div class="demo-inner">滾動視窗導覽</div>
+          </div>
+          <div class="meta">
+            <h3>滾動視窗導覽</h3>
+            <p>滾動視窗導覽 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-7">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 07 類</span>
+          <h2>內容切換 / 資訊切換元件</h2>
+          <p>本區共 12 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo accordion" data-demo="accordion">
+            <div class="label">075</div>
+            <div class="demo-inner">手風琴 Accordion</div>
+          </div>
+          <div class="meta">
+            <h3>手風琴 Accordion</h3>
+            <p>手風琴 Accordion 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo tabs" data-demo="tabs">
+            <div class="label">076</div>
+            <div class="demo-inner">Tab 切換</div>
+          </div>
+          <div class="meta">
+            <h3>Tab 切換</h3>
+            <p>Tab 切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo mediaswitch" data-demo="mediaswitch">
+            <div class="label">077</div>
+            <div class="demo-inner">圖文切換模組</div>
+          </div>
+          <div class="meta">
+            <h3>圖文切換模組</h3>
+            <p>圖文切換模組 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo accordion" data-demo="accordion">
+            <div class="label">078</div>
+            <div class="demo-inner">手風琴／扇形展開</div>
+          </div>
+          <div class="meta">
+            <h3>手風琴／扇形展開</h3>
+            <p>手風琴／扇形展開 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo drawer" data-demo="drawer">
+            <div class="label">079</div>
+            <div class="demo-inner">內容折疊抽屜 Drawer Reveal</div>
+          </div>
+          <div class="meta">
+            <h3>內容折疊抽屜 Drawer Reveal</h3>
+            <p>內容折疊抽屜 Drawer Reveal 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo puzzle" data-demo="puzzle">
+            <div class="label">080</div>
+            <div class="demo-inner">拼圖式切換</div>
+          </div>
+          <div class="meta">
+            <h3>拼圖式切換</h3>
+            <p>拼圖式切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo slicecarousel" data-demo="slicecarousel">
+            <div class="label">081</div>
+            <div class="demo-inner">圖片切片輪播</div>
+          </div>
+          <div class="meta">
+            <h3>圖片切片輪播</h3>
+            <p>圖片切片輪播 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo thumbwall" data-demo="thumbwall">
+            <div class="label">082</div>
+            <div class="demo-inner">圖片縮圖展開牆</div>
+          </div>
+          <div class="meta">
+            <h3>圖片縮圖展開牆</h3>
+            <p>圖片縮圖展開牆 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo carousel" data-demo="carousel">
+            <div class="label">083</div>
+            <div class="demo-inner">橫向滑動 Carousel</div>
+          </div>
+          <div class="meta">
+            <h3>橫向滑動 Carousel</h3>
+            <p>橫向滑動 Carousel 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo hotspot" data-demo="hotspot">
+            <div class="label">084</div>
+            <div class="demo-inner">熱點點擊 Hotspot</div>
+          </div>
+          <div class="meta">
+            <h3>熱點點擊 Hotspot</h3>
+            <p>熱點點擊 Hotspot 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo beforeafter" data-demo="beforeafter">
+            <div class="label">085</div>
+            <div class="demo-inner">Before / After 對比滑桿</div>
+          </div>
+          <div class="meta">
+            <h3>Before / After 對比滑桿</h3>
+            <p>Before / After 對比滑桿 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo lightbox" data-demo="lightbox">
+            <div class="label">086</div>
+            <div class="demo-inner">Lightbox 放大</div>
+          </div>
+          <div class="meta">
+            <h3>Lightbox 放大</h3>
+            <p>Lightbox 放大 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-8">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 08 類</span>
+          <h2>圖片 / 媒體展示特效</h2>
+          <p>本區共 12 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo panorama" data-demo="panorama">
+            <div class="label">087</div>
+            <div class="demo-inner">全景橫移展示</div>
+          </div>
+          <div class="meta">
+            <h3>全景橫移展示</h3>
+            <p>全景橫移展示 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo framedraw" data-demo="framedraw">
+            <div class="label">088</div>
+            <div class="demo-inner">圖片框線描繪動畫</div>
+          </div>
+          <div class="meta">
+            <h3>圖片框線描繪動畫</h3>
+            <p>圖片框線描繪動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo parallax" data-demo="parallax">
+            <div class="label">089</div>
+            <div class="demo-inner">圖片層疊視差</div>
+          </div>
+          <div class="meta">
+            <h3>圖片層疊視差</h3>
+            <p>圖片層疊視差 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo slicecarousel" data-demo="slicecarousel">
+            <div class="label">090</div>
+            <div class="demo-inner">圖片切片輪播</div>
+          </div>
+          <div class="meta">
+            <h3>圖片切片輪播</h3>
+            <p>圖片切片輪播 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo thumbwall" data-demo="thumbwall">
+            <div class="label">091</div>
+            <div class="demo-inner">圖片縮圖展開牆</div>
+          </div>
+          <div class="meta">
+            <h3>圖片縮圖展開牆</h3>
+            <p>圖片縮圖展開牆 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo generic" data-demo="generic">
+            <div class="label">092</div>
+            <div class="demo-inner">拼貼牆 Masonry 動態牆</div>
+          </div>
+          <div class="meta">
+            <h3>拼貼牆 Masonry 動態牆</h3>
+            <p>拼貼牆 Masonry 動態牆 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo lightbox" data-demo="lightbox">
+            <div class="label">093</div>
+            <div class="demo-inner">Lightbox 放大</div>
+          </div>
+          <div class="meta">
+            <h3>Lightbox 放大</h3>
+            <p>Lightbox 放大 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo videoframe" data-demo="videoframe">
+            <div class="label">094</div>
+            <div class="demo-inner">影片邊框切換</div>
+          </div>
+          <div class="meta">
+            <h3>影片邊框切換</h3>
+            <p>影片邊框切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo geomask" data-demo="geomask">
+            <div class="label">095</div>
+            <div class="demo-inner">幾何遮罩</div>
+          </div>
+          <div class="meta">
+            <h3>幾何遮罩</h3>
+            <p>幾何遮罩 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo skewmask" data-demo="skewmask">
+            <div class="label">096</div>
+            <div class="demo-inner">斜切遮罩</div>
+          </div>
+          <div class="meta">
+            <h3>斜切遮罩</h3>
+            <p>斜切遮罩 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo arcmask" data-demo="arcmask">
+            <div class="label">097</div>
+            <div class="demo-inner">弧形遮罩</div>
+          </div>
+          <div class="meta">
+            <h3>弧形遮罩</h3>
+            <p>弧形遮罩 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo modelrotate" data-demo="modelrotate">
+            <div class="label">098</div>
+            <div class="demo-inner">3D 模型旋轉展示</div>
+          </div>
+          <div class="meta">
+            <h3>3D 模型旋轉展示</h3>
+            <p>3D 模型旋轉展示 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-9">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 09 類</span>
+          <h2>流程 / 故事 / 頁面節奏設計</h2>
+          <p>本區共 9 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo timeline" data-demo="timeline">
+            <div class="label">099</div>
+            <div class="demo-inner">時間軸 Timeline</div>
+          </div>
+          <div class="meta">
+            <h3>時間軸 Timeline</h3>
+            <p>時間軸 Timeline 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo flowline" data-demo="flowline">
+            <div class="label">100</div>
+            <div class="demo-inner">流程線條跑動</div>
+          </div>
+          <div class="meta">
+            <h3>流程線條跑動</h3>
+            <p>流程線條跑動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo pinnedstory" data-demo="pinnedstory">
+            <div class="label">101</div>
+            <div class="demo-inner">Pinned Scroll 固定滾動敘事</div>
+          </div>
+          <div class="meta">
+            <h3>Pinned Scroll 固定滾動敘事</h3>
+            <p>Pinned Scroll 固定滾動敘事 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo stepstory" data-demo="stepstory">
+            <div class="label">102</div>
+            <div class="demo-inner">Step Story 分步解說</div>
+          </div>
+          <div class="meta">
+            <h3>Step Story 分步解說</h3>
+            <p>Step Story 分步解說 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo horizontalstory" data-demo="horizontalstory">
+            <div class="label">103</div>
+            <div class="demo-inner">橫向故事捲動</div>
+          </div>
+          <div class="meta">
+            <h3>橫向故事捲動</h3>
+            <p>橫向故事捲動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scene" data-demo="scene">
+            <div class="label">104</div>
+            <div class="demo-inner">章節切場轉場</div>
+          </div>
+          <div class="meta">
+            <h3>章節切場轉場</h3>
+            <p>章節切場轉場 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo pageflip" data-demo="pageflip">
+            <div class="label">105</div>
+            <div class="demo-inner">滾動翻頁效果</div>
+          </div>
+          <div class="meta">
+            <h3>滾動翻頁效果</h3>
+            <p>滾動翻頁效果 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo zoomfocus" data-demo="zoomfocus">
+            <div class="label">106</div>
+            <div class="demo-inner">滾動縮放聚焦</div>
+          </div>
+          <div class="meta">
+            <h3>滾動縮放聚焦</h3>
+            <p>滾動縮放聚焦 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo scrollsnap" data-demo="scrollsnap">
+            <div class="label">107</div>
+            <div class="demo-inner">捲動吸附 Scroll snap</div>
+          </div>
+          <div class="meta">
+            <h3>捲動吸附 Scroll snap</h3>
+            <p>捲動吸附 Scroll snap 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-10">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 10 類</span>
+          <h2>數據視覺化 / 儀表板動畫</h2>
+          <p>本區共 13 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo countup" data-demo="countup">
+            <div class="label">108</div>
+            <div class="demo-inner">分段數字跳動</div>
+          </div>
+          <div class="meta">
+            <h3>分段數字跳動</h3>
+            <p>分段數字跳動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo progressbar" data-demo="progressbar">
+            <div class="label">109</div>
+            <div class="demo-inner">進度條成長</div>
+          </div>
+          <div class="meta">
+            <h3>進度條成長</h3>
+            <p>進度條成長 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo dashboard" data-demo="dashboard">
+            <div class="label">110</div>
+            <div class="demo-inner">數據儀表板</div>
+          </div>
+          <div class="meta">
+            <h3>數據儀表板</h3>
+            <p>數據儀表板 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo linedraw" data-demo="linedraw">
+            <div class="label">111</div>
+            <div class="demo-inner">折線圖動態描邊</div>
+          </div>
+          <div class="meta">
+            <h3>折線圖動態描邊</h3>
+            <p>折線圖動態描邊 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo bargrow" data-demo="bargrow">
+            <div class="label">112</div>
+            <div class="demo-inner">柱狀圖生長動畫</div>
+          </div>
+          <div class="meta">
+            <h3>柱狀圖生長動畫</h3>
+            <p>柱狀圖生長動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo radar" data-demo="radar">
+            <div class="label">113</div>
+            <div class="demo-inner">雷達圖旋入</div>
+          </div>
+          <div class="meta">
+            <h3>雷達圖旋入</h3>
+            <p>雷達圖旋入 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo donut" data-demo="donut">
+            <div class="label">114</div>
+            <div class="demo-inner">環形數據圈動畫</div>
+          </div>
+          <div class="meta">
+            <h3>環形數據圈動畫</h3>
+            <p>環形數據圈動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo pulsepoints" data-demo="pulsepoints">
+            <div class="label">115</div>
+            <div class="demo-inner">資料點脈衝動畫</div>
+          </div>
+          <div class="meta">
+            <h3>資料點脈衝動畫</h3>
+            <p>資料點脈衝動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo dashboard" data-demo="dashboard">
+            <div class="label">116</div>
+            <div class="demo-inner">數據切換儀表板</div>
+          </div>
+          <div class="meta">
+            <h3>數據切換儀表板</h3>
+            <p>數據切換儀表板 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo maphotspots" data-demo="maphotspots">
+            <div class="label">117</div>
+            <div class="demo-inner">地圖熱區動畫</div>
+          </div>
+          <div class="meta">
+            <h3>地圖熱區動畫</h3>
+            <p>地圖熱區動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo mappath" data-demo="mappath">
+            <div class="label">118</div>
+            <div class="demo-inner">地圖路徑連線動畫</div>
+          </div>
+          <div class="meta">
+            <h3>地圖路徑連線動畫</h3>
+            <p>地圖路徑連線動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo odometer" data-demo="odometer">
+            <div class="label">119</div>
+            <div class="demo-inner">數字滾輪切換</div>
+          </div>
+          <div class="meta">
+            <h3>數字滾輪切換</h3>
+            <p>數字滾輪切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo waveform" data-demo="waveform">
+            <div class="label">120</div>
+            <div class="demo-inner">聲音波形視覺化</div>
+          </div>
+          <div class="meta">
+            <h3>聲音波形視覺化</h3>
+            <p>聲音波形視覺化 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-11">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 11 類</span>
+          <h2>按鈕 / 滑鼠 / 微互動</h2>
+          <p>本區共 8 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo mouselight" data-demo="mouselight">
+            <div class="label">121</div>
+            <div class="demo-inner">滑鼠跟隨光影</div>
+          </div>
+          <div class="meta">
+            <h3>滑鼠跟隨光影</h3>
+            <p>滑鼠跟隨光影 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo magnetic" data-demo="magnetic">
+            <div class="label">122</div>
+            <div class="demo-inner">磁吸按鈕</div>
+          </div>
+          <div class="meta">
+            <h3>磁吸按鈕</h3>
+            <p>磁吸按鈕 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo ripple" data-demo="ripple">
+            <div class="label">123</div>
+            <div class="demo-inner">按鈕水波紋</div>
+          </div>
+          <div class="meta">
+            <h3>按鈕水波紋</h3>
+            <p>按鈕水波紋 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo glowborder" data-demo="glowborder">
+            <div class="label">124</div>
+            <div class="demo-inner">卡片邊框發光追蹤</div>
+          </div>
+          <div class="meta">
+            <h3>卡片邊框發光追蹤</h3>
+            <p>卡片邊框發光追蹤 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo cursorui" data-demo="cursorui">
+            <div class="label">125</div>
+            <div class="demo-inner">游標自訂 Cursor UI</div>
+          </div>
+          <div class="meta">
+            <h3>游標自訂 Cursor UI</h3>
+            <p>游標自訂 Cursor UI 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo springdrag" data-demo="springdrag">
+            <div class="label">126</div>
+            <div class="demo-inner">彈簧吸附拖曳</div>
+          </div>
+          <div class="meta">
+            <h3>彈簧吸附拖曳</h3>
+            <p>彈簧吸附拖曳 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo speedmorph" data-demo="speedmorph">
+            <div class="label">127</div>
+            <div class="demo-inner">滑鼠速度形變</div>
+          </div>
+          <div class="meta">
+            <h3>滑鼠速度形變</h3>
+            <p>滑鼠速度形變 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo microstate" data-demo="microstate">
+            <div class="label">128</div>
+            <div class="demo-inner">微互動懸停狀態轉換精細化</div>
+          </div>
+          <div class="meta">
+            <h3>微互動懸停狀態轉換精細化</h3>
+            <p>微互動懸停狀態轉換精細化 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+    <section class="section" id="sec-12">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">第 12 類</span>
+          <h2>高階實驗型 / 沉浸式特效</h2>
+          <p>本區共 18 個特效，皆以獨立卡片方式實際呈現。</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="demo lottie" data-demo="lottie">
+            <div class="label">129</div>
+            <div class="demo-inner">Lottie 動畫嵌入</div>
+          </div>
+          <div class="meta">
+            <h3>Lottie 動畫嵌入</h3>
+            <p>Lottie 動畫嵌入 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo path" data-demo="path">
+            <div class="label">130</div>
+            <div class="demo-inner">SVG 路徑跟隨動畫</div>
+          </div>
+          <div class="meta">
+            <h3>SVG 路徑跟隨動畫</h3>
+            <p>SVG 路徑跟隨動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo particles" data-demo="particles">
+            <div class="label">131</div>
+            <div class="demo-inner">Canvas 粒子互動</div>
+          </div>
+          <div class="meta">
+            <h3>Canvas 粒子互動</h3>
+            <p>Canvas 粒子互動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo webgl" data-demo="webgl">
+            <div class="label">132</div>
+            <div class="demo-inner">WebGL 3D 背景</div>
+          </div>
+          <div class="meta">
+            <h3>WebGL 3D 背景</h3>
+            <p>WebGL 3D 背景 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo fluid" data-demo="fluid">
+            <div class="label">133</div>
+            <div class="demo-inner">物理模擬重力／彈性／流體</div>
+          </div>
+          <div class="meta">
+            <h3>物理模擬重力／彈性／流體</h3>
+            <p>物理模擬重力／彈性／流體 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo aireactive" data-demo="aireactive">
+            <div class="label">134</div>
+            <div class="demo-inner">AI 生成動態即時生成／反應式</div>
+          </div>
+          <div class="meta">
+            <h3>AI 生成動態即時生成／反應式</h3>
+            <p>AI 生成動態即時生成／反應式 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo depth" data-demo="depth">
+            <div class="label">135</div>
+            <div class="demo-inner">3D 空間敘事景深／視角切換</div>
+          </div>
+          <div class="meta">
+            <h3>3D 空間敘事景深／視角切換</h3>
+            <p>3D 空間敘事景深／視角切換 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo waveform" data-demo="waveform">
+            <div class="label">136</div>
+            <div class="demo-inner">感官反饋聲音／觸覺互動</div>
+          </div>
+          <div class="meta">
+            <h3>感官反饋聲音／觸覺互動</h3>
+            <p>感官反饋聲音／觸覺互動 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo environment" data-demo="environment">
+            <div class="label">137</div>
+            <div class="demo-inner">環境感知動態時間／天氣／位置</div>
+          </div>
+          <div class="meta">
+            <h3>環境感知動態時間／天氣／位置</h3>
+            <p>環境感知動態時間／天氣／位置 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo materialsim" data-demo="materialsim">
+            <div class="label">138</div>
+            <div class="demo-inner">材質模擬布料／金屬／液體</div>
+          </div>
+          <div class="meta">
+            <h3>材質模擬布料／金屬／液體</h3>
+            <p>材質模擬布料／金屬／液體 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo cloth" data-demo="cloth">
+            <div class="label">139</div>
+            <div class="demo-inner">布料懸垂模擬</div>
+          </div>
+          <div class="meta">
+            <h3>布料懸垂模擬</h3>
+            <p>布料懸垂模擬 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo fluid" data-demo="fluid">
+            <div class="label">140</div>
+            <div class="demo-inner">流體墨水擴散</div>
+          </div>
+          <div class="meta">
+            <h3>流體墨水擴散</h3>
+            <p>流體墨水擴散 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo camera" data-demo="camera">
+            <div class="label">141</div>
+            <div class="demo-inner">鏡頭運動模擬</div>
+          </div>
+          <div class="meta">
+            <h3>鏡頭運動模擬</h3>
+            <p>鏡頭運動模擬 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo tilewall" data-demo="tilewall">
+            <div class="label">142</div>
+            <div class="demo-inner">瓦片地圖動態牆</div>
+          </div>
+          <div class="meta">
+            <h3>瓦片地圖動態牆</h3>
+            <p>瓦片地圖動態牆 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo realism" data-demo="realism">
+            <div class="label">143</div>
+            <div class="demo-inner">材質擬真效果</div>
+          </div>
+          <div class="meta">
+            <h3>材質擬真效果</h3>
+            <p>材質擬真效果 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo neumorphism" data-demo="neumorphism">
+            <div class="label">144</div>
+            <div class="demo-inner">陰影浮雕 Neumorphism</div>
+          </div>
+          <div class="meta">
+            <h3>陰影浮雕 Neumorphism</h3>
+            <p>陰影浮雕 Neumorphism 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo glowui" data-demo="glowui">
+            <div class="label">145</div>
+            <div class="demo-inner">霓虹描邊 Glow UI</div>
+          </div>
+          <div class="meta">
+            <h3>霓虹描邊 Glow UI</h3>
+            <p>霓虹描邊 Glow UI 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="demo fan" data-demo="fan">
+            <div class="label">146</div>
+            <div class="demo-inner">旋轉扇葉動畫</div>
+          </div>
+          <div class="meta">
+            <h3>旋轉扇葉動畫</h3>
+            <p>旋轉扇葉動畫 示範區。此卡片為單獨可視化展示，不是分類摘要。</p>
+          </div>
+        </article></div>
+    </section>
+      <footer>此頁已將你表格中的特效名稱逐一轉為可視化展示卡片。為了維持單檔 HTML 的可用性，部分同類型特效採用相近的動畫邏輯，但每一個名稱都已有獨立展示區塊，不再只是分類摘要。</footer>
     </div>
   </main>
 </div>
-
 <script>
-  const effectData = [
-    {
-      id: "section-1",
-      index: "01",
-      title: "首屏 / 品牌形象動效",
-      desc: "主要用於首頁首屏、品牌形象橫幅、主視覺區，強調第一眼印象與品牌質感。這裡以視差、Ken Burns、光束掃描、逐字浮現、Split Hero、卡片堆疊等首屏邏輯做整合展示。",
-      badge: ["主視覺", "品牌氛圍", "首屏互動"],
-      cards: [
-        {
-          type: "heroDemo",
-          name: "首屏動效整合示意",
-          desc: "示範視差滾動、Ken Burns 緩慢縮放、漸層光暈漂浮、首屏文字逐字浮現、Split Hero、首屏背景光束掃描。",
-          tags: ["Parallax", "Ken Burns", "逐字浮現", "Split Hero", "光束掃描"]
-        },
-        {
-          type: "stackDemo",
-          name: "首屏卡片堆疊展開",
-          desc: "可用於品牌入口、主打服務入口、首頁亮點模組，模擬卡片層層浮起、向前展開的視覺節奏。",
-          tags: ["卡片堆疊", "品牌宣言", "精品式留白", "多層景深"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱，可直接放進「網站特效」選項內。",
-          items: [
-            "視差滾動 Parallax",
-            "Ken Burns 緩慢縮放",
-            "漸層光暈漂浮",
-            "影片背景",
-            "首屏文字逐字浮現",
-            "Split Hero 分割首屏",
-            "首屏卡片堆疊展開",
-            "首屏滾動提示動畫",
-            "首屏內容切片進場",
-            "首屏背景光束掃描",
-            "品牌宣言切場動畫",
-            "精品式留白滾動",
-            "多層景深分層",
-            "滾動視差雲深",
-            "視差視覺深度"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-2",
-      index: "02",
-      title: "背景氛圍類特效",
-      desc: "作為背景氣氛底使用，提升畫面層次與空氣感，不以內容本體為主。這裡把波浪、粒子、網格、星空、極光、雷達、模糊光斑等背景型特效整合成展示模組。",
-      badge: ["背景底圖", "空氣感", "舞台氛圍"],
-      cards: [
-        {
-          type: "waveDemo",
-          name: "波浪 / 曲線 / 細線流動背景",
-          desc: "適合用於頁首、品牌橫幅或過場背景，營造流動感與柔和的視覺節奏。",
-          tags: ["波浪背景動態", "曲線背景動態", "細線路徑流動"]
-        },
-        {
-          type: "particleDemo",
-          name: "粒子 / 星空 / 網格流動 / 極光",
-          desc: "示範粒子背景、星空噪點、網格背景流動與極光氛圍的綜合感受。",
-          tags: ["粒子背景", "星空背景", "網格流動", "極光背景"]
-        },
-        {
-          type: "radarDemo",
-          name: "雷達 / 光線折射 / 液態 Blob",
-          desc: "適合科技感頁面、展示頁背景或品牌實驗型風格頁。",
-          tags: ["雷達掃描", "液態 blob", "光線折射"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "波浪背景動態",
-            "曲線背景動態",
-            "粒子背景",
-            "網格背景流動",
-            "星空 / 噪點背景",
-            "漸層流體背景",
-            "極光背景",
-            "雷達掃描背景",
-            "細線路徑流動",
-            "模糊光斑飄移",
-            "液態 blob 導覽",
-            "Canvas 粒子互動",
-            "WebGL 3D 背景",
-            "光線折射效果"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-3",
-      index: "03",
-      title: "文字與標題動畫",
-      desc: "針對文字、標題、品牌口號做動態設計，適合強調訊息與主標。這裡整合漸層字、描邊字、打字機、關鍵字高亮、跑馬文字帶、閱讀線、掃光效果等。",
-      badge: ["文字焦點", "標題動態", "閱讀節奏"],
-      cards: [
-        {
-          type: "textDemo",
-          name: "標題動畫整合示意",
-          desc: "示範漸層字、描邊字、逐字打字機與關鍵字高亮切換。",
-          tags: ["漸層字", "描邊字", "打字機", "高亮切換"]
-        },
-        {
-          type: "readingDemo",
-          name: "閱讀節奏與文字光效",
-          desc: "可用於文章頁、導讀頁、品牌宣言頁，強化文字閱讀的節奏與層次。",
-          tags: ["跑馬文字帶", "高亮閱讀線", "掃光效果", "底線生長"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "漸層字",
-            "描邊字",
-            "逐字打字機",
-            "關鍵字高亮切換",
-            "跑馬文字帶",
-            "文字拆字進場",
-            "段落高亮閱讀線",
-            "文字掃光效果",
-            "文字液態變形",
-            "數字滾輪切換",
-            "關鍵字輪播替換",
-            "標題底線生長動畫",
-            "字符形態變換",
-            "空間型排版文字作為動態物件"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-4",
-      index: "04",
-      title: "區塊進場 / 滾動出現動畫",
-      desc: "常用於首頁中段與內頁內容區，讓區塊出現更自然、更有節奏。這裡以淡入、上浮現、左右滑入、交錯進場、遮罩展開與 hover 類型呈現。",
-      badge: ["進場節奏", "內容浮現", "滾動出現"],
-      cards: [
-        {
-          type: "revealDemo",
-          name: "Fade in / Up reveal / Stagger",
-          desc: "適合大量內容區塊逐步出現，降低畫面同時擁擠的壓力。",
-          tags: ["Fade in", "向上浮現", "交錯進場"]
-        },
-        {
-          type: "maskDemo",
-          name: "Mask reveal / 縮放聚焦",
-          desc: "用於主視覺、段落開場、章節標題切入，能讓畫面更有儀式感。",
-          tags: ["遮罩展開", "滾動縮放聚焦", "章節切場"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "Fade in 淡入",
-            "Up reveal 向上浮現",
-            "左右滑入",
-            "Stagger 交錯進場",
-            "Mask reveal 遮罩展開",
-            "Hover 放大卡片",
-            "Hover 圖片微縮放",
-            "圖片局部模糊轉清晰",
-            "滾動縮放聚焦",
-            "章節切場轉場"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-5",
-      index: "05",
-      title: "卡片 / 內容模組互動",
-      desc: "適合服務項目、案例、產品、團隊介紹等內容模組展示。以浮動卡、翻面卡、堆疊卡、展開卡、3D 傾斜、邊框發光、拖曳排序等邏輯為主。",
-      badge: ["卡片系統", "內容模組", "互動展示"],
-      cards: [
-        {
-          type: "cardDemo",
-          name: "卡片浮動 / 堆疊 / 展開",
-          desc: "可延伸為作品集、服務列表、品牌亮點、產品櫥窗的互動版型。",
-          tags: ["卡片浮動", "Stack Cards", "展開全頁"]
-        },
-        {
-          type: "tiltDemo",
-          name: "3D 傾斜 / 邊框發光追蹤",
-          desc: "偏科技感、精品感與互動感強的卡片呈現方式。",
-          tags: ["卡片 3D 傾斜", "邊框發光", "hover 展開高度"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "卡片浮動",
-            "卡片翻面",
-            "卡片堆疊 Stack Cards",
-            "卡片展開成全頁內容",
-            "卡片磁貼拼接動畫",
-            "卡片 3D 傾斜",
-            "卡片邊框發光追蹤",
-            "卡片拖曳排序",
-            "卡片 hover 展開高度",
-            "視差卡片書架",
-            "媒體懸浮浮層資訊"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-6",
-      index: "06",
-      title: "導覽 / 選單 / 頁面定位互動",
-      desc: "與網站操作、導覽體驗、頁面定位有關，提升使用便利性。這裡整合吸頂導覽、滾動高亮目錄、Mega Menu、回頂進度鈕、Cursor UI、hover 導覽預覽等。",
-      badge: ["導航體驗", "頁面定位", "互動導覽"],
-      cards: [
-        {
-          type: "navDemo",
-          name: "區塊 hover 導覽預覽",
-          desc: "適合大型網站、品牌官網、服務多層級分類頁，滑過選單即可看到對應預覽。",
-          tags: ["hover 導覽預覽", "Mega Menu", "目錄高亮"]
-        },
-        {
-          type: "cursorDemo",
-          name: "游標自訂 / 放射狀選單 / 回頂進度",
-          desc: "可用於風格感較強的展示型網站與創意型官網。",
-          tags: ["Cursor UI", "放射狀選單", "返回頂部進度鈕"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "吸頂導覽變形",
-            "滾動目錄高亮跟隨",
-            "全頁錨點導覽圓點",
-            "Mega Menu 動態展開",
-            "滑動返回頂部進度鈕",
-            "游標自訂 Cursor UI",
-            "區塊 hover 導覽預覽",
-            "放射狀選單",
-            "液態 blob 導覽",
-            "滾動預留導覽"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-7",
-      index: "07",
-      title: "內容切換 / 資訊切換元件",
-      desc: "適合 FAQ、產品資訊、比較頁、說明頁，用來切換資訊內容。這裡示範手風琴、Tab、圖文切換、抽屜展開、輪播、熱點、Before/After、Lightbox 等。",
-      badge: ["資訊切換", "FAQ", "比較頁"],
-      cards: [
-        {
-          type: "accordionDemo",
-          name: "Accordion / Drawer Reveal",
-          desc: "適合 FAQ、規格說明、服務流程、名詞解釋等內容。",
-          tags: ["手風琴 Accordion", "Drawer Reveal", "內容折疊"]
-        },
-        {
-          type: "tabsDemo",
-          name: "Tab / Carousel / Hotspot / Before After",
-          desc: "將圖文切換、熱點互動、圖片比較與輪播整合成常用的資訊切換模組。",
-          tags: ["Tab 切換", "Carousel", "Hotspot", "Before / After"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "手風琴 Accordion",
-            "Tab 切換",
-            "圖文切換組",
-            "手風琴 + 展示展開",
-            "內容折疊抽屜 Drawer Reveal",
-            "對圖式切換",
-            "圖片切片輪播",
-            "圖片牆層開關",
-            "橫向滑動 Carousel",
-            "熱點點擊 Hotspot",
-            "Before / After 對比滑桿",
-            "Lightbox 放大"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-8",
-      index: "08",
-      title: "圖片 / 媒體展示特效",
-      desc: "適合產品頁、作品集、案例頁，強調視覺內容的展示效果。這裡用全景橫移、層疊視差、拼貼牆、遮罩切換、Lightbox 等視覺形式呈現。",
-      badge: ["媒體展示", "產品圖", "視覺強化"],
-      cards: [
-        {
-          type: "carouselDemo",
-          name: "全景橫移 / 圖片切片輪播",
-          desc: "適合產品圖輪播、案例頭圖、品牌形象大圖展示。",
-          tags: ["全景橫移展示", "圖片切片輪播", "圖片層疊視差"]
-        },
-        {
-          type: "masonryDemo",
-          name: "Masonry / 圖片牆層開關 / Lightbox",
-          desc: "適合作品牆、案例牆、活動影像牆、品牌圖庫頁。",
-          tags: ["拼貼牆 Masonry", "圖片牆層開關", "Lightbox 放大"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "全景橫移展示",
-            "圖片框縮描動畫",
-            "圖片層疊視差",
-            "圖片切片輪播",
-            "圖片牆層開關",
-            "拼貼牆 Masonry 動態牆",
-            "Lightbox 放大",
-            "影片遮罩切換（幾何遮罩、斜切遮罩、弧形遮罩）",
-            "3D 模型旋轉展示"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-9",
-      index: "09",
-      title: "流程 / 敘事 / 頁面節奏設計",
-      desc: "適合公司簡介、品牌故事、服務流程、專案說明等內容頁面。這裡整合 Timeline、Pinned Scroll、Step Story、橫向敘事、章節切場等敘事型模組。",
-      badge: ["故事敘事", "流程頁", "節奏設計"],
-      cards: [
-        {
-          type: "timelineDemo",
-          name: "Timeline / 流程線條跑動",
-          desc: "適合品牌歷程、專案流程、交付節點、導入步驟頁面。",
-          tags: ["時間軸 Timeline", "流程線條跑動"]
-        },
-        {
-          type: "stepDemo",
-          name: "Pinned Scroll / Step Story / Scroll Snap",
-          desc: "用於一段段帶讀者往下走的敘事式頁面，讓節奏更穩定。",
-          tags: ["Pinned Scroll", "Step Story", "Scroll Snap"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "時間軸 Timeline",
-            "流程線條跑動",
-            "Pinned Scroll 固定滾動敘事",
-            "Step Story 分步解說",
-            "橫向敘事分段捲動",
-            "橫向敘事 / 滾動段落",
-            "章節切場轉場",
-            "流動圖文模組",
-            "滾動分段 Scroll snap"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-10",
-      index: "10",
-      title: "數據視覺化 / 儀表板動畫",
-      desc: "適合企業簡介、科技服務頁、工業頁、數據報表頁，提升專業感與說服力。這裡示範數字跳動、進度條、折線圖、柱狀圖、雷達圖、環形圖與波形視覺化。",
-      badge: ["儀表板", "數據頁", "專業感"],
-      cards: [
-        {
-          type: "dataDemo",
-          name: "指標數字 / 進度條 / 儀表板",
-          desc: "可應用於 KPI、產能、交期、效率、成長率、服務覆蓋等指標欄位。",
-          tags: ["分段數字跳動", "進度條成長", "數據儀表板"]
-        },
-        {
-          type: "chartDemo",
-          name: "折線圖 / 柱狀圖 / 雷達圖 / 波形",
-          desc: "適合科技頁、製造頁、工業頁與顧問型服務頁的數據呈現。",
-          tags: ["折線圖描邊", "柱狀圖生長", "雷達圖", "聲音波形"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "分段數字跳動",
-            "進度條成長",
-            "數據儀表板",
-            "折線圖動態描邊",
-            "柱狀圖生長動畫",
-            "雷達圖燈入",
-            "環形圖漸進動畫",
-            "資料點新舊動畫",
-            "數字捲輪動畫",
-            "地圖區塊動畫",
-            "地圖路徑連線動畫",
-            "數字滾輪切換",
-            "聲音波形視覺化"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-11",
-      index: "11",
-      title: "按鈕 / 滑鼠 / 微互動",
-      desc: "用在按鈕、滑過反應、操作細節，屬於精緻化互動設計。這裡整合滑鼠跟隨光影、磁吸按鈕、水波紋、邊框發光、Cursor UI、彈簧吸附拖曳等。",
-      badge: ["微互動", "按鈕設計", "滑鼠反應"],
-      cards: [
-        {
-          type: "microDemo",
-          name: "滑鼠跟隨 / 磁吸 / 水波紋",
-          desc: "能讓整體網站操作更有質感，特別適合 CTA 區塊與作品集頁面。",
-          tags: ["滑鼠跟隨光影", "磁吸按鈕", "按鈕水波紋"]
-        },
-        {
-          type: "glowBorderDemo",
-          name: "邊框發光 / Cursor UI / 微狀態轉場",
-          desc: "適合精品感、科技感、實驗感較強的網站主題。",
-          tags: ["邊框發光", "Cursor UI", "微互動狀態"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "滑鼠跟隨光影",
-            "磁吸按鈕",
-            "按鈕水波紋",
-            "卡片邊框發光追蹤",
-            "游標自訂 Cursor UI",
-            "彈簧吸附拖曳",
-            "滑鼠速度形變",
-            "微互動設計狀態轉場精細化"
-          ]
-        }
-      ]
-    },
-    {
-      id: "section-12",
-      index: "12",
-      title: "高階實驗型 / 沉浸式特效",
-      desc: "偏品牌屏幕設計、科技展示頁、活動頁使用，技術含量較高，較不適合一般官網大量使用。這裡整合 Lottie、SVG 路徑跟隨、Canvas、WebGL 氛圍、物理感、Neumorphism、Glow UI、旋轉葉片等。",
-      badge: ["高階實驗", "沉浸感", "品牌展示"],
-      cards: [
-        {
-          type: "immersiveDemo",
-          name: "Canvas / Glow UI / 路徑跟隨 / 物理感",
-          desc: "適合展示未來感、科技感、活動頁、品牌概念頁或互動專題頁。",
-          tags: ["Canvas 粒子", "Glow UI", "SVG 路徑", "物理感"]
-        },
-        {
-          type: "neoDemo",
-          name: "Neumorphism / 旋轉葉片動畫",
-          desc: "可作為風格展示區塊，或特定活動主題頁中的視覺亮點。",
-          tags: ["Neumorphism", "旋轉葉片動畫", "材質擬真"]
-        },
-        {
-          type: "list",
-          name: "本類完整特效選項",
-          desc: "以下是你表格中此分類的特效名稱。",
-          items: [
-            "Lottie 動畫嵌入",
-            "SVG 路徑跟隨動畫",
-            "Canvas 粒子互動",
-            "WebGL 3D 背景",
-            "物理模擬重力 / 彈性 / 流體",
-            "AI 生成動態即時生成 / 反應式",
-            "3D 空間敘事景深 / 視角切換",
-            "感官反饋聲音 / 觸覺互動",
-            "環境感知動態時間 / 天氣 / 位置",
-            "材質模擬布料 / 金屬 / 液體",
-            "布料懸垂模擬",
-            "流體墨水擴散",
-            "鏡頭運動模擬",
-            "瓦片地圖動態牆",
-            "材質擬真效果",
-            "陰影浮雕 Neumorphism",
-            "霓虹描邊 Glow UI",
-            "旋轉葉片動畫"
-          ]
-        }
-      ]
-    }
-  ];
-
-  const navList = document.getElementById("fxNavList");
-  const sectionsHost = document.getElementById("fxSections");
-
-  effectData.forEach(section => {
-    const nav = document.createElement("a");
-    nav.className = "fx-cat-link";
-    nav.href = `#${section.id}`;
-    nav.innerHTML = `
-      <div class="fx-cat-num">${section.index}</div>
-      <div class="fx-cat-text">
-        <strong>${section.title}</strong>
-        <span>${section.badge.join("・")}</span>
-      </div>
-    `;
-    navList.appendChild(nav);
-
-    const block = document.createElement("section");
-    block.className = "fx-section";
-    block.id = section.id;
-
-    const cardsHTML = section.cards.map(card => renderCard(card)).join("");
-
-    block.innerHTML = `
-      <span class="fx-section-anchor"></span>
-      <div class="fx-section-head">
-        <div>
-          <div class="fx-mini-title">${section.index}</div>
-          <h2>${section.title}</h2>
-          <p>${section.desc}</p>
-        </div>
-        <div class="fx-section-meta">${section.badge.map(b => `<span class="fx-badge">${b}</span>`).join("")}</div>
-      </div>
-      <div class="fx-cards">${cardsHTML}</div>
-    `;
-    sectionsHost.appendChild(block);
+document.querySelectorAll('.mouselight').forEach(el=>{
+  el.addEventListener('pointermove',e=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
   });
-
-  function renderCard(card){
-    if(card.type === "list"){
-      return `
-        <article class="fx-card fx-list-card">
-          <div class="fx-demo">
-            <div class="fx-demo-title">
-              <strong>${card.name}</strong>
-              <span>${card.desc}</span>
-            </div>
-            <div class="fx-marquee">
-              ${card.items.concat(card.items).map(item => `<span>${item}</span>`).join("")}
-            </div>
-          </div>
-          <div class="fx-body">
-            <h3>可放入「網站特效」選項的名稱清單</h3>
-            <p>以下清單已依照你的表格整理，可作為分類選單、卡片按鈕、子頁名稱或後台欄位名稱使用。</p>
-            <div class="fx-option-list">${card.items.map(i => `<div class="fx-option">${i}</div>`).join("")}</div>
-          </div>
-        </article>
-      `;
-    }
-
-    return `
-      <article class="fx-card">
-        <div class="fx-demo">${renderDemo(card.type)}</div>
-        <div class="fx-body">
-          <h3>${card.name}</h3>
-          <p>${card.desc}</p>
-          <div class="fx-tags">${(card.tags || []).map(tag => `<span>${tag}</span>`).join("")}</div>
-        </div>
-      </article>
-    `;
-  }
-
-  function renderDemo(type){
-    switch(type){
-      case "heroDemo":
-        return `
-          <div class="fx-kb"></div>
-          <div class="fx-light-pillars"></div>
-          <div class="fx-split">
-            <div class="fx-split-left"></div>
-            <div class="fx-split-right"></div>
-          </div>
-          <div class="fx-demo-title">
-            <strong>品牌首屏整合示意</strong>
-            <span>視差層次、縮放背景、文字浮現、分割首屏與掃描光束同時運作。</span>
-          </div>
-        `;
-      case "stackDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>卡片堆疊品牌入口</strong>
-            <span>首頁可依不同主題、服務或作品分類，做成層層展開的首屏視覺。</span>
-          </div>
-          <div class="fx-card-stack">
-            <span></span><span></span><span></span><span></span>
-          </div>
-        `;
-      case "waveDemo":
-        return `
-          <div class="fx-wave">
-            <svg viewBox="0 0 800 240" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="rgba(124,92,255,0.95)"/>
-                  <stop offset="100%" stop-color="rgba(35,213,171,0.85)"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,140 C120,120 180,190 300,170 C430,150 480,90 640,120 C720,136 760,150 800,130 L800,240 L0,240 Z" fill="rgba(124,92,255,.18)">
-                <animate attributeName="d" dur="8s" repeatCount="indefinite"
-                  values="
-                  M0,140 C120,120 180,190 300,170 C430,150 480,90 640,120 C720,136 760,150 800,130 L800,240 L0,240 Z;
-                  M0,150 C120,90 220,200 320,158 C430,110 520,120 650,132 C720,138 760,158 800,140 L800,240 L0,240 Z;
-                  M0,140 C120,120 180,190 300,170 C430,150 480,90 640,120 C720,136 760,150 800,130 L800,240 L0,240 Z"/>
-              </path>
-              <path d="M0,170 C140,140 210,210 340,188 C460,168 550,112 680,136 C742,146 780,164 800,154" fill="none" stroke="url(#waveGrad)" stroke-width="3" opacity=".9">
-                <animate attributeName="d" dur="6s" repeatCount="indefinite"
-                  values="
-                  M0,170 C140,140 210,210 340,188 C460,168 550,112 680,136 C742,146 780,164 800,154;
-                  M0,154 C110,126 250,210 348,170 C488,114 574,132 688,148 C750,154 780,158 800,144;
-                  M0,170 C140,140 210,210 340,188 C460,168 550,112 680,136 C742,146 780,164 800,154"/>
-              </path>
-            </svg>
-          </div>
-          <div class="fx-demo-title">
-            <strong>流動式背景底圖</strong>
-            <span>適合橫幅底圖、章節過場、品牌頁背景氛圍。</span>
-          </div>
-        `;
-      case "particleDemo":
-        return `
-          <div class="fx-canvas-host fx-multi-particles"><canvas class="fx-wave-canvas"></canvas></div>
-          <div class="fx-demo-title">
-            <strong>粒子 / 星空 / 網格 / 極光</strong>
-            <span>粒子漂浮搭配網格與極光色帶，適合科技感與展示型頁面。</span>
-          </div>
-        `;
-      case "radarDemo":
-        return `
-          <div class="fx-radar">
-            <svg viewBox="0 0 500 240" preserveAspectRatio="none">
-              <defs>
-                <radialGradient id="radarGrad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(35,213,171,.18)"/>
-                  <stop offset="100%" stop-color="rgba(35,213,171,0)"/>
-                </radialGradient>
-              </defs>
-              <circle cx="360" cy="120" r="82" fill="url(#radarGrad)" />
-              <circle cx="360" cy="120" r="82" fill="none" stroke="rgba(255,255,255,.18)" />
-              <circle cx="360" cy="120" r="56" fill="none" stroke="rgba(255,255,255,.16)" />
-              <circle cx="360" cy="120" r="30" fill="none" stroke="rgba(255,255,255,.14)" />
-              <line x1="360" y1="120" x2="440" y2="120" stroke="rgba(255,255,255,.25)"/>
-              <g transform-origin="360 120">
-                <line x1="360" y1="120" x2="438" y2="86" stroke="rgba(35,213,171,.95)" stroke-width="3">
-                  <animateTransform attributeName="transform" type="rotate" from="0 360 120" to="360 360 120" dur="4s" repeatCount="indefinite"/>
-                </line>
-              </g>
-            </svg>
-          </div>
-          <div class="fx-demo-title">
-            <strong>科技偵測感背景</strong>
-            <span>雷達掃描、液態輪廓、折射感與科技界面可以整合在同一塊背景中。</span>
-          </div>
-        `;
-      case "textDemo":
-        return `
-          <div class="fx-title-lines">
-            <h3 class="fx-gradient-text">Gradient Title</h3>
-            <h4 class="fx-outline-text">Outline Motion</h4>
-            <div class="fx-typing-line">Typing Effect</div>
-            <div class="fx-highlight-words">這個標題的主軸是 <strong>高亮</strong> 與節奏切換。</div>
-          </div>
-        `;
-      case "readingDemo":
-        return `
-          <div class="fx-readline">
-            當網站要承載較多文字說明、品牌宣言、文章導讀或專案敘述時，透過高亮閱讀線、掃光效果與底線生長，可以讓文字變得更有呼吸感，也更容易抓到重點。
-          </div>
-          <div class="fx-marquee" style="margin-top:18px">
-            <span>跑馬文字帶</span><span>底線生長</span><span>關鍵字輪播</span><span>掃光效果</span><span>字符形態變換</span>
-            <span>跑馬文字帶</span><span>底線生長</span><span>關鍵字輪播</span><span>掃光效果</span><span>字符形態變換</span>
-          </div>
-        `;
-      case "revealDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>滾動進場節奏</strong>
-            <span>大量內容區塊不必同時出現，可依序浮現、交錯進場。</span>
-          </div>
-          <div class="fx-reveal-row">
-            <div class="fx-mini-block"></div>
-            <div class="fx-mini-block"></div>
-            <div class="fx-mini-block"></div>
-          </div>
-        `;
-      case "maskDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>遮罩展開與聚焦</strong>
-            <span>適合做章節切場、主視覺轉場、內容聚焦式進場。</span>
-          </div>
-          <div class="fx-mask-reveal"></div>
-        `;
-      case "cardDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>模組卡片系統</strong>
-            <span>堆疊、浮動、展開式卡片適合首頁服務與案例展示。</span>
-          </div>
-          <div class="fx-card-stack">
-            <span></span><span></span><span></span><span></span>
-          </div>
-        `;
-      case "tiltDemo":
-        return `
-          <div class="fx-tilt-card">
-            <div class="beam"></div>
-            <div class="line"></div>
-          </div>
-        `;
-      case "navDemo":
-        return `
-          <div class="fx-nav-preview">
-            <div class="fx-nav-list">
-              <div class="fx-nav-item active">企業網站</div>
-              <div class="fx-nav-item">品牌形象</div>
-              <div class="fx-nav-item">產品型錄</div>
-              <div class="fx-nav-item">案例展示</div>
-            </div>
-            <div class="fx-nav-preview-pane"></div>
-          </div>
-        `;
-      case "cursorDemo":
-        return `
-          <div class="fx-cursor-demo" onmousemove="trackLocalCursor(event,this)">
-            <div class="fx-demo-title">
-              <strong>Cursor UI</strong>
-              <span>滑鼠跟隨、互動光圈、引導視線。</span>
-            </div>
-          </div>
-        `;
-      case "accordionDemo":
-        return `
-          <div class="fx-accordion-demo">
-            <details open>
-              <summary>Q1　什麼情況適合用手風琴？ <span>＋</span></summary>
-              <div class="fx-panel-body">當 FAQ、服務說明、規格欄位很多時，用手風琴可以降低頁面壓力。</div>
-            </details>
-            <details>
-              <summary>Q2　Drawer Reveal 適合什麼？ <span>＋</span></summary>
-              <div class="fx-panel-body">適合展示更長內容、圖文混排內容，或要做說明層層展開的頁面。</div>
-            </details>
-            <details>
-              <summary>Q3　能不能和產品介紹結合？ <span>＋</span></summary>
-              <div class="fx-panel-body">可以，常見用於規格說明、流程步驟、比較表與功能亮點。</div>
-            </details>
-          </div>
-        `;
-      case "tabsDemo":
-        return `
-          <div class="fx-tabs">
-            <div class="fx-tab-head">
-              <button class="fx-tab-btn active" type="button">Tab 切換</button>
-              <button class="fx-tab-btn" type="button">圖文切換</button>
-              <button class="fx-tab-btn" type="button">比較元件</button>
-            </div>
-            <div class="fx-tab-pane">同一塊內容區可透過 Tab 切換不同主題，也可以搭配圖文、數據、FAQ 或產品資訊。</div>
-            <div class="fx-carousel">
-              <div class="fx-carousel-track">
-                <div class="fx-carousel-slide"></div>
-                <div class="fx-carousel-slide"></div>
-                <div class="fx-carousel-slide"></div>
-              </div>
-            </div>
-            <div class="fx-hotspot-wrap">
-              <div class="fx-hotspot" style="left:20%;top:38%" data-label="功能 A"></div>
-              <div class="fx-hotspot" style="left:52%;top:52%" data-label="功能 B"></div>
-              <div class="fx-hotspot" style="left:74%;top:26%" data-label="功能 C"></div>
-            </div>
-            <div class="fx-before-after">
-              <div class="before"></div>
-              <div class="after"></div>
-            </div>
-          </div>
-        `;
-      case "carouselDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>大圖輪播與全景橫移</strong>
-            <span>適合產品主圖、案例頭圖、品牌主視覺輪播。</span>
-          </div>
-          <div class="fx-carousel">
-            <div class="fx-carousel-track">
-              <div class="fx-carousel-slide"></div>
-              <div class="fx-carousel-slide"></div>
-              <div class="fx-carousel-slide"></div>
-            </div>
-          </div>
-        `;
-      case "masonryDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>作品牆與圖庫展示</strong>
-            <span>拼貼牆、圖片牆層開關與 Lightbox 常一起出現。</span>
-          </div>
-          <div class="fx-masonry">
-            <span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-          </div>
-        `;
-      case "timelineDemo":
-        return `
-          <div class="fx-timeline">
-            <div class="fx-time-item">
-              <strong>品牌啟動</strong>
-              <span>建立第一層主視覺與品牌基礎。</span>
-            </div>
-            <div class="fx-time-item">
-              <strong>內容分流</strong>
-              <span>以流程與場景分段敘事，帶出服務重點。</span>
-            </div>
-            <div class="fx-time-item">
-              <strong>轉換引導</strong>
-              <span>將 CTA、案例與表單收束到同一條視線軸上。</span>
-            </div>
-          </div>
-        `;
-      case "stepDemo":
-        return `
-          <div class="fx-step-story">
-            <div class="fx-step"><em>01</em><strong>引起注意</strong><div>先用一個畫面或一句話把焦點抓住。</div></div>
-            <div class="fx-step"><em>02</em><strong>帶入脈絡</strong><div>透過分步敘事讓使用者理解價值。</div></div>
-            <div class="fx-step"><em>03</em><strong>收束轉換</strong><div>最後以明確 CTA 導向聯絡、詢問或下單。</div></div>
-          </div>
-        `;
-      case "dataDemo":
-        return `
-          <div class="fx-data-grid">
-            <div class="fx-metric">
-              <div class="fx-num" data-count="96">0</div>
-              <div>交付效率</div>
-              <div class="fx-progress"></div>
-            </div>
-            <div class="fx-metric">
-              <div class="fx-num" data-count="48">0</div>
-              <div>專案完成數</div>
-              <div class="fx-progress"></div>
-            </div>
-            <div class="fx-metric">
-              <div class="fx-num" data-count="12">0</div>
-              <div>核心模組</div>
-              <div class="fx-progress"></div>
-            </div>
-          </div>
-        `;
-      case "chartDemo":
-        return `
-          <div class="fx-micro-grid">
-            <div class="fx-chart">
-              <svg viewBox="0 0 400 180">
-                <polyline fill="none" stroke="rgba(108,200,255,.95)" stroke-width="4"
-                  points="16,142 70,120 118,130 168,92 224,104 280,58 336,78 382,34"
-                  stroke-linecap="round" stroke-linejoin="round"
-                  style="stroke-dasharray:760;stroke-dashoffset:760;animation:dashLine 5s ease forwards infinite;" />
-                <circle cx="70" cy="120" r="4" fill="#fff"/>
-                <circle cx="168" cy="92" r="4" fill="#fff"/>
-                <circle cx="280" cy="58" r="4" fill="#fff"/>
-              </svg>
-            </div>
-            <div class="fx-chart">
-              <svg viewBox="0 0 400 180">
-                <rect x="40" y="90" width="38" height="70" rx="10" fill="rgba(124,92,255,.85)">
-                  <animate attributeName="y" values="140;90;140" dur="4s" repeatCount="indefinite"/>
-                  <animate attributeName="height" values="20;70;20" dur="4s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="110" y="70" width="38" height="90" rx="10" fill="rgba(35,213,171,.85)">
-                  <animate attributeName="y" values="150;70;150" dur="4.2s" repeatCount="indefinite"/>
-                  <animate attributeName="height" values="10;90;10" dur="4.2s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="180" y="46" width="38" height="114" rx="10" fill="rgba(108,200,255,.85)">
-                  <animate attributeName="y" values="150;46;150" dur="4.4s" repeatCount="indefinite"/>
-                  <animate attributeName="height" values="10;114;10" dur="4.4s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="250" y="82" width="38" height="78" rx="10" fill="rgba(255,255,255,.85)">
-                  <animate attributeName="y" values="150;82;150" dur="4.6s" repeatCount="indefinite"/>
-                  <animate attributeName="height" values="10;78;10" dur="4.6s" repeatCount="indefinite"/>
-                </rect>
-              </svg>
-            </div>
-            <div class="fx-chart">
-              <svg class="fx-radar-chart" viewBox="0 0 220 180">
-                <polygon points="110,24 170,56 156,126 64,126 50,56"></polygon>
-                <polygon points="110,40 154,62 146,114 74,114 66,62" fill="none" stroke="rgba(255,255,255,.18)"></polygon>
-              </svg>
-            </div>
-            <div class="fx-waveform"><canvas class="fx-waveform-canvas"></canvas></div>
-          </div>
-        `;
-      case "microDemo":
-        return `
-          <div class="fx-btn-lab">
-            <div class="fx-magnetic"><div class="mag-btn">磁吸按鈕</div></div>
-            <div class="fx-ripple"><div class="rip-btn">水波紋按鈕</div></div>
-          </div>
-        `;
-      case "glowBorderDemo":
-        return `
-          <div class="fx-btn-lab">
-            <div class="fx-glow-outline"><div class="tiltbox"></div></div>
-            <div class="fx-cursor-demo" onmousemove="trackLocalCursor(event,this)">
-              <div class="fx-demo-title">
-                <strong>Cursor UI</strong>
-                <span>微互動狀態精細化</span>
-              </div>
-            </div>
-          </div>
-        `;
-      case "immersiveDemo":
-        return `
-          <div class="fx-demo-title">
-            <strong>沉浸式畫面整合</strong>
-            <span>以粒子、路徑、Glow UI 與空間感疊加，做出高階展示氛圍。</span>
-          </div>
-          <div class="fx-canvas-host fx-multi-particles"><canvas class="fx-fluid-canvas"></canvas></div>
-          <svg viewBox="0 0 800 220" style="position:absolute;inset:0;width:100%;height:100%;opacity:.55">
-            <path d="M20,180 C180,20 280,20 420,110 S660,200 780,46" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-dasharray="8 12"/>
-            <circle r="8" fill="#fff">
-              <animateMotion dur="5s" repeatCount="indefinite" path="M20,180 C180,20 280,20 420,110 S660,200 780,46"/>
-            </circle>
-          </svg>
-        `;
-      case "neoDemo":
-        return `
-          <div class="fx-micro-grid">
-            <div class="fx-neumorphism"><div class="fx-neo-card"></div></div>
-            <div class="fx-glow-ui"><div class="panel"></div></div>
-          </div>
-          <div class="fx-blades">
-            <div class="hub"></div>
-            <div class="blade"></div>
-            <div class="blade"></div>
-            <div class="blade"></div>
-          </div>
-        `;
-      default:
-        return `<div class="fx-demo-title"><strong>範例</strong><span>展示示意</span></div>`;
-    }
-  }
-
-  // local cursor glow
-  window.trackLocalCursor = function(e, el){
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty("--cx", ((e.clientX - rect.left) / rect.width) * 100 + "%");
-    el.style.setProperty("--cy", ((e.clientY - rect.top) / rect.height) * 100 + "%");
-  }
-
-  // hero light tracking
-  const heroBtn = document.getElementById("fxHeroBtn");
-  heroBtn.addEventListener("mousemove", (e) => {
-    const rect = heroBtn.getBoundingClientRect();
-    heroBtn.style.setProperty("--mx", (e.clientX - rect.left) + "px");
-    heroBtn.style.setProperty("--my", (e.clientY - rect.top) + "px");
-  });
-
-  // mobile sidebar
-  const fxMobileToggle = document.getElementById("fxMobileToggle");
-  const fxSidebar = document.getElementById("fxSidebar");
-  fxMobileToggle.addEventListener("click", () => fxSidebar.classList.toggle("show"));
-  document.querySelectorAll('.fx-cat-link').forEach(link => {
-    link.addEventListener("click", () => fxSidebar.classList.remove("show"));
-  });
-
-  // counters
-  const countEls = new Set();
-  document.querySelectorAll("[data-count]").forEach(el => countEls.add(el));
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const el = entry.target;
-        if(el.dataset.done) return;
-        el.dataset.done = "1";
-        animateCount(el, +el.dataset.count);
-      }
-    });
-  }, {threshold:.45});
-
-  countEls.forEach(el => io.observe(el));
-
-  function animateCount(el, target){
-    const start = 0;
-    const duration = 1600;
-    const t0 = performance.now();
-    function tick(now){
-      const p = Math.min((now - t0) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(start + (target - start) * eased);
-      if(p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // canvas particle / fluid helpers
-  function setupCanvas(canvas, drawFn){
-    const ctx = canvas.getContext("2d");
-    function resize(){
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    resize();
-    window.addEventListener("resize", resize);
-    let raf;
-    function loop(t){
-      drawFn(ctx, canvas.clientWidth, canvas.clientHeight, t || 0);
-      raf = requestAnimationFrame(loop);
-    }
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }
-
-  // background particles / aurora
-  document.querySelectorAll(".fx-wave-canvas").forEach((canvas, index) => {
-    const particles = Array.from({length: 40}, () => ({
-      x: Math.random(),
-      y: Math.random(),
-      r: 1 + Math.random() * 2.8,
-      vx: (Math.random() - .5) * .00022,
-      vy: (Math.random() - .5) * .00018
-    }));
-    setupCanvas(canvas, (ctx,w,h,t) => {
-      ctx.clearRect(0,0,w,h);
-      const grd = ctx.createLinearGradient(0,0,w,h);
-      grd.addColorStop(0, "rgba(124,92,255,.25)");
-      grd.addColorStop(1, "rgba(35,213,171,.18)");
-      ctx.fillStyle = grd;
-      ctx.fillRect(0,0,w,h);
-
-      // grid
-      ctx.strokeStyle = "rgba(255,255,255,.05)";
-      ctx.lineWidth = 1;
-      for(let x=0;x<w;x+=26){
-        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
-      }
-      for(let y=0;y<h;y+=26){
-        ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
-      }
-
-      // aurora
-      for(let i=0;i<3;i++){
-        const x = w*(.18+i*.28) + Math.sin(t*0.0006 + i)*24;
-        const y = h*(.18+i*.16);
-        const rad = 90 + i*20;
-        const g = ctx.createRadialGradient(x,y,0,x,y,rad);
-        g.addColorStop(0, i===0 ? "rgba(124,92,255,.20)" : i===1 ? "rgba(35,213,171,.16)" : "rgba(108,200,255,.16)");
-        g.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2); ctx.fill();
-      }
-
-      // particles
-      particles.forEach((p, idx) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if(p.x<0||p.x>1) p.vx *= -1;
-        if(p.y<0||p.y>1) p.vy *= -1;
-        const px = p.x * w, py = p.y * h;
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(255,255,255,.78)";
-        ctx.arc(px, py, p.r, 0, Math.PI*2);
-        ctx.fill();
-
-        for(let j=idx+1;j<particles.length;j++){
-          const q = particles[j];
-          const qx = q.x*w, qy = q.y*h;
-          const dx = px-qx, dy = py-qy;
-          const dist = Math.hypot(dx,dy);
-          if(dist < 72){
-            ctx.strokeStyle = `rgba(255,255,255,${0.14-(dist/72)*0.12})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(qx,qy); ctx.stroke();
-          }
-        }
-      });
-    });
-  });
-
-  // immersive fluid canvas
-  document.querySelectorAll(".fx-fluid-canvas").forEach(canvas => {
-    const blobs = Array.from({length: 7}, (_,i) => ({
-      x: .15 + i * .12,
-      y: .35 + (i%2)*.22,
-      r: 46 + Math.random()*28,
-      hue: i%3
-    }));
-    setupCanvas(canvas, (ctx,w,h,t) => {
-      ctx.clearRect(0,0,w,h);
-      ctx.fillStyle = "rgba(9,14,25,.75)";
-      ctx.fillRect(0,0,w,h);
-
-      const bg1 = ctx.createRadialGradient(w*.2,h*.3,0,w*.2,h*.3,120);
-      bg1.addColorStop(0,"rgba(124,92,255,.20)");
-      bg1.addColorStop(1,"rgba(124,92,255,0)");
-      ctx.fillStyle = bg1; ctx.fillRect(0,0,w,h);
-
-      const bg2 = ctx.createRadialGradient(w*.75,h*.35,0,w*.75,h*.35,120);
-      bg2.addColorStop(0,"rgba(35,213,171,.18)");
-      bg2.addColorStop(1,"rgba(35,213,171,0)");
-      ctx.fillStyle = bg2; ctx.fillRect(0,0,w,h);
-
-      blobs.forEach((b, i) => {
-        const x = w*(b.x + Math.sin(t*0.0006 + i)*.03);
-        const y = h*(b.y + Math.cos(t*0.0007 + i)*.04);
-        const r = b.r + Math.sin(t*0.001 + i)*12;
-        const grad = ctx.createRadialGradient(x,y,0,x,y,r);
-        const c0 = b.hue===0 ? "rgba(124,92,255,.33)" : b.hue===1 ? "rgba(35,213,171,.28)" : "rgba(108,200,255,.25)";
-        grad.addColorStop(0, c0);
-        grad.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(x,y,r,0,Math.PI*2);
-        ctx.fill();
-      });
-
-      ctx.strokeStyle = "rgba(255,255,255,.10)";
-      ctx.lineWidth = 1;
-      for(let i=0;i<7;i++){
-        ctx.beginPath();
-        const oy = 28 + i*28;
-        for(let x=0;x<=w;x+=12){
-          const y = oy + Math.sin(x*0.02 + t*0.0016 + i)*8;
-          if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-      }
-    });
-  });
-
-  // waveform canvases
-  document.querySelectorAll(".fx-waveform-canvas").forEach(canvas => {
-    setupCanvas(canvas, (ctx,w,h,t) => {
-      ctx.clearRect(0,0,w,h);
-      ctx.fillStyle = "rgba(255,255,255,.04)";
-      ctx.fillRect(0,0,w,h);
-      ctx.strokeStyle = "rgba(255,255,255,.12)";
-      ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2); ctx.stroke();
-
-      ctx.lineWidth = 2.4;
-      ctx.strokeStyle = "rgba(35,213,171,.95)";
-      ctx.beginPath();
-      for(let x=0;x<=w;x+=4){
-        const y = h/2 + Math.sin((x*0.03)+(t*0.004)) * 22 + Math.sin((x*0.01)+(t*0.0025)) * 12;
-        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-
-      ctx.lineWidth = 1.8;
-      ctx.strokeStyle = "rgba(124,92,255,.88)";
-      ctx.beginPath();
-      for(let x=0;x<=w;x+=4){
-        const y = h/2 + Math.sin((x*0.022)+(t*0.003)+1.4) * 14;
-        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-    });
-  });
-
-  // simple magnetic buttons
-  document.querySelectorAll(".fx-magnetic").forEach(box => {
-    const btn = box.querySelector(".mag-btn");
-    box.addEventListener("mousemove", e => {
-      const r = box.getBoundingClientRect();
-      const x = e.clientX - (r.left + r.width/2);
-      const y = e.clientY - (r.top + r.height/2);
-      btn.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
-    });
-    box.addEventListener("mouseleave", () => {
-      btn.style.transform = "translate(0,0)";
-    });
-  });
-
-  // style for svg dash animation
-  const extraStyle = document.createElement("style");
-  extraStyle.textContent = `
-    @keyframes dashLine{
-      0%{stroke-dashoffset:760}
-      45%{stroke-dashoffset:0}
-      100%{stroke-dashoffset:0}
-    }
-  `;
-  document.head.appendChild(extraStyle);
+});
 </script>
-</body>
-</html>
+</body></html>
